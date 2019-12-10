@@ -30,6 +30,14 @@ Yap is written in NodeJS, which makes it fast and easy to set up.
 ## Yap API Management Platform
 The Yap Desktop can be used with the Yap API Gateway, to provide a full lifecycle API Management platform. You can find more details at https://youngapp.io and for a full featureset, you can visit https://manual.youngapp.co
 
+#### Feaures available on Cloud Edition
+* **API Full-managed** - Create your api on Cloud Editor and hosted by Young App in realtime
+* **Functions** - Create on real-time cloud functions
+* **Advenced policies** - Use advenced policies for better security
+* **Advenced connectors** - Use complex app and connectors directly on platform
+* **Versioning** - Versionning your APIs and process on Cloud
+* **Support and integration** - Beneficiate support by expert for select best api and integration on Cloud
+
 ## Documentation
 
  - [Usage Guide](docs/guide.md)
