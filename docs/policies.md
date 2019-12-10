@@ -9,6 +9,13 @@ It’s important to realize that exposing your API services makes easier to mana
 
 Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
 
+## How using policies ?
+```
+<check-header name="Authorization" failed-check-httpcode="401" failed-check-error-message="Not authorized" ignore-case="false">
+    <value>f6dc69a089844cf6b2019bae6d36fac8</value>
+</check-header>
+```
+
 ## Policies available
 ### Access restriction policies
 - Check HTTP header - Enforces existence and/or value of a HTTP Header.
@@ -46,5 +53,3 @@ Further, it’s important to modernize your API strategy. Keeping API well-struc
 - Set query string parameter - Adds, replaces value of, or deletes request query string parameter.
 - Rewrite URL - Converts a request URL from its public form to the form expected by the web service.
 - Transform XML using an XSLT - Applies an XSL transformation to XML in the request or response body.
-
-## How using policies ?
