@@ -51,19 +51,54 @@ app.use(async ctx => {
 export default app
 ```
 
-## Features
+## Usage and Getting Started
 
-#### API Management
+## Middleware
+
+Yap is a middleware framework work only on async functions:
+Here is an example of logger middleware with each of the different functions:
+
+### ___async___ functions
+
+```js
+app.use(async (ctx, next) => {
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+});
+```
+
+## Context, Request and Response
+
+Each middleware receives a Yap `Context` object that encapsulates an incoming
+http aws lambda trigger message and the corresponding response to that message.  `ctx` is often used
+as the parameter name for the context object similar to koa or ExpressJS.
+
+```js
+app.use(async (ctx, next) => { await next(); });
+```
+
+Yap provides a `Request` object as the `request` property of the `Context`.
+
+#### Connectors
 
 API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
-#### API policies
+#### Policies
 
 It’s important to realize that exposing your API services makes easier to manage them. Why? When you keep your API policies separate, you ensure control over their performance and delivery. Independence is the key to your API policies’ success and future deployment.
 
 Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
 
-## Usage and Getting Started
+## Documentation
+
+ - [Usage Guide](docs/guide.md)
+ - [Connectors](docs/connectors.md)
+ - [Policies](docs/connectors.md)
+ - [Error Handling](docs/error-handling.md)
+ - [FAQ](docs/faq.md)
+ - [API documentation](docs/api/index.md)
 
 ### Usage with TypeScript
 The YAP for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
@@ -82,7 +117,7 @@ Before you can begin using these TypeScript definitions with your project, you n
  * If you are targeting at es5 or older ECMA standards, your `tsconfig.json` has to include `'es5'` and `'es2015.promise'` under `compilerOptions.lib`.
  See [tsconfig.json](https://github.com/youngapp/yap-sdk-js/blob/master/ts/tsconfig.json) for an example.
  
- ## Opening Issues
+## Opening Issues
 If you encounter a bug with YAP we would like to hear
 about it. Search the [existing issues](https://github.com/youngapp/yap/issues)
 and try to make sure your problem doesn’t already exist before opening a new
