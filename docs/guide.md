@@ -3,29 +3,6 @@ Yap is a microservices API gateway that sits at the heart of any microservices o
 
 By leveraging async functions, Yap allows you to ditch callbacks and greatly increase error-handling and policies. provides an elegant suite of methods that make writing servers fast and enjoyable, based on Webhooks and HTTP.
 
-## Motivation
-
-The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. For example, YAP automates quotes processing for cash business, which may involve multiple apps.
-
-Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
-
-YAP combines the enterprise-grade workflow automation platform and ease of use expected from client apps supporting both cloud-based and on-premise systems.
-
-
-## Installing
-It's a official version for JavaScript, available for Node.js backends and AWS Lambda
-
-##### With yarm
-```
-    yarn add @youngapp/yap
-```
-
-##### With npm
-```
-    npm install @youngapp/yap
-```
-
-
 ## Usage and Getting Started
 
 ### Middleware
@@ -109,23 +86,3 @@ Before you can begin using these TypeScript definitions with your project, you n
  - [Error Handling](docs/error-handling.md)
  - [FAQ](docs/faq.md)
  - [API documentation](docs/api/index.md)
-
- 
-## Opening Issues
-If you encounter a bug with YAP we would like to hear
-about it. Search the [existing issues](https://github.com/youngapp/yap/issues)
-and try to make sure your problem doesn’t already exist before opening a new
-issue. It’s helpful if you include the version of the SDK, Node.js or browser
-environment and OS you’re using. Please include a stack trace and reduced repro
-case when appropriate, too.
-
-The GitHub issues are intended for bug reports and feature requests. For help
-and questions with using the YAP SDK for JavaScript please make use of the
-resources listed in the [Getting Help](https://github.com/youngapp/yap#getting-help)
-section. There are limited resources available for handling issues and by
-keeping the list of open issues lean we can respond in a timely manner.
-
-## License
-
-This SDK is distributed under the GNU General Public License v3.0
-see LICENSE.txt and NOTICE.txt for more information.
