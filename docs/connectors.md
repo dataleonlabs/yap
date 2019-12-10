@@ -21,3 +21,15 @@ YAP ensures that citizens and IT have access to the same easy-to-use driven prod
 
 
 ## How using connectors ?
+```js
+// Middleware normally takes two parameters (ctx, next), ctx is the context for one request,
+// next is a function that is invoked to execute the downstream middleware. It returns a Promise with a then function for running code after completion.
+
+app.use((ctx, next) => {
+  const start = Date.now();
+  return next().then(() => {
+    const ms = Date.now() - start;
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+  });
+});
+```
