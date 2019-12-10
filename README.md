@@ -53,12 +53,12 @@ export default app
 
 ## Usage and Getting Started
 
-## Middleware
+#### Middleware
 
 Yap is a middleware framework work only on async functions:
 Here is an example of logger middleware with each of the different functions:
 
-### ___async___ functions
+##### ___async___ functions
 
 ```js
 app.use(async (ctx, next) => {
@@ -69,7 +69,7 @@ app.use(async (ctx, next) => {
 });
 ```
 
-## Context, Request and Response
+#### Context, Request and Response
 
 Each middleware receives a Yap `Context` object that encapsulates an incoming
 http aws lambda trigger message and the corresponding response to that message.  `ctx` is often used
@@ -100,7 +100,7 @@ Further, it’s important to modernize your API strategy. Keeping API well-stru
  - [FAQ](docs/faq.md)
  - [API documentation](docs/api/index.md)
 
-### Usage with TypeScript
+#### Usage with TypeScript
 The YAP for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
 Our goal is to keep these TypeScript definition files updated with each release for any public api.
 
