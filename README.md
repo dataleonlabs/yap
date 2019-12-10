@@ -28,6 +28,9 @@ Yap offers powerful, yet lightweight features that allow fine grained control ov
 
 Yap is written in NodeJS, which makes it fast and easy to set up.
 
+## Yap API Management Platform
+The Yap Desktop can be used with the Tyk API Gateway, to provide a full lifecycle API Management platform. You can find more details at https://youngapp.io and for a full featureset, you can visit https://manual.youngapp.
+
 ## Documentation
 
  - [Usage Guide](docs/guide.md)
