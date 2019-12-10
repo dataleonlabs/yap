@@ -1,28 +1,17 @@
-# Yap API Framework
-Next-gen API framework with low-code approach on AWS Serverless
-
-## Introduction
-
-Yap is a new web framework designed by the team Young App, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security. By leveraging async functions, Yap allows you to ditch callbacks and greatly increase error-handling and policies. provides an elegant suite of methods that make writing servers fast and enjoyable. Yap is based on Webhooks and HTTP.
+# Yap API Gateway
+Yap is a microservices API gateway that sits at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security. By leveraging async functions, Yap allows you to ditch callbacks and greatly increase error-handling and policies. provides an elegant suite of methods that make writing servers fast and enjoyable, based on Webhooks and HTTP.
 
 ## Motivation
 
-The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. For example, YAP automates quotes processing for cash business, which may involve multiple apps (AWS, HelloSign, Stripe, etc.).
-
-### Automation and low-code
+The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. For example, YAP automates quotes processing for cash business, which may involve multiple apps.
 
 Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
 
 YAP combines the enterprise-grade workflow automation platform and ease of use expected from client apps supporting both cloud-based and on-premise systems.
 
-### Designed on AWS Lambda and Cloud providers Solutions
-
-Serverless computing is a cloud-computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Yap use Serverless Framework,  free and open-source web framework written using Node.js. Serverless is the first framework developed for building applications on AWS Lambda, a serverless computing platform provided by Amazon as a part of Amazon Web
-
 
 ## Installing
 It's a official version for JavaScript, available for Node.js backends and AWS Lambda
-
 
 ##### With yarm
 ```
@@ -92,16 +81,6 @@ app.use(async ctx => {
 export default app
 ```
 
-
-## Documentation
-
- - [Usage Guide](docs/guide.md)
- - [Connectors](docs/connectors.md)
- - [Policies](docs/connectors.md)
- - [Error Handling](docs/error-handling.md)
- - [FAQ](docs/faq.md)
- - [API documentation](docs/api/index.md)
-
 #### Usage with TypeScript
 The YAP for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
 Our goal is to keep these TypeScript definition files updated with each release for any public api.
@@ -118,6 +97,17 @@ Before you can begin using these TypeScript definitions with your project, you n
 
  * If you are targeting at es5 or older ECMA standards, your `tsconfig.json` has to include `'es5'` and `'es2015.promise'` under `compilerOptions.lib`.
  See [tsconfig.json](https://github.com/youngapp/yap-sdk-js/blob/master/ts/tsconfig.json) for an example.
+ 
+
+## Documentation
+
+ - [Usage Guide](docs/guide.md)
+ - [Connectors](docs/connectors.md)
+ - [Policies](docs/connectors.md)
+ - [Error Handling](docs/error-handling.md)
+ - [FAQ](docs/faq.md)
+ - [API documentation](docs/api/index.md)
+
  
 ## Opening Issues
 If you encounter a bug with YAP we would like to hear
