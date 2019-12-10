@@ -18,3 +18,6 @@ Business and IT users need visibility into the running integrations and the capa
 YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
 Citizen integrators are designed for those who would like to integrate applications quickly but isn’t deeply technical. 
 YAP ensures that citizens and IT have access to the same easy-to-use driven productivity improvements, as well as offers citizens advanced power and capability available to IT.
+
+
+## How using connectors ?
