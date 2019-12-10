@@ -19,17 +19,20 @@ YAP combines the enterprise-grade workflow automation platform and ease of use e
 
 Serverless computing is a cloud-computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Yap use Serverless Framework,  free and open-source web framework written using Node.js. Serverless is the first framework developed for building applications on AWS Lambda, a serverless computing platform provided by Amazon as a part of Amazon Web
 
-## Features
 
-#### API Management
+## Installing
+It's a official version for JavaScript, available for Node.js backends and AWS Lambda
 
-API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
-#### API policies
+##### With yarm
+```
+    yarn add @youngapp/yap
+```
 
-It’s important to realize that exposing your API services makes easier to manage them. Why? When you keep your API policies separate, you ensure control over their performance and delivery. Independence is the key to your API policies’ success and future deployment.
-
-Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
+##### With npm
+```
+    npm install @youngapp/yap
+```
 
 ## Application
 
@@ -48,19 +51,17 @@ app.use(async ctx => {
 export default app
 ```
 
-## Installing
-It's a official version for JavaScript, available for Node.js backends and AWS Lambda
+## Features
 
+#### API Management
 
-##### With yarm
-```
-    yarn add @youngapp/yap
-```
+API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
-##### With npm
-```
-    npm install @youngapp/yap
-```
+#### API policies
+
+It’s important to realize that exposing your API services makes easier to manage them. Why? When you keep your API policies separate, you ensure control over their performance and delivery. Independence is the key to your API policies’ success and future deployment.
+
+Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
 
 ## Usage and Getting Started
 
