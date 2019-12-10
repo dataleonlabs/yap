@@ -4,7 +4,6 @@ Yap is a microservices API gateway that sits at the heart of any microservices o
 By leveraging async functions, Yap allows you to ditch callbacks and greatly increase error-handling and policies. provides an elegant suite of methods that make writing servers fast and enjoyable, based on Webhooks and HTTP.
 
 ## Motivation
-
 The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. For example, YAP automates quotes processing for cash business, which may involve multiple apps.
 
 Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
@@ -29,17 +28,16 @@ Yap offers powerful, yet lightweight features that allow fine grained control ov
 Yap is written in NodeJS, which makes it fast and easy to set up.
 
 ## Yap API Management Platform
-The Yap Desktop can be used with the Yap API Gateway, to provide a full lifecycle API Management platform. You can find more details at https://youngapp.io and for a full featureset, you can visit https://manual.youngapp.
+The Yap Desktop can be used with the Yap API Gateway, to provide a full lifecycle API Management platform. You can find more details at https://youngapp.io and for a full featureset, you can visit https://manual.youngapp.co
 
 ## Documentation
 
  - [Usage Guide](docs/guide.md)
+ - [Application and Middlewares](docs/middlewares.md)
  - [Connectors](docs/connectors.md)
- - [Policies](docs/connectors.md)
+ - [Policies](docs/policies.md)
  - [Error Handling](docs/error-handling.md)
  - [FAQ](docs/faq.md)
- - [API documentation](docs/api/index.md)
- 
 
 ## Installing
 It's a official version for JavaScript, available for Node.js backends and AWS Lambda
