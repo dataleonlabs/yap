@@ -9,13 +9,13 @@ Yap is a new web framework designed by the team Young App, which aims to be a sm
 
 The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. For example, YAP automates quotes processing for cash business, which may involve multiple apps (AWS, HelloSign, Stripe, etc.).
 
-#### Automation and low-code
+### Automation and low-code
 
 Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
 
 YAP combines the enterprise-grade workflow automation platform and ease of use expected from client apps supporting both cloud-based and on-premise systems.
 
-#### Designed on AWS Lambda and Cloud providers Solutions
+### Designed on AWS Lambda and Cloud providers Solutions
 
 Serverless computing is a cloud-computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Yap use Serverless Framework,  free and open-source web framework written using Node.js. Serverless is the first framework developed for building applications on AWS Lambda, a serverless computing platform provided by Amazon as a part of Amazon Web
 
