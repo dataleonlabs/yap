@@ -1,4 +1,4 @@
-## Usage and Getting Started
+# Usage and Getting Started
 Yap is a microservices API gateway that sits at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
 ### Middleware
