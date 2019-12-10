@@ -1,3 +1,12 @@
+## Yap Application
+
+The object created when executing `new Yap()` is known as the Yap application object.
+
+The application object is Yap's interface with node's http server and handles the registration
+of middleware, dispatching to the middleware from http, default error handling, as well as
+configuration of the context, request and response objects.
+
+Learn more about the application object in the [Application API Reference](docs/api/index.md).
 
 ## Middleware
 
@@ -87,13 +96,3 @@ instead of `ctx.request.accepts`.
 
 For more information on `Request`, `Response` and `Context`, see the [Request API Reference](docs/api/request.md),
 [Response API Reference](docs/api/response.md) and [Context API Reference](docs/api/context.md).
-
-## Yap Application
-
-The object created when executing `new Yap()` is known as the Yap application object.
-
-The application object is Yap's interface with node's http server and handles the registration
-of middleware, dispatching to the middleware from http, default error handling, as well as
-configuration of the context, request and response objects.
-
-Learn more about the application object in the [Application API Reference](docs/api/index.md).
