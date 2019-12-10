@@ -97,5 +97,5 @@ keeping the list of open issues lean we can respond in a timely manner.
 
 ## License
 
-This SDK is distributed under the
+This SDK is distributed under the GNU General Public License v3.0
 see LICENSE.txt and NOTICE.txt for more information.
