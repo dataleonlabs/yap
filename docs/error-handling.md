@@ -1,4 +1,25 @@
 # Error Handling
+By providing a throw object, API management allows publishers to respond to error conditions, which may occur during processing of requests. The throw object is accessed through the context.LastError property and can be used by policies in the on-error policy section. This article provides a reference for the error handling capabilities in API management.
+
+Policies in API management are divided into ```inbound```, ```outbound```, and ```on-error``` sections as shown in the following example.
+
+During the processing of a request, built-in steps are executed along with any policies, which are in scope for the request. If an error occurs, processing immediately jumps to the on-error policy section.
+The on-error policy section can be used at any scope. API publishers can configure custom behavior such as logging the error to event hubs or creating a new response to return to the caller.
+
+```
+<policies>  
+  <inbound>  
+    <!-- statements to be applied to the request go here -->  
+  </inbound>    
+    <outbound>  
+      <!-- statements to be applied to the response go here -->  
+    </outbound>  
+    <on-error>  
+        <!-- statements to be applied if there is an error   
+             condition go here -->  
+  </on-error>  
+</policies>
+```
 
 ## Try-Catch
 
@@ -48,14 +69,4 @@ app.use(async (ctx, next) => {
 })
 ```
 
-## The Error Event
-
-  Error event listeners can be specified with `app.on('error')`.
-  If no error listener is specified, a default error listener
-  is used. Error listener receive all errors that make their
-  way back through the middleware chain, if an error is caught
-  and not thrown again, it will not be passed to the error
-  listener. If no error event listener is specified, then
-  `app.onerror` will be used, which simply log the error unless
-  `error.expose`is true or `app.silent` is true or `error.status`
-  is 404.
+  
