@@ -63,6 +63,8 @@ npx @youngapp/yap my-api
 cd my-apy
 npm start
 ```
+
+More details on [Usage Guide](docs/guide.md)
  
 ## Opening Issues
 If you encounter a bug with YAP we would like to hear
