@@ -78,7 +78,7 @@ Contribute
 ==========
 Yap is open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [github](https://github.com/youngapp/yap).
 
-No contribution is too small – providing feedback, [reporting issues](https://github.com/youngapp/yap/issues). Please refer to our [contribution guidelines](CONTRIBUTING.md) for details.
+No contribution is too small – providing feedback, [reporting issues](https://github.com/youngapp/yap/issues).
 
 ## License
 
