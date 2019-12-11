@@ -74,6 +74,75 @@ Before you can begin using these TypeScript definitions with your project, you n
  See [tsconfig.json](https://github.com/youngapp/yap-sdk-js/blob/master/ts/tsconfig.json) for an example.
  
 
+## Installing
+It's a official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda
+
+##### With yarm
+```
+npx @youngapp/yap my-api
+cd my-apy
+yarn start
+```
+
+##### With npm
+```
+npx @youngapp/yap my-api
+cd my-apy
+npm start
+```
+
+_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
+
+Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
+When you’re ready to deploy to production, create a minified bundle with `npm run build` or `yarn build`.
+
+It will create a directory called `my-api` inside the current folder.<br>
+Inside that directory, it will generate the initial project structure and install the transitive dependencies:
+
+```
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── serverless.yml
+├── tslint.json
+├── tsconfig.json
+├── jest.config.js
+└── src
+    ├── app.ts
+    └── app.test.js
+```
+
+No configuration or complicated folder structures, only the files you need to build your app.<br>
+Once the installation is done, you can open your project folder:
+
+```sh
+cd my-app
+```
+
+### `npm test` or `yarn test`
+
+Runs the test watcher in an interactive mode.<br>
+By default, runs tests related to files changed since the last commit.
+
+### `npm run build` or `yarn build`
+
+Builds the app for production to the `build` folder.<br>
+It correctly bundles in production mode and optimizes the build for the best performance.
+The build is minified and the filenames include the hashes with TypeScript.<br>
+
+Your api is ready to be deployed.
+
+### `npm run deploy` or `yarn deploy`
+
+Deploy the app for production with serverless with `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br>
+
+Your api is available on Cloud function provider.
+
 ## Documentation
 
  - [Usage Guide](docs/guide.md)
