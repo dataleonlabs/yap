@@ -1,5 +1,5 @@
 # Error handling
-By providing a throw object, API management allows publishers to respond to error conditions, which may occur during requests processing. The throw object is accessed through the context.LastError property and can be used by policies in the on-error policy section. This article provides a reference for the error handling capabilities in API management.
+By providing a throw object, API management allows publishers to respond to error conditions, which may occur during requests processing. The throw object is accessed through the ```context.LastError``` property and can be used by policies in the on-error policy section. This article provides a reference for the error handling capabilities in API management.
 
 Policies in API management are divided into ```inbound```, ```outbound```, and ```on-error``` sections as shown in the following example.
 
