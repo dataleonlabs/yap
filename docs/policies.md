@@ -4,14 +4,14 @@ This section provides a reference for the following API management policies.
 ## Policies management
 Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration. Policies are a collection of statements that are executed sequentially on the API request or response. Popular statements include format conversion from XML to JSON and call rate limiting to restrict the amount of incoming calls from a developer. Many more policies are available out of the box.
 
-## Why using policies ?
+## Why using policies?
 It’s important to realize that exposing your API services makes easier to manage them. 
 Why? When you keep your API policies separate, you ensure control over their performance and delivery. 
 Independence is the key to your API policies’ success and future deployment.
 
 Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
 
-## How to use policies ?
+## How to use policies?
 ```
 <check-header name="Authorization" failed-check-httpcode="401" failed-check-error-message="Not authorized" ignore-case="false">
     <value>f6dc69a089844cf6b2019bae6d36fac8</value>
@@ -21,11 +21,11 @@ Further, it’s important to modernize your API strategy. Keeping API well-struc
 ## Policies available
 
 ### Access restriction policies
-- **Check HTTP header** – enforces existence or value of a HTTP Header.
+- *Check HTTP header* – enforces existence or value of a HTTP Header.
 
 ### Advanced policies
-- **Control flow** – conditionally applies policy statements based on the evaluation of boolean expressions.
-- **Limit concurrency** – prevents enclosed policies from executing by more than the specified number of requests at a time.
+- *Control flow* – conditionally applies policy statements based on the evaluation of boolean expressions.
+- *Limit concurrency* – prevents enclosed policies from executing by more than the specified number of requests at a time.
 - **Return response** – aborts pipeline execution and returns the specified response directly to the caller.
 - **Send one way request** – sends a request to the specified URL without waiting for a response.
 - **Send request** – sends a request to the specified URL.
