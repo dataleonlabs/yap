@@ -21,7 +21,7 @@ Yap offers powerful, yet lightweight features that allow fine-grained control ov
 * **Quotas** – enforce usage quotas on users to manage capacity or charge for tiered access.
 * **Granular access control** – grant API access on a version-by-version basis, grant keys access to multiple APIs or just a single version.
 * **API versioning** – API versions can be easily set and deprecated at a specific time and date.
-* **Blacklist/Whitelist/Ignored endpoint access** – enforce strict security models on a version-by-version basis to your access points.
+* **Blacklist / Whitelist / Ignored endpoint access** – enforce strict security models on a version-by-version basis to your access points.
 * **Webhooks** – trigger webhooks against events such as quota violations and authentication failures.
 * **IP whitelisting** – Block access to non-trusted IP addresses for more secure interactions.
 
@@ -32,10 +32,10 @@ The YAP desktop version can be used with the YAP API Gateway to provide a full l
 
 #### Feaures available for cloud edition
 * **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
-* **Functions** – create on real-time cloud functions.
+* **Functions** – create online your cloud functions.
 * **Advanced policies** – use advanced policies for better security.
 * **Advanced connectors** – use complex app and connectors directly on the YAP platform.
-* **Versioning** – versionning your APIs and process on cloud.
+* **Versioning** – use versionning for APIs and cloud processes.
 * **Support and integration** – beneficiate support by experts to select the best API and cloud integration.
 
 ## Documentation
@@ -73,14 +73,12 @@ to find the solution right away if your problem was solved before.
 
 Attach the following details if appropriate: 
 - SDK, Node.js, or browser version
-- environment and OS
-- stack trace
-- reduced repro case
+- Environment and OS
+- Stack trace
+- Reduced repro case
 
 The GitHub issues are intended for bug reports and feature requests. 
-For quick help and questions on using the YAP SDK for JavaScript, please use the
-resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help)
-section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
+For quick help and questions on using the YAP SDK for JavaScript, please use the resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help) section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
 
 Contribute
 ==========
