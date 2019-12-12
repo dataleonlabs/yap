@@ -1,7 +1,11 @@
-# YAP API gateway
-YAP is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
+# Yap API gateway
+Yap is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
-By leveraging async functions, YAP allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
+By leveraging async functions, Yap allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
+
+Please distinguish:
+**Yap** – the core product of Young App
+**YAP** – the platform of Young App
 
 ## Motivation
 The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
@@ -78,11 +82,11 @@ Attach the following details if appropriate:
 - Reduced repro case
 
 The GitHub issues are intended for bug reports and feature requests. 
-For quick help and questions on using the YAP SDK for JavaScript, please use the resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help) section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
+For quick help and questions on using the Yap SDK for JavaScript, please use the resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help) section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
 
 Contribute
 ==========
-YAP is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [GitHub](https://github.com/youngapp/yap).
+Yap is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [GitHub](https://github.com/youngapp/yap).
 
 No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
