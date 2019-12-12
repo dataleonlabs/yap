@@ -1,9 +1,9 @@
-# Usage and Getting Started
-Yap is a microservices API gateway that sits at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
+# Usage and getting started
+YAP is a microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
 ### Middleware
 
-Yap is a middleware framework work only on async functions:
+YAP is a middleware framework work only on async functions:
 Here is an example of logger middleware with each of the different functions:
 
 ##### ___async___ functions
@@ -17,33 +17,35 @@ app.use(async (ctx, next) => {
 });
 ```
 
-### Context, Request and Response
+### Context, request and response
 
-Each middleware receives a Yap `Context` object that encapsulates an incoming
-http aws lambda trigger message and the corresponding response to that message.  `ctx` is often used
+Each middleware receives a YAP `Context` object that encapsulates an incoming
+HTTP AWS Lambda trigger message and the corresponding response to that message.  `ctx` is often used
 as the parameter name for the context object similar to koa or ExpressJS.
 
 ```js
 app.use(async (ctx, next) => { await next(); });
 ```
 
-Yap provides a `Request` object as the `request` property of the `Context`.
+YAP provides a `Request` object as the `request` property of the `Context`.
 
 ### Connectors
 
-API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
+API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
 ### Policies
 
-It’s important to realize that exposing your API services makes easier to manage them. Why? When you keep your API policies separate, you ensure control over their performance and delivery. Independence is the key to your API policies’ success and future deployment.
+It’s important to realize that exposing your API services makes easier to manage them. 
+Why? When you keep your API policies separate, you ensure control over their performance and delivery. 
+Independence is the key to your API policies’ success and future deployment.
 
 Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
 
 ### Application
 
-A Yap application is an object containing an array of middleware functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
+YAP application is an object containing an array of middleware functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
 
-The obligatory hello world application:
+The obligatory hello-world application:
 
 ```
 const Yap = require('@youngapp/yap');
@@ -58,7 +60,7 @@ export default app
 
 #### Usage with TypeScript
 The YAP for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
-Our goal is to keep these TypeScript definition files updated with each release for any public api.
+Our goal is to keep these TypeScript definition files updated with each release for any public API.
 
 #### Pre-requisites
 Before you can begin using these TypeScript definitions with your project, you need to make sure your project meets a few of these requirements:
@@ -132,7 +134,7 @@ Builds the app for production to the `build` folder.<br>
 It correctly bundles in production mode and optimizes the build for the best performance.
 The build is minified and the filenames include the hashes with TypeScript.<br>
 
-Your api is ready to be deployed.
+Your API is ready to be deployed.
 
 ### `npm run deploy` or `yarn deploy`
 
@@ -141,7 +143,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 
-Your api is available on Cloud function provider.
+Your API is available on a cloud function provider.
 
 ## Documentation
 
