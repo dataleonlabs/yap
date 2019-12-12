@@ -1,10 +1,10 @@
-# YAP API Gateway
-YAP is the lightweight microservices API gateway that sits at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
+# YAP API gateway
+YAP is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
 By leveraging async functions, YAP allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
 
 ## Motivation
-The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
+The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
 
 Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
 
@@ -16,14 +16,14 @@ YAP combines the enterprise-grade workflow automation platform and ease of use e
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
 * **RESTful API** – full programmatic access to the internals makes it easy to manage your API users, keys and API configuration from within your systems.
-* **Multiple access protocols** – out of the box, YAP supports token-based, HMAC-signed, basic auth and keyless access methods.
+* **Multiple access protocols** – out of the box, YAP supports token-based, HMAC-signed, basic auth, and keyless access methods.
 * **Rate limiting** – easily rate limit of your API users; rate limiting is granular and can be applied on a per-key basis.
 * **Quotas** – enforce usage quotas on users to manage capacity or charge for tiered access.
 * **Granular access control** – grant API access on a version-by-version basis, grant keys access to multiple APIs or just a single version.
 * **API versioning** – API versions can be easily set and deprecated at a specific time and date.
 * **Blacklist / Whitelist / Ignored endpoint access** – enforce strict security models on a version-by-version basis to your access points.
 * **Webhooks** – trigger webhooks against events such as quota violations and authentication failures.
-* **IP whitelisting** – Block access to non-trusted IP addresses for more secure interactions.
+* **IP whitelisting** – block access to non-trusted IP addresses for more secure interactions.
 
 YAP is written in NodeJS, which makes it fast and easy to set up.
 
