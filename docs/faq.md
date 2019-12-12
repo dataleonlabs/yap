@@ -2,7 +2,7 @@
 
 ## Does Yap replace Express?
 
-  It's more like Connect, but a lot of the Express goodies were moved to the middleware level in YAP to help form a stronger foundation. 
+  It's more like Connect, but a lot of the Express goodies were moved to the middleware level in Yap to help form a stronger foundation. 
   This makes middleware more enjoyable and less error-prone to write, for the entire stack, not just the end application code.
 
   Typically many middleware would re-implement similar features, or even worse incorrectly implement them,
