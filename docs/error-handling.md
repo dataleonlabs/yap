@@ -22,7 +22,7 @@ The on-error policy section can be used at any scope. API publishers can configu
 </policies>
 ```
 
-## Try-Catch
+## Try-catch
 
   Using async functions means that you can try-catch `next`.
   This example adds a `.status` to all errors:
@@ -40,19 +40,13 @@ The on-error policy section can be used at any scope. API publishers can configu
 
 ### Default error handler
 
-  The default error handler is essentially a try-catch at
-  the very beginning of the middleware chain. To use a
-  different error handler, simply put another try-catch at
-  the beginning of the middleware chain, and handle the error
-  there. However, the default error handler is good enough for
-  most use cases. It will use a status code of `err.status`,
-  or by default 500. If `err.expose` is true, then `err.message`
-  will be the reply. Otherwise, a message generated from the
-  error code will be used (e.g. for the code 500 the message
-  "Internal Server Error" will be used). All headers will be
-  cleared from the request, but any headers in `err.headers`
-  will then be set. You can use a try-catch, as specified
-  above, to add a header to this list.
+  The default error handler is essentially a try-catch at the very beginning of the middleware chain. 
+  To use a different error handler, simply put another try-catch at the beginning of the middleware chain, and handle the error there. 
+  
+  However, the default error handler is good enough for the most use cases. It will use a status code of `err.status` or by default 500. 
+  If `err.expose` is true, then `err.message` will be the reply. 
+  Otherwise, a message generated from the error code will be used (e.g. for the code 500, the message "Internal Server Error" will be used). 
+All headers will be cleared from the request, but any headers in `err.headers` will then be set. You can use a try-catch, as specified above, to add a header to this list.
 
   Here is an example of creating your own error handler:
 
