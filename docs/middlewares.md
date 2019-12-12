@@ -1,16 +1,18 @@
 ## YAP application
 
-The object created when executing `new Yap()` is known as the YAP application object.
+The object created when executing `new Yap()` is known as the Yap application object.
 
-The application object is YAP's interface with node's HTTP server and handles the registration
+The application object is Yap's interface with node's HTTP server and handles the registration
 of middleware, dispatching to the middleware from HTTP, default error handling, as well as
 configuration of the context, request and response objects.
 
 Learn more about the application object in the [Application API reference](docs/api/index.md).
 
+Please distinguish **Yap** (the core project of Young App) and **YAP** (the platform of Young App).
+
 ## Middleware
 
-YAP is a middleware framework that can take two different kinds of functions as middleware:
+Yap is a middleware framework that can take two different kinds of functions as middleware:
 
   * async function
   * common function
@@ -45,7 +47,7 @@ app.use((ctx, next) => {
 
 ## Context, request, and response
 
-Each middleware receives a YAP `Context` object that encapsulates an incoming
+Each middleware receives a Yap `Context` object that encapsulates an incoming
 HTTP message and the corresponding response to that message.  `ctx` is often used
 as the parameter name for the context object.
 
@@ -53,8 +55,8 @@ as the parameter name for the context object.
 app.use(async (ctx, next) => { await next(); });
 ```
 
-YAP provides a `Request` object as the `request` property of the `Context`.  
-YAP's `Request` object provides helpful methods for working with
+Yap provides a `Request` object as the `request` property of the `Context`.  
+Yap's `Request` object provides helpful methods for working with
 HTTP requests, which delegate to an [IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
 from the node `http` module.
 
@@ -69,11 +71,11 @@ app.use(async (ctx, next) => {
 });
 ```
 
-YAP provides a `Response` object as the `response` property of the `Context`.  
-YAP's `Response` object provides helpful methods for working with
+Yap provides a `Response` object as the `response` property of the `Context`.  
+Yap's `Response` object provides helpful methods for working with
 HTTP responses which delegate to a [ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse).  
 
-YAP's pattern of delegating to Node's request and response objects rather than extending them
+Yap's pattern of delegating to Node's request and response objects rather than extending them
 provides a cleaner interface and reduces conflicts between different middleware and with Node
 itself as well as providing better support for stream handling. The `IncomingMessage` can still be
 directly accessed as the `req` property on the `Context` and `ServerResponse` can be directly
