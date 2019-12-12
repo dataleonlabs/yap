@@ -64,7 +64,7 @@ cd my-apy
 npm start
 ```
 
-Find more details on [Usage Guide](docs/guide.md)
+Find more details on [Usage guide](docs/guide.md)
  
 ## Opening issues
 If you encounter a bug with YAP, we would appreciate if you inform us about it. 
@@ -82,7 +82,7 @@ For quick help and questions on using the YAP SDK for JavaScript, please use the
 
 Contribute
 ==========
-YAP is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [github](https://github.com/youngapp/yap).
+YAP is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [GitHub](https://github.com/youngapp/yap).
 
 No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
