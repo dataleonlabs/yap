@@ -34,7 +34,7 @@ Keeping API well-structured prevents overexposing API that results in stucking i
 - *Wait* – waits for enclosed Send request, Get value from cache, or Control flow policies to complete before proceeding.
 
 ### Authentication policies
-- *Authenticate with Basic* – authenticates with a backend service using basic authentication.
+- *Basic authentication* – authenticates with a backend service using basic authentication.
 
 ### Caching policies
 - *Get from cache* – perform cache look up and return a valid cached response when available.
