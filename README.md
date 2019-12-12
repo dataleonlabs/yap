@@ -3,7 +3,7 @@ Yap is the lightweight microservices API gateway that shines at the heart of any
 
 By leveraging async functions, Yap allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
 
-Please distinguish **Yap** (the core product of Young App) and **YAP** (the platform of Young App).
+Please distinguish **Yap** (the core project of Young App) and **YAP** (the platform of Young App).
 
 ## Motivation
 The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
