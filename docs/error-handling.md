@@ -1,9 +1,10 @@
-# Error Handling
-By providing a throw object, API management allows publishers to respond to error conditions, which may occur during processing of requests. The throw object is accessed through the context.LastError property and can be used by policies in the on-error policy section. This article provides a reference for the error handling capabilities in API management.
+# Error handling
+By providing a throw object, API management allows publishers to respond to error conditions, which may occur during requests processing. The throw object is accessed through the context.LastError property and can be used by policies in the on-error policy section. This article provides a reference for the error handling capabilities in API management.
 
 Policies in API management are divided into ```inbound```, ```outbound```, and ```on-error``` sections as shown in the following example.
 
-During the processing of a request, built-in steps are executed along with any policies, which are in scope for the request. If an error occurs, processing immediately jumps to the on-error policy section.
+During the processing of a request, built-in steps are executed along with any policies, which are in scope for the request. 
+If an error occurs, processing immediately jumps to the on-error policy section.
 The on-error policy section can be used at any scope. API publishers can configure custom behavior such as logging the error to event hubs or creating a new response to return to the caller.
 
 ```
@@ -37,7 +38,7 @@ The on-error policy section can be used at any scope. API publishers can configu
   });
   ```
 
-### Default Error Handler
+### Default error handler
 
   The default error handler is essentially a try-catch at
   the very beginning of the middleware chain. To use a
