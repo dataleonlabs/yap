@@ -15,23 +15,23 @@ YAP combines the enterprise-grade workflow automation platform and ease of use e
 
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
-* **RESTFul API** – full programmatic access to the internals makes it easy to manage your API users, keys and API configuration from within your systems.
+* **RESTful API** – full programmatic access to the internals makes it easy to manage your API users, keys and API configuration from within your systems.
 * **Multiple access protocols** – out of the box, YAP supports token-based, HMAC-signed, basic auth and keyless access methods.
-* **Rate Limiting** – easily rate limit of your API users; rate limiting is granular and can be applied on a per-key basis.
+* **Rate limiting** – easily rate limit of your API users; rate limiting is granular and can be applied on a per-key basis.
 * **Quotas** – enforce usage quotas on users to manage capacity or charge for tiered access.
-* **Granular Access Control** – grant API access on a version-by-version basis, grant keys access to multiple APIs or just a single version.
-* **API Versioning** – API versions can be easily set and deprecated at a specific time and date.
+* **Granular access control** – grant API access on a version-by-version basis, grant keys access to multiple APIs or just a single version.
+* **API versioning** – API versions can be easily set and deprecated at a specific time and date.
 * **Blacklist/Whitelist/Ignored endpoint access** – enforce strict security models on a version-by-version basis to your access points.
 * **Webhooks** – trigger webhooks against events such as quota violations and authentication failures.
-* **IP Whitelisting** – Block access to non-trusted IP addresses for more secure interactions.
+* **IP whitelisting** – Block access to non-trusted IP addresses for more secure interactions.
 
 YAP is written in NodeJS, which makes it fast and easy to set up.
 
 ## Yap API management platform
 The YAP desktop version can be used with the YAP API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.io and to see the full feature set, explore https://manual.youngapp.co
 
-#### Feaures available on cloud edition
-* **API Full-managed** – create your API on cloud editor and hosted by Young App in realtime.
+#### Feaures available for cloud edition
+* **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
 * **Functions** – create on real-time cloud functions.
 * **Advanced policies** – use advanced policies for better security.
 * **Advanced connectors** – use complex app and connectors directly on the YAP platform.
@@ -40,11 +40,11 @@ The YAP desktop version can be used with the YAP API Gateway to provide a full l
 
 ## Documentation
 
- - [Usage Guide](docs/guide.md)
- - [Application and Middlewares](docs/middlewares.md)
+ - [Usage guide](docs/guide.md)
+ - [Application and middlewares](docs/middlewares.md)
  - [Connectors](docs/connectors.md)
  - [Policies](docs/policies.md)
- - [Error Handling](docs/error-handling.md)
+ - [Error handling](docs/error-handling.md)
  - [FAQ](docs/faq.md)
 
 ## Installing
@@ -66,27 +66,29 @@ npm start
 
 Find more details on [Usage Guide](docs/guide.md)
  
-## Opening Issues
-If you encounter a bug with YAP we would like to hear
-about it. Search the [existing issues](https://github.com/youngapp/yap/issues)
-to make sure your problem didn’t already exist before opening a new
-issue. It’s helpful if you include the version of the SDK, Node.js or browser
-environment and OS you’re using. Please include a stack trace and reduced repro
-case when appropriate, too.
+## Opening issues
+If you encounter a bug with YAP, we would appreciate if you inform us about it. 
+Before opening a new issue, please go through [existing issues](https://github.com/youngapp/yap/issues)
+to find the solution right away if your problem was solved before. 
 
-The GitHub issues are intended for bug reports and feature requests. For quick help
-and questions on using the YAP SDK for JavaScript, please use the
+Attach the following details if appropriate: 
+- SDK, Node.js, or browser version
+- environment and OS
+- stack trace
+- reduced repro case
+
+The GitHub issues are intended for bug reports and feature requests. 
+For quick help and questions on using the YAP SDK for JavaScript, please use the
 resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help)
-section. The time of our support experts is flying, and they will appreciate your help (to apply for support reasonably) in order to
-effectively handle open issues so we can reply to you and other users in a timely manner.
+section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
 
 Contribute
 ==========
 YAP is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [github](https://github.com/youngapp/yap).
 
-No contribution is too small – providing feedback, [reporting issues](https://github.com/youngapp/yap/issues).
+No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
 ## License
 
-This SDK is distributed under the GNU General Public License v3.0
-see [LICENSE.txt](LICENSE.txt) for more information.
+This SDK is distributed under the GNU General Public License v3.0. 
+See [LICENSE.txt](LICENSE.txt) for more information.
