@@ -1,16 +1,16 @@
-## Yap Application
+## YAP application
 
-The object created when executing `new Yap()` is known as the Yap application object.
+The object created when executing `new Yap()` is known as the YAP application object.
 
-The application object is Yap's interface with node's http server and handles the registration
-of middleware, dispatching to the middleware from http, default error handling, as well as
+The application object is YAP's interface with node's HTTP server and handles the registration
+of middleware, dispatching to the middleware from HTTP, default error handling, as well as
 configuration of the context, request and response objects.
 
-Learn more about the application object in the [Application API Reference](docs/api/index.md).
+Learn more about the application object in the [Application API reference](docs/api/index.md).
 
 ## Middleware
 
-Yap is a middleware framework that can take two different kinds of functions as middleware:
+YAP is a middleware framework that can take two different kinds of functions as middleware:
 
   * async function
   * common function
@@ -43,19 +43,19 @@ app.use((ctx, next) => {
 });
 ```
 
-## Context, Request and Response
+## Context, request, and response
 
-Each middleware receives a Yap `Context` object that encapsulates an incoming
-http message and the corresponding response to that message.  `ctx` is often used
+Each middleware receives a YAP `Context` object that encapsulates an incoming
+HTTP message and the corresponding response to that message.  `ctx` is often used
 as the parameter name for the context object.
 
 ```js
 app.use(async (ctx, next) => { await next(); });
 ```
 
-Yap provides a `Request` object as the `request` property of the `Context`.  
-Yap's `Request` object provides helpful methods for working with
-http requests which delegate to an [IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
+YAP provides a `Request` object as the `request` property of the `Context`.  
+YAP's `Request` object provides helpful methods for working with
+HTTP requests, which delegate to an [IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
 from the node `http` module.
 
 Here is an example of checking that a requesting client supports xml.
@@ -69,18 +69,17 @@ app.use(async (ctx, next) => {
 });
 ```
 
-Yap provides a `Response` object as the `response` property of the `Context`.  
-Yap's `Response` object provides helpful methods for working with
-http responses which delegate to a [ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse)
-.  
+YAP provides a `Response` object as the `response` property of the `Context`.  
+YAP's `Response` object provides helpful methods for working with
+HTTP responses which delegate to a [ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse).  
 
-Yap's pattern of delegating to Node's request and response objects rather than extending them
+YAP's pattern of delegating to Node's request and response objects rather than extending them
 provides a cleaner interface and reduces conflicts between different middleware and with Node
-itself as well as providing better support for stream handling.  The `IncomingMessage` can still be
+itself as well as providing better support for stream handling. The `IncomingMessage` can still be
 directly accessed as the `req` property on the `Context` and `ServerResponse` can be directly
 accessed as the `res` property on the `Context`.
 
-Here is an example using Yap's `Response` object to stream a file as the response body.
+Here is an example using YAP's `Response` object to stream a file as the response body.
 
 ```js
 app.use(async (ctx, next) => {
@@ -90,9 +89,9 @@ app.use(async (ctx, next) => {
 });
 ```
 
-The `Context` object also provides shortcuts for methods on its `request` and `response`.  In the prior
-examples,  `ctx.type` can be used instead of `ctx.response.type` and `ctx.accepts` can be used
+The `Context` object also provides shortcuts for methods on its `request` and `response`. In the prior
+examples, `ctx.type` can be used instead of `ctx.response.type` and `ctx.accepts` can be used
 instead of `ctx.request.accepts`.
 
-For more information on `Request`, `Response` and `Context`, see the [Request API Reference](docs/api/request.md),
-[Response API Reference](docs/api/response.md) and [Context API Reference](docs/api/context.md).
+For more information on `Request`, `Response`, and `Context`, see the [Request API reference](docs/api/request.md),
+[Response API reference](docs/api/response.md) and [Context API reference](docs/api/context.md).
