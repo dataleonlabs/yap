@@ -17,7 +17,7 @@ Yap is a middleware framework that can take two different kinds of functions as 
   * async function
   * common function
 
-Here is an example of logger middleware with each of the different functions:
+Here is an example of logger middleware with different functions:
 
 ### ___async___ functions (node v7.6+)
 
