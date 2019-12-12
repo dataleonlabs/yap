@@ -1,42 +1,42 @@
-# Yap API Gateway
-Yap is a lightweight microservices API gateway that sits at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
+# YAP API Gateway
+YAP is the lightweight microservices API gateway that sits at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
-By leveraging async functions, Yap allows you to ditch callbacks and greatly increase error-handling and policies. provides an elegant suite of methods that make writing servers fast and enjoyable, based on Webhooks and HTTP.
+By leveraging async functions, YAP allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
 
 ## Motivation
-The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. For example, YAP automates quotes processing for cash business, which may involve multiple apps.
+The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams advanced collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
 
 Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
 
 YAP combines the enterprise-grade workflow automation platform and ease of use expected from client apps supporting both cloud-based and on-premise systems.
 
 
-## Key Features of Yap
+## Key features of YAP
 
-Yap offers powerful, yet lightweight features that allow fine grained control over your API ecosystem.
+Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
-* **RESTFul API** - Full programmatic access to the internals makes it easy to manage your API users, keys and Api Configuration from within your systems
-* **Multiple access protocols** - Out of the box, Tyk supports Token-based, HMAC Signed, Basic Auth and Keyless access methods
-* **Rate Limiting** - Easily rate limit your API users, rate limiting is granular and can be applied on a per-key basis
-* **Quotas** - Enforce usage quotas on users to manage capacity or charge for tiered access
-* **Granular Access Control** - Grant api access on a version by version basis, grant keys access to multiple API's or just a single version
-* **API Versioning** - API Versions can be easily set and deprecated at a specific time and date
-* **Blacklist/Whitelist/Ignored endpoint access** - Enforce strict security models on a version-by-version basis to your access points
-* **Webhooks** - Trigger webhooks against events such as Quota Violations and Authentication failures
-* **IP Whitelisting** - Block access to non-trusted IP addresses for more secure interactions
+* **RESTFul API** – full programmatic access to the internals makes it easy to manage your API users, keys and API configuration from within your systems.
+* **Multiple access protocols** – out of the box, YAP supports token-based, HMAC-signed, basic auth and keyless access methods.
+* **Rate Limiting** – easily rate limit of your API users; rate limiting is granular and can be applied on a per-key basis.
+* **Quotas** – enforce usage quotas on users to manage capacity or charge for tiered access.
+* **Granular Access Control** – grant API access on a version-by-version basis, grant keys access to multiple APIs or just a single version.
+* **API Versioning** – API versions can be easily set and deprecated at a specific time and date.
+* **Blacklist/Whitelist/Ignored endpoint access** – enforce strict security models on a version-by-version basis to your access points.
+* **Webhooks** – trigger webhooks against events such as quota violations and authentication failures.
+* **IP Whitelisting** – Block access to non-trusted IP addresses for more secure interactions.
 
-Yap is written in NodeJS, which makes it fast and easy to set up.
+YAP is written in NodeJS, which makes it fast and easy to set up.
 
-## Yap API Management Platform
-The Yap Desktop can be used with the Yap API Gateway, to provide a full lifecycle API Management platform. You can find more details at https://youngapp.io and for a full featureset, you can visit https://manual.youngapp.co
+## Yap API management platform
+The YAP desktop version can be used with the YAP API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.io and to see the full feature set, explore https://manual.youngapp.co
 
-#### Feaures available on Cloud Edition
-* **API Full-managed** - Create your api on Cloud Editor and hosted by Young App in realtime
-* **Functions** - Create on real-time cloud functions
-* **Advenced policies** - Use advenced policies for better security
-* **Advenced connectors** - Use complex app and connectors directly on platform
-* **Versioning** - Versionning your APIs and process on Cloud
-* **Support and integration** - Beneficiate support by expert for select best api and integration on Cloud
+#### Feaures available on cloud edition
+* **API Full-managed** – create your API on cloud editor and hosted by Young App in realtime.
+* **Functions** – create on real-time cloud functions.
+* **Advanced policies** – use advanced policies for better security.
+* **Advanced connectors** – use complex app and connectors directly on the YAP platform.
+* **Versioning** – versionning your APIs and process on cloud.
+* **Support and integration** – beneficiate support by experts to select the best API and cloud integration.
 
 ## Documentation
 
@@ -48,7 +48,7 @@ The Yap Desktop can be used with the Yap API Gateway, to provide a full lifecycl
  - [FAQ](docs/faq.md)
 
 ## Installing
-It's a official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda
+It's an official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda.
 
 ##### With yarm
 ```
@@ -64,25 +64,25 @@ cd my-apy
 npm start
 ```
 
-More details on [Usage Guide](docs/guide.md)
+Find more details on [Usage Guide](docs/guide.md)
  
 ## Opening Issues
 If you encounter a bug with YAP we would like to hear
 about it. Search the [existing issues](https://github.com/youngapp/yap/issues)
-and try to make sure your problem doesn’t already exist before opening a new
+to make sure your problem didn’t already exist before opening a new
 issue. It’s helpful if you include the version of the SDK, Node.js or browser
 environment and OS you’re using. Please include a stack trace and reduced repro
 case when appropriate, too.
 
-The GitHub issues are intended for bug reports and feature requests. For help
-and questions with using the YAP SDK for JavaScript please make use of the
-resources listed in the [Getting Help](https://github.com/youngapp/yap#getting-help)
-section. There are limited resources available for handling issues and by
-keeping the list of open issues lean we can respond in a timely manner.
+The GitHub issues are intended for bug reports and feature requests. For quick help
+and questions on using the YAP SDK for JavaScript, please use the
+resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help)
+section. The time of our support experts is flying, and they will appreciate your help (to apply for support reasonably) in order to
+effectively handle open issues so we can reply to you and other users in a timely manner.
 
 Contribute
 ==========
-Yap is open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [github](https://github.com/youngapp/yap).
+YAP is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [github](https://github.com/youngapp/yap).
 
 No contribution is too small – providing feedback, [reporting issues](https://github.com/youngapp/yap/issues).
 
