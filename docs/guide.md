@@ -147,9 +147,9 @@ Your API is available on a cloud function provider.
 
 ## Documentation
 
- - [Usage Guide](docs/guide.md)
- - [Application and Middlewares](docs/middlewares.md)
+ - [Usage guide](docs/guide.md)
+ - [Application and middlewares](docs/middlewares.md)
  - [Connectors](docs/connectors.md)
  - [Policies](docs/policies.md)
- - [Error Handling](docs/error-handling.md)
+ - [Error handling](docs/error-handling.md)
  - [FAQ](docs/faq.md)
