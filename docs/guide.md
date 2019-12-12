@@ -1,9 +1,9 @@
 # Usage and getting started
-YAP is a microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
+Yap is a microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
 ### Middleware
 
-YAP is a middleware framework work only on async functions:
+Yap is a middleware framework work only on async functions:
 Here is an example of logger middleware with each of the different functions:
 
 ##### ___async___ functions
@@ -19,9 +19,9 @@ app.use(async (ctx, next) => {
 
 ### Context, request and response
 
-Each middleware receives a YAP `Context` object that encapsulates an incoming
-HTTP AWS Lambda trigger message and the corresponding response to that message.  `ctx` is often used
-as the parameter name for the context object similar to koa or ExpressJS.
+Each middleware receives a Yap `Context` object that encapsulates an incoming
+HTTP AWS Lambda trigger message and the corresponding response to that message.  
+`ctx` is often used as the parameter name for the context object similar to koa or ExpressJS.
 
 ```js
 app.use(async (ctx, next) => { await next(); });
@@ -43,7 +43,7 @@ Further, it’s important to modernize your API strategy. Keeping API well-stru
 
 ### Application
 
-YAP application is an object containing an array of middleware functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
+Yap application is an object containing an array of middleware functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
 
 The obligatory hello-world application:
 
@@ -59,7 +59,7 @@ export default app
 ```
 
 #### Usage with TypeScript
-The YAP for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
+The Yap for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
 Our goal is to keep these TypeScript definition files updated with each release for any public API.
 
 #### Pre-requisites
@@ -143,7 +143,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 
-Your API is available on a cloud function provider.
+Your API is available on the platforms of cloud function providers (AWS, GCP, and Azure).
 
 ## Documentation
 
