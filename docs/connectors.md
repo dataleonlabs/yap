@@ -4,7 +4,7 @@ API management is the process of creating and publishing web application program
 ## API management
 API Management helps organizations to publish APIs to external, partner, and internal developers to unlock the potential of their data and services. Businesses everywhere are looking to extend their operations as a digital platform, creating new channels, finding new customers and driving deeper engagement with existing ones. API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
-To explore YAP deeper, visit Connectors, Process Flow, and Young App website pages.
+To explore YAP deeper, visit [Connectors](https://manual.youngapp.co/connectors/), [Process Flow](https://manual.youngapp.co/developer-guide/process-flow/untitled), and [Young App website](https://youngapp.co/) pages.
 
 ### Integration challenges
 The average enterprise uses over 200 different applications – both cloud-based and on-premise – they are personal and business productivity programs with key part of daily work and data. Such applications are often not integrated with other business data.
