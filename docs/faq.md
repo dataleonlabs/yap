@@ -1,26 +1,20 @@
-# Frequently Asked Questions
+# Frequently asked questions
 
-## Does Yap replace Express?
+## Does YAP replace Express?
 
-  It's more like Connect, but a lot of the Express goodies
-  were moved to the middleware level in Yap to help form
-  a stronger foundation. This makes middleware more enjoyable
-  and less error-prone to write, for the entire stack, not
-  just the end application code.
+  It's more like Connect, but a lot of the Express goodies were moved to the middleware level in YAP to help form a stronger foundation. 
+  This makes middleware more enjoyable and less error-prone to write, for the entire stack, not just the end application code.
 
-  Typically many middleware would
-  re-implement similar features, or even worse incorrectly implement them,
-  when features like signed cookie secrets among others are typically application-specific,
-  not middleware specific.
+  Typically many middleware would re-implement similar features, or even worse incorrectly implement them,
+  when features like signed cookie secrets among others are typically application-specific, not middleware specific.
 
-## Does Yap replace Connect?
+## Does YAP replace Connect?
 
   No, just a different take on similar functionality
-  now that async functions allow us to write code with fewer
-  callbacks. Connect is equally capable, and some may still prefer it,
-  it's up to what you prefer.
+  now that async functions allow us to write code with fewer callbacks. 
+  Connect is equally capable, and some may still prefer it, it's up to what you prefer.
 
-## Does Yap include routing?
+## Does YAP include routing?
 
   No - out of the box Yap has no form of routing, however
   many routing middleware are available: https://github.com/Yapjs/Yap/wiki
