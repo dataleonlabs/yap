@@ -1,8 +1,8 @@
-## YAP application
+## Yap application
 
 The object created when executing `new Yap()` is known as the Yap application object.
 
-The application object is Yap's interface with node's HTTP server and handles the registration
+The application object is Yap's interface with node's HTTP server. The server handles the registration
 of middleware, dispatching to the middleware from HTTP, default error handling, as well as
 configuration of the context, request and response objects.
 
