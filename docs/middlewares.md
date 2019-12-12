@@ -58,7 +58,7 @@ YAP's `Request` object provides helpful methods for working with
 HTTP requests, which delegate to an [IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
 from the node `http` module.
 
-Here is an example of checking that a requesting client supports xml.
+Here is an example of checking that a requesting client supports XML.
 
 ```js
 app.use(async (ctx, next) => {
