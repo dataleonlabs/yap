@@ -1,36 +1,15 @@
 # Usage and getting started
 Yap is a microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
-### Middleware
-
-Yap is a middleware framework work only on async functions:
-Here is an example of logger middleware with each of the different functions:
-
-##### ___async___ functions
-
-```js
-app.post('/posts', async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});
-```
-
-### Context, request and response
-
-Each middleware receives a Yap `Context` object that encapsulates an incoming
-HTTP AWS Lambda trigger message and the corresponding response to that message.  
+### Middleware and Sequences
+Yap is a middleware framework work only on async functions, Each middleware receives a Yap `Context` object that encapsulates an incoming HTTP AWS Lambda trigger message and the corresponding response to that message.  
 `ctx` is often used as the parameter name for the context object similar to koa or ExpressJS.
 
 ```js
-app.use(async (ctx, next) => { await next(); });
+app.post('/hello', ...)
 ```
 
-YAP provides a `Request` object as the `request` property of the `Context`.
-
 ### Sequences
-
 API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
 ```js
@@ -50,6 +29,12 @@ Why? When you keep your API policies separate, you ensure control over their per
 Independence is the key to your API policies’ success and future deployment.
 
 Further, it’s important to modernize your API strategy. Keeping API well-structured prevents overexposing API that results in stucking in little things. Unifying API policies simplifies API management.
+
+```xml
+<check-header name="Authorization" failed-check-httpcode="401" failed-check-error-message="Not authorized" ignore-case="false">
+    <value>f6dc69a089844cf6b2019bae6d36fac8</value>
+</check-header>
+```
 
 ### Application
 
