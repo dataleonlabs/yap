@@ -47,3 +47,13 @@ Keeping API well-structured prevents overexposing API that results in stucking i
 - *Set HTTP header* – assigns a value to an existing response/request header or adds a new response/request header.
 - *Set query string parameter* – adds, replaces value of, or deletes request query string parameter.
 - *Rewrite URL* – converts a request URL from its public form to the form expected by the web service.
+
+## Documentation
+
+ - [Usage guide](../docs/guide.md)
+ - [Application and middlewares](../docs/middlewares.md)
+ - [Connectors](../docs/connectors.md)
+ - [Policies](../docs/policies.md)
+ - [Error handling](../docs/error-handling.md)
+ - [FAQ](../docs/faq.md)
+
