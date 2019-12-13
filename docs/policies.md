@@ -18,18 +18,18 @@ Keeping API well-structured prevents overexposing API that results in stucking i
 
 ## Policies available
 ### Access restriction policies
-- Check HTTP header - Enforces the existence or value of an HTTP Header.
-- Restrict caller IPs - Filters (allows/denies) calls from specific IP addresses and/or address ranges. 
-- Restrict caller hosts - Filters (allows/denies) calls from specific IP addresses and/or address ranges.
+- Check HTTP header – enforces the existence or value of an HTTP Header.
+- Restrict caller IPs – filters (allows/denies) calls from specific IP addresses and/or address ranges. 
+- Restrict caller hosts – filters (allows/denies) calls from specific IP addresses and/or address ranges.
 
 ### Advanced policies
-- *Control flow* - Conditionally applies policy statements based on the results of the evaluation of Boolean expressions.
-- *Mock response* - Aborts pipeline execution and returns a mocked response directly to the caller.
-- *Return response* - Aborts pipeline execution and returns the specified response directly to the caller.
-- *Send request* - Sends a request to the specified URL.
-- *Set request method* - Allows you to change the HTTP method for a request.
-- *Set status code* - Changes the HTTP status code to the specified value.
-- *Set variable* - Persists a value in a named context variable for later access.
+- *Control flow* – conditionally applies policy statements based on the results of the evaluation of Boolean expressions.
+- *Mock response* – aborts pipeline execution and returns a mocked response directly to the caller.
+- *Return response* – aborts pipeline execution and returns the specified response directly to the caller.
+- *Send request* – sends a request to the specified URL.
+- *Set request method* – allows you to change the HTTP method for a request.
+- *Set status code* – changes the HTTP status code to the specified value.
+- *Set variable* – persists a value in a named context variable for later access.
 
 ### Authentication policies
 - *Basic authentication* – authenticates with a backend service using basic authentication.
