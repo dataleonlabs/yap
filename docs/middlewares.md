@@ -15,21 +15,7 @@ Yap is a middleware framework that can take two different kinds of functions as 
   * async function
   * sequence function
 
-Here is an example of logger middleware with different functions:
-
-### ___async___ functions (node v7.6+)
-
-```js
-// Middleware normally takes two parameters (ctx, next), ctx is the context for one request,
-// next is a function that is invoked to execute the downstream middleware. It returns a Promise with a then function for running code after completion.
-
-app.post('/hello', async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});
-```
+Here is an example of send sms and create csv:
 
 ### Sequence function
 
@@ -47,7 +33,7 @@ HTTP message and the corresponding response to that message.  `ctx` is often use
 as the parameter name for the context object.
 
 ```js
-app.use(async (ctx, next) => { await next(); });
+app.all('/', async (ctx, next) => { await next(); });
 ```
 
 Yap provides a `Request` object as the `request` property of the `Context`.  
@@ -59,3 +45,12 @@ provides a cleaner interface and reduces conflicts between different middleware 
 itself as well as providing better support for stream handling. The `IncomingMessage` can still be
 directly accessed as the `req` property on the `Context` and `ServerResponse` can be directly
 accessed as the `res` property on the `Context`.
+
+## Documentation
+
+ - [Usage guide](../docs/guide.md)
+ - [Application and middlewares](../docs/middlewares.md)
+ - [Connectors](../docs/connectors.md)
+ - [Policies](../docs/policies.md)
+ - [Error handling](../docs/error-handling.md)
+ - [FAQ](../docs/faq.md)
