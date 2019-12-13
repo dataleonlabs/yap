@@ -67,7 +67,7 @@ npm start
 ```
 
 ```javascript
-app.post('/export', new Connector([
+app.post('/export', new Sequence([
   csv().create({ in: 'data' }),
   s3().save(),
   twillio({ API_KEY }).send({ in: 'user' }),
