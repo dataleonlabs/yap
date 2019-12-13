@@ -64,4 +64,11 @@ app.use(async (ctx, next) => {
 })
 ```
 
-  
+## Documentation
+
+ - [Usage guide](../docs/guide.md)
+ - [Application and middlewares](../docs/middlewares.md)
+ - [Connectors](../docs/connectors.md)
+ - [Policies](../docs/policies.md)
+ - [Error handling](../docs/error-handling.md)
+ - [FAQ](../docs/faq.md)
