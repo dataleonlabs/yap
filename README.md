@@ -66,6 +66,17 @@ cd my-apy
 npm start
 ```
 
+```
+const Yap = require('@youngapp/yap');
+const app = new Yap();
+
+app.post('/export', new Connector([
+  csv().create({ in: 'data' }),
+  s3({ API_KEY }).create(),
+  twillio({ API_KEY }).send({ in: 'user' }),
+]))
+```
+
 Find more details on [Usage guide](docs/guide.md)
  
 ## Opening issues
