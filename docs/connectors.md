@@ -25,11 +25,20 @@ YAP ensures that citizens and IT have access to the same easy-to-use driven prod
 // Middleware normally takes two parameters (ctx, next), ctx is the context for one request,
 // next is a function that is invoked to execute the downstream middleware. It returns a Promise with a then function for running code after completion.
 
-app.use((ctx, next) => {
+app.post('/hello',(ctx, next) => {
   const start = Date.now();
   return next().then(() => {
     const ms = Date.now() - start;
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
   });
 });
+```
+Or with sequences
+```js
+app.post('/posts', new Sequence([
+  csv().create({ in: 'data' }),
+  s3({ ACCESS_KEY, ACCESS_SECRET, REGION, BUCKET }).save({ in: 'csv' }),
+  twillio({ API_KEY }).send({ in: 'user' }),
+  response({ in: 'csv' }),
+]))
 ```
