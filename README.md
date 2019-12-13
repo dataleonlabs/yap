@@ -67,9 +67,6 @@ npm start
 ```
 
 ```javascript
-const Yap = require('@youngapp/yap');
-const app = new Yap();
-
 app.post('/export', new Connector([
   csv().create({ in: 'data' }),
   s3().save(),
