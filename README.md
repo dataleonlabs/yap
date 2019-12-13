@@ -72,7 +72,7 @@ const app = new Yap();
 
 app.post('/export', new Connector([
   csv().create({ in: 'data' }),
-  s3({ API_KEY }).save(),
+  s3().save(),
   twillio({ API_KEY }).send({ in: 'user' }),
 ]))
 ```
