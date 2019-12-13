@@ -41,3 +41,13 @@ If it's a getter/setter, then both the getter and the setter will strictly
 correspond to either `ctx.request` or `ctx.response`.
 
 Please think about these rules before suggesting additional properties.
+
+## Documentation
+
+ - [Usage guide](../docs/guide.md)
+ - [Application and middlewares](../docs/middlewares.md)
+ - [Connectors](../docs/connectors.md)
+ - [Policies](../docs/policies.md)
+ - [Error handling](../docs/error-handling.md)
+ - [FAQ](../docs/faq.md)
+
