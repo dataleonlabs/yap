@@ -9,7 +9,7 @@ Here is an example of logger middleware with each of the different functions:
 ##### ___async___ functions
 
 ```js
-app.use(async (ctx, next) => {
+app.post('/posts', async (ctx, next) => {
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
@@ -29,9 +29,19 @@ app.use(async (ctx, next) => { await next(); });
 
 YAP provides a `Request` object as the `request` property of the `Context`.
 
-### Connectors
+### Sequences
 
 API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
+
+```js
+app.post('/posts', new Sequence([
+  postgres().create({ in: 'data' }),
+  excel().save({ in: 'csv' }),
+  dropbox({ API_KEY }).put({ in: 'user' }),
+  sendinblue({ in: 'csv' }),
+  response({ in: 'csv' }),
+]))
+```
 
 ### Policies
 
@@ -47,13 +57,16 @@ Yap application is an object containing an array of middleware functions and pol
 
 The obligatory hello-world application:
 
-```
+```js
 const Yap = require('@youngapp/yap');
 const app = new Yap();
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
+app.post('/posts', new Sequence([
+  csv().create({ in: 'data' }),
+  s3({ ACCESS_KEY, ACCESS_SECRET, REGION, BUCKET }).save({ in: 'csv' }),
+  twillio({ API_KEY }).send({ in: 'user' }),
+  response({ in: 'csv' }),
+]))
 
 export default app
 ```
