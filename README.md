@@ -68,9 +68,9 @@ npm start
 
 ```javascript
 app.post('/posts/:id', new Sequence([
-    async ({ params }) => await mysql.findOne({ table: 'posts', values: { name: params.id } }),
-    async ({ results }) => await csv.save({ data: results }),
-    async ({ results }) => await dropbox.put({ file: results.csv }),
+    async (_, ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
+    async (res) => await csv.save({ data: res }),
+    async (res) => await dropbox.put({ file: res.csv }),
 ]))
 ```
 
