@@ -67,10 +67,18 @@ npm start
 ```
 
 ```javascript
-app.post('/export', new Sequence([
-  csv().create({ in: 'data' }),
-  s3().save(),
-  twillio({ API_KEY }).send({ in: 'user' }),
+import { MySQL } from "yap-mysql";
+import { DropBox } from "yap-dropbox";
+import { Excel } from "yap-excel";
+
+const mysql = new MySQL(...conn.MySQL);
+const dropbox = new DropBox(...conn.DROPBOX);
+const excel = new Excel();
+
+app.post('/posts', new Sequence([
+    async ({ params }) => mysql.findOne({ table: 'posts', values: { name: params.id } }),
+    async ({ results }) => await excel.save({ data: results.mysql }),
+    async ({ results }) => await dropbox.put({ file: results.excel }),
 ]))
 ```
 
