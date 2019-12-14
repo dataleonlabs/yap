@@ -13,12 +13,9 @@ app.post('/hello', ...)
 API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
 ```js
-app.post('/posts', new Sequence([
-  postgres().create({ in: 'data' }),
-  excel().save({ in: 'csv' }),
-  dropbox({ API_KEY }).put({ in: 'user' }),
-  sendinblue({ in: 'csv' }),
-  response({ in: 'csv' }),
+app.post('/hello', new Sequence([
+    async (res) => await csv.save({ data: res }),
+    async (res) => await dropbox.put({ file: res.csv }),
 ]))
 ```
 
@@ -46,12 +43,12 @@ The obligatory hello-world application:
 import { Yap } from "@youngapp/yap";
 import { MySQL } from "@youngapp/rds";
 import { DropBox } from "@youngapp/storage";
-import { Excel } from "@youngapp/data";
+import { CSV } from "@youngapp/data";
 
 // Connections
 const mysql = new MySQL(...conn.MySQL);
 const dropbox = new DropBox(...conn.DROPBOX);
-const excel = new Excel();
+const csv = new CSV();
 
 const Yap = require('@youngapp/yap');
 const app = new Yap();
