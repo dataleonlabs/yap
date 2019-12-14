@@ -43,14 +43,23 @@ Yap application is an object containing an array of middleware functions and pol
 The obligatory hello-world application:
 
 ```js
+import { Yap } from "@youngapp/yap";
+import { MySQL } from "@youngapp/rds";
+import { DropBox } from "@youngapp/storage";
+import { Excel } from "@youngapp/data";
+
+// Connections
+const mysql = new MySQL(...conn.MySQL);
+const dropbox = new DropBox(...conn.DROPBOX);
+const excel = new Excel();
+
 const Yap = require('@youngapp/yap');
 const app = new Yap();
 
-app.post('/posts', new Sequence([
-  csv().create({ in: 'data' }),
-  s3({ ACCESS_KEY, ACCESS_SECRET, REGION, BUCKET }).save({ in: 'csv' }),
-  twillio({ API_KEY }).send({ in: 'user' }),
-  response({ in: 'csv' }),
+app.post('/posts/:id', new Sequence([
+    async (_, ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
+    async (res) => await csv.save({ data: res }),
+    async (res) => await dropbox.put({ file: res.csv }),
 ]))
 
 export default app
