@@ -39,11 +39,12 @@ Yap application is an object containing an array of middleware functions and pol
 
 The obligatory hello-world application:
 
-```js
+```typescript
 import { Yap } from "@youngapp/yap";
 import { MySQL } from "@youngapp/rds";
 import { DropBox } from "@youngapp/storage";
 import { CSV } from "@youngapp/data";
+import conn from "./connections.ts";
 
 // Connections
 const mysql = new MySQL(...conn.MySQL);
