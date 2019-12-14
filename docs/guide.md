@@ -37,7 +37,7 @@ Further, it’s important to modernize your API strategy. Keeping API well-stru
 
 Yap application is an object containing an array of middleware functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
 
-The obligatory hello-world application:
+The obligatory workflow application:
 
 ```typescript
 import { Yap } from "@youngapp/yap";
