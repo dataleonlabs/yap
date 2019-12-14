@@ -54,9 +54,9 @@ const Yap = require('@youngapp/yap');
 const app = new Yap();
 
 app.post('/posts/:id', new Sequence([
-    async (_, ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
-    async (res) => await csv.save({ data: res }),
-    async (res) => await dropbox.put({ file: res.csv }),
+    async (ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
+    async (_, res) => await csv.save({ data: res }),
+    async (_, res) => await dropbox.put({ file: res.csv }),
 ]))
 
 export default app
