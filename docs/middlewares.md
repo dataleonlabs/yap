@@ -20,9 +20,9 @@ Here is an example of send sms and create csv:
 ### Sequence function
 
 ```js
-app.post('/hello', new Sequence([
-  twillio({ API_KEY }).send({ in: 'user' }),
-  csv().create({ in: 'data' })
+app.post('/request?phone', new Sequence([
+    async (_, ctx) => twillio.send({ in: ctx.query.phone }),
+    async (res) => await csv.save({ data: res }),
 ]))
 ```
 
