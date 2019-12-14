@@ -18,9 +18,9 @@ Keeping API well-structured prevents overexposing API that results in stucking i
 
 ## Policies available
 ### Access restriction policies
-- Check HTTP header – enforces the existence or value of an HTTP Header.
-- Restrict caller IPs – filters (allows/denies) calls from specific IP addresses and/or address ranges. 
-- Restrict caller hosts – filters (allows/denies) calls from specific IP addresses and/or address ranges.
+- [Check HTTP header](https://manual.youngapp.co/developer-guide/policies/access-restriction-policies/check-http-header) – enforces the existence or value of an HTTP Header.
+- [Restrict caller IPs](https://manual.youngapp.co/developer-guide/policies/access-restriction-policies/restrict-caller-ips) – filters (allows/denies) calls from specific IP addresses and/or address ranges. 
+- [Restrict caller hosts](https://manual.youngapp.co/developer-guide/policies/access-restriction-policies/restrict-caller-hosts) – filters (allows/denies) calls from specific IP addresses and/or address ranges.
 
 ### Advanced policies
 - *Control flow* – conditionally applies policy statements based on the results of the evaluation of Boolean expressions.
