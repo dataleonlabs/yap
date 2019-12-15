@@ -35,14 +35,12 @@ Keeping API well-structured prevents overexposing API that results in stucking i
 - [Basic authentication](https://manual.youngapp.co/developer-guide/policies/authentication-policies/authenticate-with-basic) – authenticates with a backend service using basic authentication.
 
 ### Cross domain policies
-- Allow cross-domain calls – makes the API accessible from Adobe Flash and Microsoft Silverlight browser-based clients.
 - [CORS](https://manual.youngapp.co/developer-guide/policies/cross-domain-policies/cors) – adds cross-origin resource sharing (CORS) support to an operation or an API to allow cross-domain calls from browser-based clients.
 
 ### Transformation policies
 - [Convert JSON to XML](https://manual.youngapp.co/developer-guide/policies/transformation-policies/convert-json-to-xml) – converts request or response body from JSON to XML.
 - [Convert XML to JSON](https://manual.youngapp.co/developer-guide/policies/transformation-policies/convert-xml-to-json) – converts request or response body from XML to JSON.
 - [Find and replace string in body](https://manual.youngapp.co/developer-guide/policies/transformation-policies/find-and-replace-string-in-body) – finds a request or response substring and replaces it with a different substring.
-- Mask URLs in content – re-writes (masks) links in the response body so that they point to the equivalent link via the gateway.
 - [Set body](https://manual.youngapp.co/developer-guide/policies/transformation-policies/set-body) – sets the message body for incoming and outgoing requests.
 - [Set HTTP header](https://manual.youngapp.co/developer-guide/policies/transformation-policies/set-http-header) – assigns a value to an existing response/request header or adds a new response/request header.
 - [Set query string parameter](https://manual.youngapp.co/developer-guide/policies/transformation-policies/set-query-string-parameter) – adds, replaces value of, or deletes request query string parameter.
