@@ -1,5 +1,9 @@
 {
     "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "strict": true,
         "target": "es2016"
     },
     "include": [
