@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.ts",
-    "build": "rm -rf dist && tsc",
-    "release": "/node_modules/.bin/np"
+    "build": "rm -rf dist && ./node_modules/.bin/tsc",
+    "release": "./node_modules/.bin/np"
   },
   "repository": {
     "type": "git",
