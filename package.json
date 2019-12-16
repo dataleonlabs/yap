@@ -8,8 +8,7 @@
   },
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.ts",
-    "build": "rm -rf dist && ./node_modules/.bin/tsc",
-    "release": "./node_modules/.bin/np"
+    "build": "rm -rf dist && ./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -27,7 +26,6 @@
   "devDependencies": {
     "@types/mocha": "^5.2.7",
     "mocha": "^6.2.2",
-    "np": "^5.2.1",
     "sinon": "^7.5.0",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.3",
@@ -42,8 +40,5 @@
     "aws-lambda": "^0.1.2",
     "aws-sdk": "^2.590.0",
     "path-to-regexp": "^6.1.0"
-  },
-  "np": {
-    "contents": "dist"
   }
 }
