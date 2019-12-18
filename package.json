@@ -1,5 +1,5 @@
 {
-  "name": "yap-core",
+  "name": "@youngapp/yap",
   "version": "1.0.0",
   "description": "Yap Core",
   "main": "dist/index.js",
