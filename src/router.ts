@@ -1,6 +1,6 @@
 import { Key, pathToRegexp } from 'path-to-regexp';
 import { xml2js } from 'xml-js';
-import ipFilter from './policies/filters/ip-filter';
+import ipFilter from './policies/access-restriction/ip-filter';
 
 /**
  * Policies
