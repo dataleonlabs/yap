@@ -26,6 +26,8 @@ jobs:
       run: |
         npm ci
         npm test
+        pwd
+        ls -la
         npm run build
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         cd dist
