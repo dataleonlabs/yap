@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * api-key-filter Policy

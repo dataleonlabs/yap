@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * <send-request> policy sends the provided request to the specified URL, waiting no longer than the set timeout value.

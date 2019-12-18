@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * rate-limit-by-key policy prevents API usage spikes on a per-key basis by limiting the call

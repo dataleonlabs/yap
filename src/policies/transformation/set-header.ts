@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * set-header policy

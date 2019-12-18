@@ -1,4 +1,4 @@
-import { Context } from "../Router";
+import { Context } from "../router";
 
 /**
  * control-flow policy

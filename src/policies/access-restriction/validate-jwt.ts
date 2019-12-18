@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * validate-jwt policy enforces the existence and validity of a JWT 

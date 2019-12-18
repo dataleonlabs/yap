@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * <send-one-way-request> policy sends the provided request to the specified URL without waiting for a response

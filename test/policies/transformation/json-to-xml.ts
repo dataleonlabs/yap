@@ -1,4 +1,4 @@
-import { Context } from "../../../src/Router";
+import { Context } from "../../../src/router";
 import { js2xml } from 'xml-js';
 import { set } from 'lodash';
 

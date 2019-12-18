@@ -1,4 +1,4 @@
-import { Context } from "../../Router";
+import { Context } from "../../router";
 
 /**
  * check-header policy to enforce that a request has a specified HTTP header. 

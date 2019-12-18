@@ -1,4 +1,4 @@
-import { Context } from "../../../src/Router";
+import { Context } from "../../../src/router";
 
 /**
  * <mock-response policy
