@@ -29,6 +29,7 @@ jobs:
         npm run build
         cp ./package.json ./dist/package.json
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+        cd dist
         npm publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version
       env:
         CI: true
