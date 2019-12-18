@@ -7,6 +7,11 @@
   "directories": {
     "doc": "docs"
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "files": [
     "dist",
     "docs",
@@ -15,8 +20,12 @@
     "package.json"
   ],
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.ts",
-    "build": "rm -rf dist && ./node_modules/.bin/tsc"
+    "test": "ENV=local mocha -r ts-node/register test/**/*.ts  --timeout 30000 --watch-extensions ts --watch",
+    "test:integration": "nyc mocha -r ts-node/register test/**/*.ts",
+    "lint": "tslint test/**/*.ts{,x} src/**/*.ts{,x} -c tslint.json -p tsconfig.json --fix",
+    "build": "rm -rf dist && ./node_modules/.bin/tsc",
+    "coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95 --statements 95",
+    "release": "standard-version  --no-verify --commit-all --release-as minor --git-tag-fallback false"
   },
   "repository": {
     "type": "git",
@@ -31,13 +40,28 @@
     "url": "https://github.com/youngapp/yap/issues"
   },
   "homepage": "https://github.com/youngapp/yap#readme",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "git add package.json",
+      "precommit": "echo \"chore(release): [skip ci]\""
+    }
+  },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
     "mocha": "^6.2.2",
     "sinon": "^7.5.0",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.3",
-    "typings": "^2.1.1"
+    "husky": "^3.0.0",
+    "tslint": "^5.12.0",
+    "nyc": "^13.1.0"
   },
   "dependencies": {
     "@types/assert": "^1.4.3",

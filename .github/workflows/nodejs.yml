@@ -24,9 +24,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: test and publish
       run: |
+        npm install -g standard-version nyc mocha typescript ts-node commitizen yarn husky
         npm ci
-        npm test
-        npm run build
+        yarn lint
+        yarn test:integration
+        yarn coverage
+        yarn build
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
       env:

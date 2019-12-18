@@ -2,7 +2,7 @@ import { xml2js } from 'xml-js';
 import assert from 'assert';
 import findAndReplace from '../../../src/policies/transformation/find-and-replace';
 
-describe('Router', () => {
+describe('<find-and-replace />', () => {
 
     it('U-TEST-1 - Test find and replace', async () => {
       const res = xml2js(`<find-and-replace from="notebook" to="laptop" />`);

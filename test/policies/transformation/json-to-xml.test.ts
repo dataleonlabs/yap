@@ -1,7 +1,7 @@
 import assert from 'assert';
 import jsonToXml from './json-to-xml';
 
-describe('Router', () => {
+describe('<json-to-xml />', () => {
 
     it('U-TEST-1 - Test json to xml success', async () => {
       const res = {
