@@ -27,8 +27,8 @@ jobs:
         npm ci
         npm test
         npm run build
-      run: echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-      run: npm publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version
+        echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+        npm publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
