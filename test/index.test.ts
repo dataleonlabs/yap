@@ -2,7 +2,6 @@ import 'mocha';
 import assert from 'assert';
 import * as sinon from 'sinon';
 import Yap from '../src/index';
-import { Context } from '../src/Router';
 
 describe('Core', () => {
     it('U-TEST-1 - Constructor creates router', () => {
