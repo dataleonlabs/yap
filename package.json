@@ -11,7 +11,8 @@
     "dist",
     "docs",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "package.json"
   ],
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.ts",
