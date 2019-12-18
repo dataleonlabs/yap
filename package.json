@@ -7,8 +7,15 @@
   "directories": {
     "doc": "docs"
   },
+  "files": [
+    "dist",
+    "docs",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.ts"
+    "test": "mocha -r ts-node/register test/**/*.ts",
+    "build": "rm -rf dist && ./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",

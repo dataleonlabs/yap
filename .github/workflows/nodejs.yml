@@ -26,13 +26,8 @@ jobs:
       run: |
         npm ci
         npm test
-        rm -rf dist 
-        ./node_modules/.bin/tsc 
-        cp package.json dist/package.json 
-        cp LICENSE dist/LICENSE 
-        cp README.md dist/README.md
+        npm run build
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-        cd dist
         npm publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version
       env:
         CI: true

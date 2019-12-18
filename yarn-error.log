@@ -1,0 +1,86 @@
+Arguments: 
+  /Users/oleksandr/.nvm/versions/node/v10.16.3/bin/node /usr/local/Cellar/yarn/1.19.2/libexec/bin/yarn.js publish
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/oleksandr/.nvm/versions/node/v10.16.3/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/oleksandr/.nvm/versions/node/v10.16.3/bin
+
+Yarn version: 
+  1.19.2
+
+Node version: 
+  10.16.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/Cellar/yarn/1.19.2/libexec/lib/cli.js:136846:13)
+      at Interface.emit (events.js:198:13)
+      at Interface._ttyWrite (readline.js:801:16)
+      at ReadStream.onkeypress (readline.js:184:10)
+      at ReadStream.emit (events.js:198:13)
+      at emitKeys (internal/readline.js:424:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1075:36)
+      at ReadStream.emit (events.js:198:13)
+      at addChunk (_stream_readable.js:288:12)
+
+npm manifest: 
+  {
+    "name": "yap-core",
+    "version": "1.0.0",
+    "description": "Yap Core",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "directories": {
+      "doc": "docs"
+    },
+    "scripts": {
+      "test": "mocha -r ts-node/register test/**/*.ts",
+      "build": "rm -rf dist && ./node_modules/.bin/tsc && cp package.json dist/package.json && cp LICENSE dist/LICENSE && cp README.md dist/README.md"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/youngapp/yap.git"
+    },
+    "keywords": [
+      "youngapp",
+      "core"
+    ],
+    "author": "Oleksandr Koreniuk",
+    "bugs": {
+      "url": "https://github.com/youngapp/yap/issues"
+    },
+    "homepage": "https://github.com/youngapp/yap#readme",
+    "devDependencies": {
+      "@types/mocha": "^5.2.7",
+      "mocha": "^6.2.2",
+      "sinon": "^7.5.0",
+      "ts-node": "^8.5.4",
+      "typescript": "^3.7.3",
+      "typings": "^2.1.1"
+    },
+    "dependencies": {
+      "@types/assert": "^1.4.3",
+      "@types/aws-lambda": "^8.10.39",
+      "@types/ip": "^1.1.0",
+      "@types/lodash": "^4.14.149",
+      "@types/node": "^12.12.17",
+      "@types/path-to-regexp": "^1.7.0",
+      "@types/sinon": "^7.5.1",
+      "@types/xml-js": "^1.0.0",
+      "aws-lambda": "^0.1.2",
+      "aws-sdk": "^2.590.0",
+      "ip": "^1.1.5",
+      "lodash": "^4.17.15",
+      "path-to-regexp": "^6.1.0",
+      "xml-js": "^1.6.11"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
