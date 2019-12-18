@@ -1,7 +1,7 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
-import cors from '../../../src/policies/security/cors';
 import { get } from 'lodash';
+import { xml2js } from 'xml-js';
+import cors from '../../../src/policies/security/cors';
 
 // follow https://stackoverflow.com/questions/33062097/how-can-i-retrieve-a-users-public-ip-address-via-amazon-api-gateway-lambda-n
 describe('Router', () => {

@@ -1,7 +1,7 @@
 import { Context } from "../../router";
 
 /**
- * validate-jwt policy enforces the existence and validity of a JWT 
+ * validate-jwt policy enforces the existence and validity of a JWT
  * extracted from either a specified HTTP Header or a specified query parameter.
  * @example
  * <!-- Active directory token validation -->
@@ -16,7 +16,7 @@ import { Context } from "../../router";
  *       </claim>
  *   </required-claims>
  * </validate-jwt>
- * 
+ *
  * <!-- Active Directory B2C token validation -->
  * <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
  *   <openid-config url="https://login.microsoftonline.com/tfp/contoso.onmicrosoft.com/b2c_1_signin/v2.0/.well-known/openid-configuration" />
@@ -29,7 +29,7 @@ import { Context } from "../../router";
  *        </claim>
  *    </required-claims>
  * </validate-jwt>
- * 
+ *
  * <!-- Authorize access to operations based on token claims -->
  * <validate-jwt header-name="Authorization" require-scheme="Bearer" output-token-variable-name="jwt">
  *    <issuer-signing-keys>
@@ -55,7 +55,7 @@ import { Context } from "../../router";
  *         </return-response>
  *     </when>
  * </choose>
- * 
+ *
  * <!-- Mobile services token validation -->
  * <validate-jwt header-name="x-zumo-auth" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Supplied access token is invalid.">
  *     <issuers>

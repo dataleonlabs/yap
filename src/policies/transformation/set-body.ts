@@ -11,9 +11,9 @@ import { Context } from "../../router";
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
     policyElement.elements.forEach((element:any) => {
-        if(policyElement.name=="set-body"){
+        if(policyElement.name=="set-body") {
             context.response.body = element.text;
         }
-    })
+    });
     return { policyElement, context, scope };
 };

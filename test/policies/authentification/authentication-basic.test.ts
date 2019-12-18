@@ -1,10 +1,9 @@
 import assert from 'assert';
-import authBasic from '../../../src/policies/authentification/authentication-basic';
-import { xml2js } from 'xml-js';
 import { get } from 'lodash';
+import { xml2js } from 'xml-js';
+import authBasic from '../../../src/policies/authentification/authentication-basic';
 
 describe('Basic Authentication', () => {
-
 
   it('U-TEST-1 - Test basic user authentication success', async () => {
     const res = xml2js(`<authentication-basic username="Jhon" password="john@123" />`);

@@ -23,18 +23,18 @@ import { Context } from "../../../src/router";
  *
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="return-response"){
+    if(policyElement.name=="return-response") {
         policyElement.elements.forEach((element:any) => {
-            if(element.name=="set-header"){
-                let header: any = {};
+            if(element.name=="set-header") {
+                const header: any = {};
                 const headerKey: any = (element.attributes.name as { [key: string]: any });
                 header[headerKey] = element.elements[0].elements[0].text;
                 context.response.headers = header;
             }
-            if(element.name=="set-status"){
+            if(element.name=="set-status") {
                 context.response.statusCode = element.attributes.code;
             }
-        })
+        });
     }
     return { policyElement, context, scope };
 };

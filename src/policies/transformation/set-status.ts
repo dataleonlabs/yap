@@ -7,9 +7,9 @@ import { Context } from "../../router";
  * <set-status code="401" reason="Unauthorized"/>
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="set-status"){
+    if(policyElement.name=="set-status") {
         context.response.statusCode = policyElement.attributes.code;
-        if(policyElement.attributes.reason){
+        if(policyElement.attributes.reason) {
             context.response.body = policyElement.attributes.reason;
         }
     }

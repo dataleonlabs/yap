@@ -1,5 +1,5 @@
-import 'mocha';
 import assert from 'assert';
+import 'mocha';
 import * as sinon from 'sinon';
 import Yap from '../src/index';
 
@@ -15,12 +15,12 @@ describe('Core', () => {
         const request = {
             body: { a: 1 },
             httpMethod: 'GET',
-            path: '/'
-        }
+            path: '/',
+        };
         const context = {
             request,
-            response: {}
-        }
+            response: {},
+        };
         await yap.execute(request);
         assert.deepEqual(yap.Router.Context.request, context.request);
         mock.expects("getResponse").once();
@@ -83,9 +83,9 @@ describe('Core', () => {
             request: awsEvent,
             response: {},
             fields: {},
-            connection: {}
-        }
-        const stub = sinon.stub(yap.Router, "getResponse")
+            connection: {},
+        };
+        const stub = sinon.stub(yap.Router, "getResponse");
         await yap.handler(awsEvent);
         assert.deepEqual(yap.Router.Context.request, context.request);
         assert.equal(stub.callCount, 1);

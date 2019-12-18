@@ -1,6 +1,6 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
 import { get } from 'lodash';
+import { xml2js } from 'xml-js';
 import setMethod from '../../../src/policies/transformation/set-method';
 
 describe('Router', () => {

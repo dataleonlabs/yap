@@ -1,4 +1,4 @@
-export function getTestRequest () {
+export function getTestRequest() {
     return {
         httpMethod: 'GET',
         path: '',
@@ -32,8 +32,8 @@ export function getTestRequest () {
                 sourceIp: "127.0.0.1",
                 user: null,
                 userAgent: null,
-                userArn: null
-            }
-        }
-    }
+                userArn: null,
+            },
+        },
+    };
 }

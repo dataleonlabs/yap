@@ -1,5 +1,5 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
+import { xml2js } from 'xml-js';
 import response from './return-response';
 
 describe('Router', () => {

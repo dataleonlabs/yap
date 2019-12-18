@@ -20,13 +20,13 @@ import { Context } from "../../../src/router";
  *  <mock-response status-code='200' content-type='application/json'/>
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    
-    if(policyElement.name=="mock-response"){
-        let header: any = {};
-            Object.keys(policyElement.attributes).map(key=>{
+
+    if(policyElement.name=="mock-response") {
+        const header: any = {};
+            Object.keys(policyElement.attributes).map((key)=> {
                 header[key] = policyElement.attributes[key];
                 header[key] = policyElement.attributes[key];
-            })
+            });
             context.response.headers = header;
     }
     return { policyElement, context, scope };

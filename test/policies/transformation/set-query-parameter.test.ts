@@ -1,6 +1,6 @@
-import { xml2js } from 'xml-js';
-import { get } from 'lodash';
 import assert from 'assert';
+import { get } from 'lodash';
+import { xml2js } from 'xml-js';
 import setQueryParam from '../../../src/policies/transformation/set-query-parameter';
 
 describe('Router', () => {

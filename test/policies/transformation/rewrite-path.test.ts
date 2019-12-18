@@ -1,6 +1,6 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
-import { get } from 'lodash'
+import { get } from 'lodash';
+import { xml2js } from 'xml-js';
 import rewritePath from '../../../src/policies/transformation/rewrite-path';
 
 describe('Router', () => {

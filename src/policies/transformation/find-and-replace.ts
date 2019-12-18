@@ -9,20 +9,20 @@ import { Context } from "../../router";
  * <find-and-replace from="notebook" to="laptop" />
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    
-    if (policyElement.name == "find-and-replace") {
-        
+
+    if (policyElement.name === "find-and-replace") {
+
         const stringToReplace = policyElement.attributes.from;
         const newString = policyElement.attributes.to;
 
         const { body = {} }: any = context.request;
         const { data = {} }: any = context.response;
         if (body instanceof Object && body && Object.keys(body).length > 0) {
-            for (let key in body) {
-                if(!key){
+            for (const key in body) {
+                if(!key) {
                     continue;
                 }
-                if(key && typeof body[key] === 'string'){
+                if(key && typeof body[key] === 'string') {
                     body[key] = body[key].replace(stringToReplace, newString);
                 }
                 if (key.includes(stringToReplace)) {
@@ -32,11 +32,11 @@ export default (policyElement: any, context: Context, scope: 'inbound' | 'outbou
             }
         }
         if (data instanceof Object && data && Object.keys(data).length > 0) {
-            for (let key in data) {
-                if(!key){
+            for (const key in data) {
+                if(!key) {
                     continue;
                 }
-                if(key && typeof data[key] === 'string'){
+                if(key && typeof data[key] === 'string') {
                     data[key].replace(stringToReplace, newString);
                 }
                 if (key.includes(stringToReplace)) {

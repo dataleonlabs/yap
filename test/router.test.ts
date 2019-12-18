@@ -1,5 +1,5 @@
-import 'mocha';
 import * as assert from 'assert';
+import 'mocha';
 import * as sinon from 'sinon';
 import Router, { Context, policiesRegistry } from '../src/router';
 import { getTestRequest } from './tools';
@@ -183,7 +183,7 @@ describe('Router', () => {
     });
 
     it('U-TEST-9 - Test policies error', async () => {
-        const router = new Router()
+        const router = new Router();
         const request = getTestRequest();
         request.requestContext.identity.sourceIp = "13.66.140.129";
         router.Context = {

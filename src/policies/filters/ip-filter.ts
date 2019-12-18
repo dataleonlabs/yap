@@ -1,6 +1,6 @@
-import { Context } from "../../router";
+import { cidrSubnet, isEqual, toLong } from 'ip';
 import { get } from 'lodash';
-import { isEqual, cidrSubnet, toLong } from 'ip';
+import { Context } from "../../router";
 /**
  * ip-filter policy
  * The ip-filter policy filters (allows/denies) calls from specific
@@ -14,7 +14,7 @@ import { isEqual, cidrSubnet, toLong } from 'ip';
  */
 
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    
+
     const doAllow = policyElement.attributes.action === "allow";
     const sourceIP = get(context, 'request.requestContext.identity.sourceIp');
 
@@ -42,8 +42,8 @@ export default (policyElement: any, context: Context, scope: 'inbound' | 'outbou
         }
 
         // Throw error if IP is not passing any case or there is no IP
-        throw new Error("IP out of range")
-    };
+        throw new Error("IP out of range");
+    }
 
     //If no elements in policy element
     return { policyElement: null, context, scope };

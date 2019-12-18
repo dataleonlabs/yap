@@ -14,20 +14,20 @@ import { Context } from "../../router";
  * </set-header>
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="set-header"){
+    if(policyElement.name=="set-header") {
         policyElement.elements.forEach((element:any) => {
-            let header: any = {};
+            const header: any = {};
             const headerKey: any = (policyElement.attributes.name as { [key: string]: any });
             header[headerKey] = element.elements[0].text;
-            if(policyElement.attributes['exists-action']=="override"){
+            if(policyElement.attributes['exists-action']=="override") {
                 context.response.headers = header;
-            } else if(policyElement.attributes['exists-action']=="append"){
+            } else if(policyElement.attributes['exists-action']=="append") {
                 context.response.headers = { ...context.response.headers, ...header };
             } else if(policyElement.attributes['exists-action']=="delete") {
                 delete context.response.headers;
             } else {
             }
-        })
+        });
     }
     return { policyElement, context, scope };
 };

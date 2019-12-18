@@ -1,5 +1,5 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
+import { xml2js } from 'xml-js';
 import setBody from '../../../src/policies/transformation/set-body';
 
 describe('Router', () => {
@@ -10,7 +10,7 @@ describe('Router', () => {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
         response: {}, fields: {}, connection: {},
       }, 'inbound');
-  
+
       assert.equal(resIp.context.response.body, "bJtrpFi1fO1JMCcwLx8uZyAg");
     });
   });

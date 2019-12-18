@@ -1,5 +1,5 @@
-import { xml2js } from 'xml-js';
 import { Key, pathToRegexp } from 'path-to-regexp';
+import { xml2js } from 'xml-js';
 import ipFilter from './policies/filters/ip-filter';
 
 /**
@@ -189,7 +189,7 @@ export default class Router {
      */
     public getMiddlewaresMatched(): Middleware[] {
         // Get middleware matched
-        const middlewaresMatchedWithMethod = []
+        const middlewaresMatchedWithMethod = [];
         for (const middleware of this.middlewares) {
 
             if (this.context.request.path) {

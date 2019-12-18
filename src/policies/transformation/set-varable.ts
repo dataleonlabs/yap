@@ -1,5 +1,5 @@
-import { Context } from "../../router";
 import { set } from 'lodash';
+import { Context } from "../../router";
 
 /**
  * set-varable policy
@@ -11,7 +11,7 @@ import { set } from 'lodash';
  * <set-variable name="variable name" value="Expression | String literal" />
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="set-variable"){
+    if(policyElement.name=="set-variable") {
         const variableName: any = (policyElement.attributes.name as { [key: string]: any });
         set(context, `fields.${variableName}`,policyElement.attributes.value);
     }

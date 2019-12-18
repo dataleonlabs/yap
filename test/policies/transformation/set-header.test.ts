@@ -1,6 +1,6 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
 import { get } from 'lodash';
+import { xml2js } from 'xml-js';
 import setHeader from '../../../src/policies/transformation/set-header';
 
 describe('Router', () => {
@@ -60,5 +60,5 @@ describe('Router', () => {
       }, 'inbound');
       assert.equal(get(resIp, 'context.response.headers'), undefined);
     });
-    
+
   });

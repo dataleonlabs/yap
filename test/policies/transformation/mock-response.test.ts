@@ -1,6 +1,6 @@
 import assert from 'assert';
-import { xml2js } from 'xml-js';
 import { get } from 'lodash';
+import { xml2js } from 'xml-js';
 import mockResponse from './mock-response';
 
 describe('Router', () => {

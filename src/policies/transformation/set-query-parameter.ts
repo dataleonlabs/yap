@@ -1,5 +1,5 @@
-import { Context } from "../../router";
 import { unset } from 'lodash';
+import { Context } from "../../router";
 
 /**
  * set-query-parameter Policy
@@ -19,16 +19,16 @@ import { unset } from 'lodash';
  * </set-query-parameter>
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="set-query-parameter"){
+    if(policyElement.name=="set-query-parameter") {
         policyElement.elements.forEach((element:any) => {
-            let queryParam: any = {};
-            if(element.name=="parameter"){
+            const queryParam: any = {};
+            if(element.name=="parameter") {
                 element.elements.forEach((param: any) => {
                     const queryKey: any = (element.attributes.name as { [key: string]: any });
                     queryParam[queryKey] = param.elements[0].text;
-                    if(element.attributes['exists-action']=="override"){
+                    if(element.attributes['exists-action']=="override") {
                         context.request.queryStringParameters = queryParam;
-                    } else if(element.attributes['exists-action']=="append"){
+                    } else if(element.attributes['exists-action']=="append") {
                         context.request.queryStringParameters = {...context.request.queryStringParameters , ...queryParam};
                     } else if(element.attributes['exists-action']=="delete") {
                         unset(context, `request.queryStringParameters.${queryKey}`);
@@ -36,7 +36,7 @@ export default (policyElement: any, context: Context, scope: 'inbound' | 'outbou
                     }
                 });
             }
-        })
+        });
     }
     return { policyElement, context, scope };
 };

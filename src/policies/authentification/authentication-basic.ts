@@ -10,11 +10,11 @@ import { Context } from "../../router";
  * <authentication-basic username="username" password="password" />
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="authentication-basic"){
-        if(policyElement.attributes.username && policyElement.attributes.password){
-            context.response.body = "Request is valid"
-        } else{
-            context.response.body = "Request is not valid"
+    if(policyElement.name === "authentication-basic") {
+        if(policyElement.attributes.username && policyElement.attributes.password) {
+            context.response.body = "Request is valid";
+        } else {
+            context.response.body = "Request is not valid";
         }
     }
     return { policyElement, context, scope };

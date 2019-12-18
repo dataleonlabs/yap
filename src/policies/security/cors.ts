@@ -53,32 +53,32 @@ import { Context } from "../../router";
  * </cors>
  */
 export default (policyElement: any, context: Context, scope: 'inbound' | 'outbound' | 'on-error') => {
-    if(policyElement.name=="cors"){
+    if(policyElement.name=="cors") {
         let header: any = {};
-        let origin: any = [];
-        let method: any = [];
-        let allowedHeader: any = [];
-        let exposedHeader: any = [];
+        const origin: any = [];
+        const method: any = [];
+        const allowedHeader: any = [];
+        const exposedHeader: any = [];
         header = policyElement.attributes;
-        context.response.headers= {...context.response.headers,...header}
-        policyElement.elements.map((corsKey:any)=>{           
-            corsKey.elements.map((elementKey:any)=>{
-                if(elementKey.name == "origin"){
+        context.response.headers= {...context.response.headers,...header};
+        policyElement.elements.map((corsKey:any)=> {
+            corsKey.elements.map((elementKey:any)=> {
+                if(elementKey.name == "origin") {
                     origin.push(elementKey.elements[0].text);
                     header[corsKey.name] = origin.join(",");
-                } else if (elementKey.name == "method"){
+                } else if (elementKey.name == "method") {
                     method.push(elementKey.elements[0].text);
                     header[corsKey.name] = method.join(",");
-                }  else if (elementKey.name == "header" && corsKey.name == "allowed-headers"){
+                }  else if (elementKey.name == "header" && corsKey.name == "allowed-headers") {
                     allowedHeader.push(elementKey.elements[0].text);
                     header[corsKey.name] = allowedHeader.join(",");
-                } else if (elementKey.name == "header" && corsKey.name == "expose-headers"){
+                } else if (elementKey.name == "header" && corsKey.name == "expose-headers") {
                     exposedHeader.push(elementKey.elements[0].text);
                     header[corsKey.name] = exposedHeader.join(",");
                 }
-            })
-            context.response.headers= {...context.response.headers,...header}
-        })
+            });
+            context.response.headers= {...context.response.headers,...header};
+        });
     }
     return { policyElement, context, scope };
 };

@@ -1,5 +1,5 @@
-import { xml2js } from 'xml-js';
 import assert from 'assert';
+import { xml2js } from 'xml-js';
 import setStatus from '../../../src/policies/transformation/set-status';
 
 describe('Router', () => {
@@ -14,7 +14,7 @@ describe('Router', () => {
       }, 'inbound');
       assert.equal(resIp.context.response.statusCode, "401");
       assert.equal(resIp.context.response.body, "Unauthorized");
-      // pass reason to body 
+      // pass reason to body
     });
 
     it('U-TEST-2 - Test status without reason', async () => {
@@ -26,6 +26,6 @@ describe('Router', () => {
         response: {}, fields: {}, connection: {},
       }, 'inbound');
       assert.equal(resIp.context.response.statusCode, "200");
-      // pass reason to body 
+      // pass reason to body
     });
   });

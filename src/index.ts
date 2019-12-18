@@ -14,35 +14,35 @@ export default class Yap {
     }
 
     public async handler(awsEvent: APIGatewayEvent) {
-        return await this.execute(awsEvent);
+        return this.execute(awsEvent);
     }
 
     public async execute(request: Request) {
         const context: Context = {
             request,
-            response: {}
-        }
+            response: {},
+        };
         this.router.Context = context;
-        return await this.router.getResponse();
+        return this.router.getResponse();
     }
 
     public get(path: string, action: any) {
-        this.router.register('GET', path, action)
+        this.router.register('GET', path, action);
     }
 
     public post(path: string, action: any) {
-        this.router.register('POST', path, action)
+        this.router.register('POST', path, action);
     }
 
     public put(path: string, action: any) {
-        this.router.register('PUT', path, action)
+        this.router.register('PUT', path, action);
     }
 
     public delete(path: string, action: any) {
-        this.router.register('DELETE', path, action)
+        this.router.register('DELETE', path, action);
     }
 
     public all(path: string, action: any) {
-        this.router.register(null, path, action)
+        this.router.register(null, path, action);
     }
 }
