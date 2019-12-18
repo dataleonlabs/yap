@@ -1,4 +1,14 @@
+import { xml2js } from 'xml-js';
 import { Key, pathToRegexp } from 'path-to-regexp';
+import ipFilter from './policies/filters/ip-filter';
+
+/**
+ * Policies
+ * @param {Object} policies Policies on application
+ */
+export const policiesRegistry: any = {
+    'ip-filter': ipFilter,
+};
 
 // API Gateway "event"
 export interface Request {
@@ -126,10 +136,10 @@ export interface Context {
     readonly policies?: string;
 
     /** Fields */
-    readonly fields: { [key: string]: any };
+    readonly fields?: { [key: string]: any };
 
     /** connection */
-    readonly connection: { [key: string]: any };
+    readonly connection?: { [key: string]: any };
 }
 
 export interface Middleware {
@@ -239,24 +249,71 @@ export default class Router {
         // Get middlewares matched
         const middlewares = this.getMiddlewaresMatched();
         try {
+            await this.applyPolicies('inbound');
             if (middlewares.length) {
                 // Loop
                 for (const middleware of middlewares) {
                     await this.triggerMiddleWare(middleware);
-                } 
+                }
+                await this.applyPolicies('outbound');
             } else {
                 this.context.response.statusCode = 404;
                 this.context.response.body = 'Not found middleware';
             }
 
         } catch (error) {
-
+            await this.applyPolicies('on-error');
             // Inject error
             this.context.response.statusCode = this.context.response.statusCode || 500;
             this.context.response.body = this.context.response.body || error;
         } finally {
             return this.context.response;
         }
+    }
+
+    /**
+   * Add policies
+   */
+    public async applyPolicies(scope: 'inbound' | 'outbound' | 'on-error'): Promise<boolean> {
+        const res = xml2js(this.context.policies || '');
+
+        if (res.elements) {
+            const policies = res.elements[0].elements;
+            // Inbound policies
+            for (const group of policies) {
+                if (group.name === scope) {
+                    for (const policyElement of group.elements) {
+                        await this.triggerPolicy(policyElement, scope);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * triggerPolicy
+     * Manage next and throw function
+     */
+    public triggerPolicy = (policyElement: any, scope: 'inbound' | 'outbound' | 'on-error') => {
+        return new Promise(async (resolve: (value?: unknown) => void, reject: (reason?: any) => void) => {
+            // functio next
+            this.context.next = () => resolve();
+            this.context.throw = (statusCode: number, body: string) => {
+                this.context.response.statusCode = statusCode;
+                this.context.response.body = body;
+                reject(body);
+            };
+
+            try {
+                await policiesRegistry[policyElement.name](policyElement, this.context, scope);
+                resolve();
+            } catch (error) {
+                this.context.response.statusCode = 500;
+                this.context.response.body = error.message;
+                reject(error);
+            }
+        });
     }
 
     /**

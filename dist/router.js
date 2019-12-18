@@ -8,8 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const xml_js_1 = require("xml-js");
 const path_to_regexp_1 = require("path-to-regexp");
+const ip_filter_1 = __importDefault(require("./policies/filters/ip-filter"));
+/**
+ * Policies
+ * @param {Object} policies Policies on application
+ */
+exports.policiesRegistry = {
+    'ip-filter': ip_filter_1.default,
+};
 /**
  * Router
  */
@@ -40,6 +52,30 @@ class Router {
                 };
                 try {
                     yield middleware.action(this.context);
+                }
+                catch (error) {
+                    this.context.response.statusCode = 500;
+                    this.context.response.body = error.message;
+                    reject(error);
+                }
+            }));
+        };
+        /**
+         * triggerPolicy
+         * Manage next and throw function
+         */
+        this.triggerPolicy = (policyElement, scope) => {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                // functio next
+                this.context.next = () => resolve();
+                this.context.throw = (statusCode, body) => {
+                    this.context.response.statusCode = statusCode;
+                    this.context.response.body = body;
+                    reject(body);
+                };
+                try {
+                    yield exports.policiesRegistry[policyElement.name](policyElement, this.context, scope);
+                    resolve();
                 }
                 catch (error) {
                     this.context.response.statusCode = 500;
@@ -100,11 +136,13 @@ class Router {
             // Get middlewares matched
             const middlewares = this.getMiddlewaresMatched();
             try {
+                yield this.applyPolicies('inbound');
                 if (middlewares.length) {
                     // Loop
                     for (const middleware of middlewares) {
                         yield this.triggerMiddleWare(middleware);
                     }
+                    yield this.applyPolicies('outbound');
                 }
                 else {
                     this.context.response.statusCode = 404;
@@ -112,6 +150,7 @@ class Router {
                 }
             }
             catch (error) {
+                yield this.applyPolicies('on-error');
                 // Inject error
                 this.context.response.statusCode = this.context.response.statusCode || 500;
                 this.context.response.body = this.context.response.body || error;
@@ -119,6 +158,26 @@ class Router {
             finally {
                 return this.context.response;
             }
+        });
+    }
+    /**
+   * Add policies
+   */
+    applyPolicies(scope) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = xml_js_1.xml2js(this.context.policies || '');
+            if (res.elements) {
+                const policies = res.elements[0].elements;
+                // Inbound policies
+                for (const group of policies) {
+                    if (group.name === scope) {
+                        for (const policyElement of group.elements) {
+                            yield this.triggerPolicy(policyElement, scope);
+                        }
+                    }
+                }
+            }
+            return true;
         });
     }
     /**

@@ -1,5 +1,5 @@
 import { APIGatewayEvent } from "aws-lambda";
-import Router, { Context } from './router';
+import Router, { Context, Request } from './router';
 
 export default class Yap {
 
@@ -13,20 +13,17 @@ export default class Yap {
         this.router = new Router();
     }
 
-    public async executeAWS(awsEvent: APIGatewayEvent) {
-        const context = {
-            request: awsEvent,
-            response: {}, 
-            fields: {}, 
-            connection: {}
-        }
-        return await this.execute(context);
+    public async handler(awsEvent: APIGatewayEvent) {
+        return await this.execute(awsEvent);
     }
 
-    public async execute(context:Context) {
+    public async execute(request: Request) {
+        const context: Context = {
+            request,
+            response: {}
+        }
         this.router.Context = context;
         return await this.router.getResponse();
-
     }
 
     public get(path: string, action: any) {
@@ -43,5 +40,9 @@ export default class Yap {
 
     public delete(path: string, action: any) {
         this.router.register('DELETE', path, action)
+    }
+
+    public all(path: string, action: any) {
+        this.router.register(null, path, action)
     }
 }

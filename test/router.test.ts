@@ -1,7 +1,8 @@
 import 'mocha';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import Router, { Context } from '../src/router';
+import Router, { Context, policiesRegistry } from '../src/router';
+import { getTestRequest } from './tools';
 
 describe('Router', () => {
 
@@ -118,6 +119,98 @@ describe('Router', () => {
         const res = await router.getResponse();
         assert.equal(spy.callCount, 1);
         assert.equal(res.body, 'hello error');
+    });
+
+    it('U-TEST-7 - Test policies inbound', async () => {
+        const router = new Router();
+        const request = getTestRequest();
+        request.requestContext.identity.sourceIp = "13.66.201.169";
+        router.Context = {
+            request,
+            response: {}, fields: {}, connection: {},
+            policies: `
+                <policies>
+                    <inbound>
+                    <ip-filter action="allow">
+                        <address>13.66.201.169</address>
+                        <address-range from="13.66.140.128" to="13.66.255.143" />
+                    </ip-filter>
+                    </inbound>
+                    <outbound/>
+                </policies>
+          `,
+        };
+
+        const spy = sinon.spy(policiesRegistry, 'ip-filter');
+        await router.applyPolicies('inbound');
+        assert.equal(spy.callCount, 1);
+
+        await router.applyPolicies('inbound');
+        assert.equal(spy.callCount, 2);
+        spy.restore();
+    });
+
+    it('U-TEST-8 - Test policies inbound and outbound', async () => {
+        const router = new Router();
+        const request = getTestRequest();
+        request.requestContext.identity.sourceIp = "13.66.140.129";
+        router.Context = {
+            request,
+            response: {}, fields: {}, connection: {},
+            policies: `
+                <policies>
+                    <inbound>
+                    <ip-filter action="allow">
+                        <address>13.66.140.129</address>
+                        <address-range from="13.66.140.128" to="13.66.140.143" />
+                    </ip-filter>
+                    </inbound>
+                    <outbound>
+                    <ip-filter action="allow">
+                        <address>13.66.140.129</address>
+                        <address-range from="13.66.140.128" to="13.66.140.143" />
+                    </ip-filter>
+                    </outbound>
+                </policies>
+                    `,
+        };
+
+        const spy = sinon.spy(policiesRegistry, 'ip-filter');
+        await router.applyPolicies('inbound');
+        await router.applyPolicies('outbound');
+        assert.equal(spy.callCount, 2);
+        spy.restore();
+    });
+
+    it('U-TEST-9 - Test policies error', async () => {
+        const router = new Router()
+        const request = getTestRequest();
+        request.requestContext.identity.sourceIp = "13.66.140.129";
+        router.Context = {
+            request,
+            response: {}, fields: {}, connection: {},
+            policies: `
+                <policies>
+                    <inbound>
+                    <ip-filter action="allow">
+                        <address>13.66.140.129</address>
+                        <address-range from="13.66.140.128" to="13.66.140.143" />
+                    </ip-filter>
+                    </inbound>
+                    <outbound>
+                    <ip-filter action="allow">
+                        <address>13.66.140.129</address>
+                        <address-range from="13.66.140.128" to="13.66.140.143" />
+                    </ip-filter>
+                    </outbound>
+                </policies>
+          `,
+        };
+
+        const spy = sinon.spy(policiesRegistry, 'ip-filter');
+        await router.applyPolicies('inbound');
+        assert.equal(spy.callCount, 1);
+        spy.restore();
     });
 
     it('U-TEST-10 - getResponse with next', async () => {

@@ -2,7 +2,8 @@
   "name": "yap-core",
   "version": "1.0.0",
   "description": "Yap Core",
-  "main": "dist/source",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "doc": "docs"
   },
@@ -34,11 +35,17 @@
   "dependencies": {
     "@types/assert": "^1.4.3",
     "@types/aws-lambda": "^8.10.39",
+    "@types/ip": "^1.1.0",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.17",
     "@types/path-to-regexp": "^1.7.0",
     "@types/sinon": "^7.5.1",
+    "@types/xml-js": "^1.0.0",
     "aws-lambda": "^0.1.2",
     "aws-sdk": "^2.590.0",
-    "path-to-regexp": "^6.1.0"
+    "ip": "^1.1.5",
+    "lodash": "^4.17.15",
+    "path-to-regexp": "^6.1.0",
+    "xml-js": "^1.6.11"
   }
 }

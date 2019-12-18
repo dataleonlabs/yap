@@ -8,8 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const router_1 = require("./router");
+const router_1 = __importDefault(require("./router"));
 class Yap {
     constructor() {
         this.router = new router_1.default();
@@ -17,19 +20,17 @@ class Yap {
     get Router() {
         return this.router;
     }
-    executeAWS(awsEvent) {
+    handler(awsEvent) {
         return __awaiter(this, void 0, void 0, function* () {
-            const context = {
-                request: awsEvent,
-                response: {},
-                fields: {},
-                connection: {}
-            };
-            return yield this.execute(context);
+            return yield this.execute(awsEvent);
         });
     }
-    execute(context) {
+    execute(request) {
         return __awaiter(this, void 0, void 0, function* () {
+            const context = {
+                request,
+                response: {}
+            };
             this.router.Context = context;
             return yield this.router.getResponse();
         });
@@ -45,6 +46,9 @@ class Yap {
     }
     delete(path, action) {
         this.router.register('DELETE', path, action);
+    }
+    all(path, action) {
+        this.router.register(null, path, action);
     }
 }
 exports.default = Yap;

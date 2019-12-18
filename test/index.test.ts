@@ -1,7 +1,8 @@
 import 'mocha';
-import * as assert from 'assert';
+import assert from 'assert';
 import * as sinon from 'sinon';
 import Yap from '../src/index';
+import { Context } from '../src/Router';
 
 describe('Core', () => {
     it('U-TEST-1 - Constructor creates router', () => {
@@ -12,18 +13,21 @@ describe('Core', () => {
     it('U-TEST-2 - Execute pass context and calls getResponse', async () => {
         const yap = new Yap();
         const mock = sinon.mock(yap.Router);
-        const context = {
-            request: {},
-            response: {},
-            fields: {},
-            connection: {}
+        const request = {
+            body: { a: 1 },
+            httpMethod: 'GET',
+            path: '/'
         }
-        await yap.execute(context);
-        assert.equal(yap.Router.Context, context);
+        const context = {
+            request,
+            response: {}
+        }
+        await yap.execute(request);
+        assert.deepEqual(yap.Router.Context.request, context.request);
         mock.expects("getResponse").once();
     });
 
-    it('U-TEST-3 - AWS execute correctly pass context to execute function', async () => {
+    it('U-TEST-3 - AWS execute correctly pass context to handler function', async () => {
         const yap = new Yap();
         const awsEvent = {
             body: null,
@@ -83,8 +87,8 @@ describe('Core', () => {
             connection: {}
         }
         const stub = sinon.stub(yap.Router, "getResponse")
-        await yap.executeAWS(awsEvent);
-        assert.deepEqual(yap.Router.Context, context);
+        await yap.handler(awsEvent);
+        assert.deepEqual(yap.Router.Context.request, context.request);
         assert.equal(stub.callCount, 1);
     });
 
@@ -92,7 +96,7 @@ describe('Core', () => {
         const yap = new Yap();
         const mock = sinon.mock(yap.Router);
         const path = '/somepath';
-        const action = () => { };
+        const action = () => {};
         yap.get(path, action);
         mock.expects("register").once().withExactArgs('GET', path, action);
     });
@@ -122,5 +126,14 @@ describe('Core', () => {
         const action = () => { };
         yap.delete(path, action);
         mock.expects("register").once().withExactArgs('DELETE', path, action);
+    });
+
+    it('U-TEST-8 - delete registers ALL middleware', async () => {
+        const yap = new Yap();
+        const mock = sinon.mock(yap.Router);
+        const path = '/somepath';
+        const action = () => { };
+        yap.all(path, action);
+        mock.expects("register").once().withExactArgs(null, path, action);
     });
 });
