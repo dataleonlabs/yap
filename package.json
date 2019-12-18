@@ -8,8 +8,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.ts",
-    "build": "rm -rf dist && ./node_modules/.bin/tsc && cp package.json dist/package.json && cp LICENSE dist/LICENSE && cp README.md dist/README.md"
+    "test": "mocha -r ts-node/register test/**/*.ts"
   },
   "repository": {
     "type": "git",
