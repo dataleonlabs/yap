@@ -28,7 +28,7 @@ jobs:
         npm test
         npm run build
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-        npm publish
+        npm publish --access public
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
