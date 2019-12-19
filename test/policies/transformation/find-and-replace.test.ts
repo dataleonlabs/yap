@@ -1,15 +1,32 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
-import findAndReplace from '../../../src/policies/transformation/find-and-replace';
+import FindAndReplace from '../../../src/policies/transformation/find-and-replace';
 
 describe('<find-and-replace />', () => {
 
-    it('U-TEST-1 - Test find and replace', async () => {
-      const res = xml2js(`<find-and-replace from="notebook" to="laptop" />`);
-      const resIp = await findAndReplace(res.elements[0], {
-        request: { httpMethod: 'POST', path: '/contacts/yap',  body: { notebook: 'this is test data for notebook', laptop: 'Testing laptop' } },
-        response: {}, fields: {}, connection: {},
-      }, 'inbound');
-      assert.equal(resIp.context.request.body.laptop, "this is test data for laptop");
+  it('U-TEST-1 - Test find and replace inbound in request', async () => {
+    const findAndReplace = new FindAndReplace();
+    const res = xml2js(`<find-and-replace from="notebook.name" to="laptop.parentNotebookName" />`);
+    const resIp = await findAndReplace.apply({ policyElement: res.elements[0], context: {
+      request: { httpMethod: 'POST', path: '/contacts/yap', body: { notebook: { name: 'laptop name' }, laptop: { name: 'laptop name' } } },
+      response: {}, fields: {}, connection: {},
+    }, scope: 'inbound' });
+    assert.deepEqual(resIp.context.request.body.laptop, {
+      name: 'laptop name',
+      parentNotebookName: 'laptop name',
     });
   });
+
+  it('U-TEST-2 - Test find and replace inbound in response', async () => {
+    const findAndReplace = new FindAndReplace();
+    const res = xml2js(`<find-and-replace from="notebook.name" to="laptop.parentNotebookName" />`);
+    const resIp = await findAndReplace.apply({ policyElement: res.elements[0], context: {
+      response: { body: { notebook: { name: 'laptop name' }, laptop: { name: 'laptop name' } } },
+      request: {}, fields: {}, connection: {},
+    }, scope: 'outbound'});
+    assert.deepEqual(resIp.context.response.body.laptop, {
+      name: 'laptop name',
+      parentNotebookName: 'laptop name',
+    });
+  });
+});

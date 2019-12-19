@@ -75,6 +75,7 @@
     "aws-lambda": "^0.1.2",
     "aws-sdk": "^2.590.0",
     "codacy-coverage": "^3.4.0",
+    "axios": "^0.19.0",
     "ip": "^1.1.5",
     "lodash": "^4.17.15",
     "path-to-regexp": "^6.1.0",

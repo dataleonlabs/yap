@@ -1,8 +1,8 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
-import response from './return-response';
+import ReturnResponse from '../../../src/policies/advanced/return-response';
 
-describe('Router', () => {
+describe('<return-response />', () => {
 
     it('U-TEST-1 - Test return response', async () => {
       const res = xml2js(`
@@ -13,10 +13,11 @@ describe('Router', () => {
                 </set-header>
              </return-response>
             `);
-      const resIp = await response(res.elements[0], {
+      const returnResponse = new ReturnResponse();
+      const resIp = await returnResponse.apply({ policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
         response: {}, fields: {}, connection: {},
-      }, 'inbound');
+      }, scope: 'inbound' });
       assert(resIp.context);
     });
   });

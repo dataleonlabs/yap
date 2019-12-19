@@ -1,10 +1,10 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import cors from '../../../src/policies/security/cors';
+import CORS from '../../../src/policies/cors/cors';
 
 // follow https://stackoverflow.com/questions/33062097/how-can-i-retrieve-a-users-public-ip-address-via-amazon-api-gateway-lambda-n
-describe('Router', () => {
+describe('<cors />', () => {
 
   it('U-TEST-1 - Test cors for all usecase ', async () => {
     const res = xml2js(`
@@ -33,11 +33,11 @@ describe('Router', () => {
              </expose-headers>
           </cors>
           `);
-
-    const resIp = await cors(res.elements[0], {
+    const cors = new CORS();
+    const resIp = await cors.apply({ policyElement: res.elements[0], context: {
       request: { httpMethod: 'POST', path: '/contacts/yap' },
       response: {}, fields: {}, connection: {},
-    }, 'inbound');
+    }, scope: 'inbound'});
 
     assert.equal(get(resIp, 'context.response.headers.allowed-methods'), "GET,POST,PATCH,DELETE");
     assert.equal(get(resIp, 'context.response.headers.allowed-headers'), "x-zumo-installation-id,x-zumo-application,x-zumo-version,x-zumo-auth,content-type,accept");
@@ -56,10 +56,11 @@ describe('Router', () => {
           </cors>
           `);
 
-    const resIp = await cors(res.elements[0], {
+    const cors = new CORS();
+    const resIp = await cors.apply({ policyElement: res.elements[0], context: {
       request: { httpMethod: 'POST', path: '/contacts/yap' },
       response: {}, fields: {}, connection: {},
-    }, 'inbound');
+    }, scope: 'inbound'});
 
     assert.equal(get(resIp, 'context.response.headers.allowed-origins'), "http://localhost:8080/,http://example.com/");
     assert.equal(get(resIp, 'context.response.headers.allow-credentials'), "true");
@@ -77,10 +78,11 @@ describe('Router', () => {
           </cors>
           `);
 
-    const resIp = await cors(res.elements[0], {
+    const cors = new CORS();
+    const resIp = await cors.apply({ policyElement: res.elements[0], context: {
       request: { httpMethod: 'POST', path: '/contacts/yap' },
       response: {}, fields: {}, connection: {},
-    }, 'inbound');
+    }, scope: 'inbound'});
 
     assert.equal(get(resIp, 'context.response.headers.allowed-methods'), "GET,POST,PATCH,DELETE");
     assert.equal(get(resIp, 'context.response.headers.allow-credentials'), "true");
@@ -100,10 +102,11 @@ describe('Router', () => {
           </cors>
           `);
 
-    const resIp = await cors(res.elements[0], {
+    const cors = new CORS();
+    const resIp = await cors.apply({ policyElement: res.elements[0], context: {
       request: { httpMethod: 'POST', path: '/contacts/yap' },
       response: {}, fields: {}, connection: {},
-    }, 'inbound');
+    }, scope: 'inbound'});
 
     assert.equal(get(resIp, 'context.response.headers.allowed-headers'), "x-zumo-installation-id,x-zumo-application,x-zumo-version,x-zumo-auth,content-type,accept");
     assert.equal(get(resIp, 'context.response.headers.allow-credentials'), "true");
@@ -119,10 +122,11 @@ describe('Router', () => {
           </cors>
           `);
 
-    const resIp = await cors(res.elements[0], {
+    const cors = new CORS();
+    const resIp = await cors.apply({ policyElement: res.elements[0], context: {
       request: { httpMethod: 'POST', path: '/contacts/yap' },
       response: {}, fields: {}, connection: {},
-    }, 'inbound');
+    }, scope: 'inbound'});
     assert.equal(get(resIp, 'context.response.headers.expose-headers'), "x-zumo-installation-id,x-zumo-application");
     assert.equal(get(resIp, 'context.response.headers.allow-credentials'), "true");
   });

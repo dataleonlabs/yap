@@ -1,14 +1,6 @@
 import { Key, pathToRegexp } from 'path-to-regexp';
 import { xml2js } from 'xml-js';
-import ipFilter from './policies/access-restriction/ip-filter';
-
-/**
- * Policies
- * @param {Object} policies Policies on application
- */
-export const policiesRegistry: any = {
-    'ip-filter': ipFilter,
-};
+import policyManager from './policies';
 
 // API Gateway "event"
 export interface Request {
@@ -138,8 +130,11 @@ export interface Context {
     /** Fields */
     readonly fields?: { [key: string]: any };
 
-    /** connection */
+    /** Connection */
     readonly connection?: { [key: string]: any };
+
+    /** Variables */
+    readonly variables?: { [key: string]: any };
 }
 
 export interface Middleware {
@@ -262,18 +257,22 @@ export default class Router {
             }
 
         } catch (error) {
-            await this.applyPolicies('on-error');
-            // Inject error
-            this.context.response.statusCode = this.context.response.statusCode || 500;
-            this.context.response.body = this.context.response.body || error;
-        } finally {
-            return this.context.response;
+            try {
+                await this.applyPolicies('on-error');
+                this.context.response.statusCode = this.context.response.statusCode || 500;
+                this.context.response.body = this.context.response.body || error;
+            } catch (applyOnErrorPoliciesError) {
+                this.context.response.statusCode = this.context.response.statusCode || 500;
+                this.context.response.body = this.context.response.body || applyOnErrorPoliciesError;
+            }
         }
+
+        return this.context.response;
     }
 
     /**
-   * Add policies
-   */
+     * Add policies
+     */
     public async applyPolicies(scope: 'inbound' | 'outbound' | 'on-error'): Promise<boolean> {
         const res = xml2js(this.context.policies || '');
 
@@ -306,7 +305,7 @@ export default class Router {
             };
 
             try {
-                await policiesRegistry[policyElement.name](policyElement, this.context, scope);
+                await policyManager.apply({policyElement, context: this.context, scope});
                 resolve();
             } catch (error) {
                 this.context.response.statusCode = 500;

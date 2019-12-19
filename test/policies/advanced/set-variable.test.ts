@@ -1,18 +1,19 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import setVarable from '../../../src/policies/transformation/set-varable';
+import SetVariable from '../../../src/policies/advanced/set-variable';
 
-describe('Router', () => {
+describe('<set-variable />', () => {
 
     it('U-TEST-1 - Test variable', async () => {
       const res = xml2js(`
             <set-variable name="username" value="Jhon" />
             `);
-      const resIp = await setVarable(res.elements[0], {
+      const setVariable = new SetVariable();
+      const resIp = await setVariable.apply({ policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
         response: {}, fields: {}, connection: {},
-      }, 'inbound');
+      }, scope: 'inbound'});
       assert.equal(get(resIp, 'context.fields.username'), "Jhon");
     });
   });

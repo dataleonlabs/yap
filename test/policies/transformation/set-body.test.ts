@@ -1,16 +1,19 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
-import setBody from '../../../src/policies/transformation/set-body';
+import SetBody from '../../../src/policies/transformation/set-body';
 
-describe('Router', () => {
+describe('<set-body />', () => {
 
-    it('U-TEST-1 - Test set response body', async () => {
-      const res = xml2js(`<set-body>bJtrpFi1fO1JMCcwLx8uZyAg</set-body>`);
-      const resIp = await setBody(res.elements[0], {
+  it('U-TEST-1 - Test set request body', async () => {
+    const res = xml2js(`<set-body>bJtrpFi1fO1JMCcwLx8uZyAg</set-body>`);
+    const setBody = new SetBody();
+    const resIp = await setBody.apply({
+      policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
         response: {}, fields: {}, connection: {},
-      }, 'inbound');
-
-      assert.equal(resIp.context.response.body, "bJtrpFi1fO1JMCcwLx8uZyAg");
+      }, scope: 'inbound',
     });
+
+    assert.equal(resIp.context.request.body, "bJtrpFi1fO1JMCcwLx8uZyAg");
   });
+});

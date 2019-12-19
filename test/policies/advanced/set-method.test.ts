@@ -1,18 +1,19 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import setMethod from '../../../src/policies/transformation/set-method';
+import SetMethod from '../../../src/policies/advanced/set-method';
 
-describe('Router', () => {
+describe('<set-method />', () => {
 
     it('U-TEST-1 - Test set request method', async () => {
+      const setMethod = new SetMethod();
       const res = xml2js(`
             <set-method>POST</set-method>
             `);
-      const resIp = await setMethod(res.elements[0], {
+      const resIp = await setMethod.apply({ policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
         response: {}, fields: {}, connection: {},
-      }, 'inbound');
+      }, scope: 'inbound' });
       assert.equal(get(resIp, 'context.request.httpMethod'), "POST");
     });
   });

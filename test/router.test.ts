@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import 'mocha';
 import * as sinon from 'sinon';
-import Router, { Context, policiesRegistry } from '../src/router';
+import Router, { Context } from '../src/router';
 import { getTestRequest } from './tools';
 
 describe('Router', () => {
@@ -141,7 +141,7 @@ describe('Router', () => {
           `,
         };
 
-        const spy = sinon.spy(policiesRegistry, 'ip-filter');
+        const spy = sinon.spy(router, 'triggerPolicy');
         await router.applyPolicies('inbound');
         assert.equal(spy.callCount, 1);
 
@@ -175,7 +175,7 @@ describe('Router', () => {
                     `,
         };
 
-        const spy = sinon.spy(policiesRegistry, 'ip-filter');
+        const spy = sinon.spy(router, 'triggerPolicy');
         await router.applyPolicies('inbound');
         await router.applyPolicies('outbound');
         assert.equal(spy.callCount, 2);
@@ -207,7 +207,7 @@ describe('Router', () => {
           `,
         };
 
-        const spy = sinon.spy(policiesRegistry, 'ip-filter');
+        const spy = sinon.spy(router, 'triggerPolicy');
         await router.applyPolicies('inbound');
         assert.equal(spy.callCount, 1);
         spy.restore();
