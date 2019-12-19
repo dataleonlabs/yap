@@ -25,11 +25,10 @@ YAP ensures that citizens and IT have access to the same easy-to-use driven prod
 // Middleware normally takes two parameters (ctx, next), ctx is the context for one request,
 // next is a function that is invoked to execute the downstream middleware. It returns a Promise with a then function for running code after completion.
 
-app.post('/posts/:id', new Sequence([
-    async (_, ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
-    async (res) => await csv.save({ data: res }),
-    async (res) => await dropbox.put({ file: res.csv }),
-]))
+app.post('/posts/:id', async (ctx: Context) => {
+    const data = await mysql.findOne({ table: 'posts', values: { name: ctx.req.params.id } });
+    ctx.body = data;
+})
 ```
 
 ## Documentation
