@@ -19,6 +19,7 @@ Yap offers powerful, yet lightweight features that allow fine-grained control ov
 * **Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants.
 * **Designed for Serverless** – Yap is designed for serverless event functions.
 * **Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
+* **Universal middleware design** – Inspired by Express or KoaJS adapted for Serverless application and low-code approach.
 
 YAP is written in NodeJS, which makes it fast and easy to set up.
 
@@ -73,7 +74,7 @@ Before opening a new issue, please go through [existing issues](https://github.c
 to find the solution right away if your problem was solved before. 
 
 Attach the following details if appropriate: 
-- SDK, Node.js, or browser version
+- SDK, Node.js
 - Environment and OS
 - Stack trace
 - Reduced repro case
