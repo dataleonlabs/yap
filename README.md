@@ -40,6 +40,7 @@ The YAP desktop version can be used with the YAP API Gateway to provide a full l
  - [Connectors](docs/connectors.md)
  - [Policies](docs/policies.md)
  - [Error handling](docs/error-handling.md)
+ - [Yap for Express Users](docs/yap-vs-express.md)
  - [FAQ](docs/faq.md)
 
 ## Installing
