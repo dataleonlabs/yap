@@ -1,22 +1,22 @@
 # Usage and getting started
 Yap is a microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
-### Middleware and Sequences
+### Middleware
 Yap is a middleware framework work only on async functions, Each middleware receives a Yap `Context` object that encapsulates an incoming HTTP AWS Lambda trigger message and the corresponding response to that message.  
 `ctx` is often used as the parameter name for the context object similar to koa or ExpressJS.
 
 ```js
-app.post('/hello', ...)
+app.post('/hello', async (ctx: Context) => { })
 ```
 
-### Sequences
+### Connectors
 API management is the process of creating and publishing web application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting performance. API management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection.
 
 ```js
-app.post('/hello', new Sequence([
-    async (res) => await csv.save({ data: res }),
-    async (res) => await dropbox.put({ file: res.csv }),
-]))
+app.post('/posts/:id', async (ctx: Context) => {
+    const data = await mysql.findOne({ table: 'posts', values: { name: ctx.req.params.id } });
+    ctx.body = data;
+})
 ```
 
 ### Policies
@@ -54,11 +54,10 @@ const csv = new CSV();
 const Yap = require('@youngapp/yap');
 const app = new Yap();
 
-app.post('/posts/:id', new Sequence([
-    async (_, ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
-    async (res) => await csv.save({ data: res }),
-    async (res) => await dropbox.put({ file: res.csv }),
-]))
+app.post('/posts/:id', async (ctx: Context) => {
+    const data = await mysql.findOne({ table: 'posts', values: { name: ctx.req.params.id } });
+    ctx.body = data;
+})
 
 export default app
 ```
