@@ -42,14 +42,10 @@ The obligatory workflow application:
 ```typescript
 import { Yap } from "@youngapp/yap";
 import { MySQL } from "@youngapp/rds";
-import { DropBox } from "@youngapp/storage";
-import { CSV } from "@youngapp/data";
 import conn from "./connections.ts";
 
 // Connections
 const mysql = new MySQL(...conn.MySQL);
-const dropbox = new DropBox(...conn.DROPBOX);
-const csv = new CSV();
 
 const Yap = require('@youngapp/yap');
 const app = new Yap();
@@ -85,15 +81,15 @@ It's a official version for JavaScript, available for Node.js backends, Serverle
 
 ##### With yarm
 ```
-npx @youngapp/yap my-api
-cd my-apy
+npx create yap my-api
+cd my-api
 yarn start
 ```
 
 ##### With npm
 ```
-npx @youngapp/yap my-api
-cd my-apy
+npx create-yap my-api
+cd my-api
 npm start
 ```
 
