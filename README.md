@@ -1,4 +1,6 @@
 # Yap API gateway
+[![Inline docs](http://inch-ci.org/github/youngapp/yap.svg?branch=master)](http://inch-ci.org/github/youngapp/yap)
+
 Yap is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
 
 By leveraging async functions, Yap allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
