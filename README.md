@@ -51,15 +51,15 @@ It's an official version for JavaScript, available for Node.js backends, Serverl
 
 ##### With yarm
 ```
-npx @youngapp/yap my-api
-cd my-apy
+npx create yap my-api
+cd my-api
 yarn start
 ```
 
 ##### With npm
 ```
-npx @youngapp/yap my-api
-cd my-apy
+npx create-yap my-api
+cd my-api
 npm start
 ```
 
