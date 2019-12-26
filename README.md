@@ -1,5 +1,5 @@
 # Yap API gateway
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/yap/master) ![GitHub repo size](https://img.shields.io/github/repo-size/youngapp/yap) ![GitHub](https://img.shields.io/github/license/youngapp/yap) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/yap/master) ![GitHub repo size](https://img.shields.io/github/repo-size/youngapp/yap) [![GitHub](https://img.shields.io/github/license/youngapp/yap)](https://github.com/youngapp/yap/blob/master/LICENSE) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap)
 
 
 Yap is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
