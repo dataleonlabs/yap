@@ -1,4 +1,4 @@
-name: Node CI
+name: yap
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: test and publish
       run: |
-        npm install -g standard-version nyc mocha typescript ts-node commitizen yarn husky
+        npm install -g standard-version nyc mocha typescript ts-node yarn
         npm ci
         yarn lint
         yarn test:integration
