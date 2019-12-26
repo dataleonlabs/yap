@@ -13,19 +13,13 @@ Without automated integration, organizations cannot leverage the full power of d
 YAP combines the enterprise-grade workflow automation platform and ease of use expected from client apps supporting both cloud-based and on-premise systems.
 
 
-## Key features of YAP
-
+## Key features of Yap
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
-* **RESTful API** – full programmatic access to the internals makes it easy to manage your API users, keys and API configuration from within your systems.
-* **Multiple access protocols** – out of the box, YAP supports token-based, HMAC-signed, basic auth, and keyless access methods.
-* **Rate limiting** – easily rate limit of your API users; rate limiting is granular and can be applied on a per-key basis.
-* **Quotas** – enforce usage quotas on users to manage capacity or charge for tiered access.
-* **Granular access control** – grant API access on a version-by-version basis, grant keys access to multiple APIs or just a single version.
-* **API versioning** – API versions can be easily set and deprecated at a specific time and date.
-* **Blacklist / Whitelist / Ignored endpoint access** – enforce strict security models on a version-by-version basis to your access points.
-* **Webhooks** – trigger webhooks against events such as quota violations and authentication failures.
-* **IP whitelisting** – block access to non-trusted IP addresses for more secure interactions.
+* **Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants.
+* **Designed for Serverless** – Yap is designed for serverless event functions on AWS, GCP or Azure Functions.
+* **Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
+* **Universal middleware design** – Inspired by Express or KoaJS adapted for Serverless application and low-code approach.
 
 YAP is written in NodeJS, which makes it fast and easy to set up.
 
@@ -34,7 +28,6 @@ The YAP desktop version can be used with the YAP API Gateway to provide a full l
 
 #### Feaures available for cloud edition
 * **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
-* **Functions** – create online your cloud functions.
 * **Advanced policies** – use advanced policies for better security.
 * **Advanced connectors** – use complex app and connectors directly on the YAP platform.
 * **Versioning** – use versionning for APIs and cloud processes.
@@ -47,6 +40,7 @@ The YAP desktop version can be used with the YAP API Gateway to provide a full l
  - [Connectors](docs/connectors.md)
  - [Policies](docs/policies.md)
  - [Error handling](docs/error-handling.md)
+ - [Yap for Express Users](docs/yap-vs-express.md)
  - [FAQ](docs/faq.md)
 
 ## Installing
@@ -67,11 +61,10 @@ npm start
 ```
 
 ```javascript
-app.post('/posts/:id', new Sequence([
-    async (_, ctx) => await mysql.findOne({ table: 'posts', values: { name: ctx.params.id } }),
-    async (res) => await csv.save({ data: res }),
-    async (res) => await dropbox.put({ file: res.csv }),
-]))
+app.post('/posts/:id', async (ctx: Context) => {
+    const data = await mysql.findOne({ table: 'posts', values: { name: ctx.req.params.id } });
+    ctx.body = data;
+})
 ```
 
 Find more details on [Usage guide](docs/guide.md)
@@ -82,7 +75,7 @@ Before opening a new issue, please go through [existing issues](https://github.c
 to find the solution right away if your problem was solved before. 
 
 Attach the following details if appropriate: 
-- SDK, Node.js, or browser version
+- SDK, Node.js
 - Environment and OS
 - Stack trace
 - Reduced repro case

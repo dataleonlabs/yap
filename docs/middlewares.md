@@ -17,14 +17,6 @@ Yap is a middleware framework that can take two different kinds of functions as 
 
 Here is an example of send sms and create csv:
 
-### Sequence function
-
-```js
-app.post('/message', new Sequence([
-    async (_, ctx) => twillio.send({ in: ctx.query.phone }),
-    async (res) => await csv.save({ data: res }),
-]))
-```
 
 ## Context, request, and response
 
