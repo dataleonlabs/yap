@@ -86,9 +86,8 @@ Attach the following details if appropriate:
 The GitHub issues are intended for bug reports and feature requests. 
 For quick help and questions on using the Yap SDK for JavaScript, please use the resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help) section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
 
-Contribute
-==========
-Yap is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, you can fork us on [GitHub](https://github.com/youngapp/yap).
+## Contribute
+Yap is the open source and we love contributions! If you have an idea for a great improvement or spy an issue you’re keen to fix, follow our [Contributing Guide](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md).
 
 No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
