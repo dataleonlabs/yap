@@ -38,13 +38,13 @@ The YAP desktop version can be used with the YAP API Gateway to provide a full l
 
 ## Documentation
 
- - [Usage guide](docs/guide.md)
- - [Application and middlewares](docs/middlewares.md)
- - [Connectors](docs/connectors.md)
- - [Policies](docs/policies.md)
- - [Error handling](docs/error-handling.md)
- - [Yap for Express Users](docs/yap-vs-express.md)
- - [FAQ](docs/faq.md)
+ - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
+ - [Application and middlewares](https://manual.youngapp.co/community/application-and-middlewares)
+ - [Connectors](https://manual.youngapp.co/community/connectors)
+ - [Policies](https://manual.youngapp.co/community/policies)
+ - [Error handling](https://manual.youngapp.co/community/error-handling)
+ - [Yap for Express Users](https://manual.youngapp.co/community/faq/faq-error-policies)
+ - [FAQ](https://manual.youngapp.co/community/faq/frequently-asked-questions)
 
 ## Installing
 It's an official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda.
@@ -70,7 +70,7 @@ app.post('/posts/:id', async (ctx: Context) => {
 })
 ```
 
-Find more details on [Usage guide](docs/guide.md)
+Find more details on [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
  
 ## Opening issues
 If you encounter a bug with YAP, we would appreciate if you inform us about it. 
