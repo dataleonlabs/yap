@@ -200,7 +200,8 @@ export default class Router {
                     errors.push(`policies-ERR-002: XML tag <policies/> must only contains <inbound />, <outbound />, <on-error /> XML Tag, found <${policy.name}>`);
                 } else {
                     if (!(policy.elements instanceof Array)) {
-                        errors.push(`policies-ERR-003: XML tag <policies/> should contains at least one policy. Tag <${policy.name}> have no elements`);
+                        errors.push(
+                            `policies-ERR-003: XML tag <policies/> should contains at least one policy. Tag <${policy.name}> have no elements`);
                     } else {
                         for (const policyElement of policy.elements) {
                             const policyInstance = policyManager.getPolicy(policyElement.name);

@@ -60,6 +60,11 @@ export interface ExecutionContext {
     scope: Scope;
 }
 
+/**
+ * Tries to execute script in a given context, or just return script as string variable
+ * @param field Script in a format of @(....some js code....) or a variable
+ * @param executionContext Execution context to be used in VM execution process
+ */
 export const tryExecuteFieldValue = (field?: string, executionContext?: ExecutionContext) => {
     if (field && executionContext && field.startsWith && field.startsWith('@(') && field.endsWith && field.endsWith(')')) {
         const scriptString = field.substring(2, field.length - 1);
@@ -145,7 +150,7 @@ export class PolicyManager {
     }
 
     /**
-     * APplies policy
+     * Applies policy
      * @param executionContext Execution context contains policy data, request context and request scope
      */
     public apply(executionContext: ExecutionContext) {

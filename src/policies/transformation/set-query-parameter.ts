@@ -1,6 +1,4 @@
-import { unset } from 'lodash';
-import { get } from 'lodash';
-import { Context } from "../../router";
+import { get, unset } from 'lodash';
 import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from '../index';
 
 /**
