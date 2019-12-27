@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { get } from 'lodash';
+import { Scope } from '../../../src/policies';
 import XMLtoJSON from '../../../src/policies/transformation/xml-to-json';
 import { getTestContext } from '../../tools';
 
@@ -109,7 +110,7 @@ describe("<xml-to-json />", async () => {
         const xmlToJson = new XMLtoJSON();
         const context = getTestContext();
         context.request.body = testBody;
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'inbound'});
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.request.requestContext.headers.Accept'), 'application/json');
         assert.deepEqual(appliedResult.context.request.body, testConvertedBody);
     });
@@ -127,7 +128,7 @@ describe("<xml-to-json />", async () => {
         const xmlToJson = new XMLtoJSON();
         const context = getTestContext();
         context.request.body = testBody;
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'inbound'});
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.request.requestContext.headers.Accept'), 'application/json');
         assert.deepEqual(appliedResult.context.request.body, testConvertedFriendlyBody);
     });
@@ -145,7 +146,7 @@ describe("<xml-to-json />", async () => {
         const xmlToJson = new XMLtoJSON();
         const context = getTestContext();
         context.response.body = testBody;
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'outbound'});
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.outbound });
         assert.deepEqual(appliedResult.context.response.body, testConvertedBody);
         assert.equal(get(appliedResult, 'context.response.headers.Content-Type'), 'application/json');
     });
@@ -165,8 +166,8 @@ describe("<xml-to-json />", async () => {
         context.response.body = testBody;
         context.response.headers = {
             'Content-Type': 'application/xml',
-          };
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'outbound'});
+        };
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.outbound });
         assert.deepEqual(appliedResult.context.response.body, testConvertedBody);
         assert.equal(get(appliedResult, 'context.response.headers.Content-Type'), 'application/json');
     });
@@ -186,8 +187,8 @@ describe("<xml-to-json />", async () => {
         context.response.body = testBody;
         context.response.headers = {
             'Content-Type': 'application/json',
-          };
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'outbound'});
+        };
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.outbound });
         assert.deepEqual(appliedResult.context.response.body, testBody);
     });
 
@@ -206,8 +207,8 @@ describe("<xml-to-json />", async () => {
         context.request.body = testBody;
         context.request.requestContext.headers = {
             Accept: 'application/xml',
-          };
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'inbound'});
+        };
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.request.requestContext.headers.Accept'), 'application/json');
         assert.deepEqual(appliedResult.context.request.body, testConvertedBody);
     });
@@ -227,8 +228,41 @@ describe("<xml-to-json />", async () => {
         context.request.body = testBody;
         context.request.requestContext.headers = {
             Accept: 'application/json',
-          };
-        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: 'inbound'});
+        };
+        const appliedResult = await xmlToJson.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.deepEqual(appliedResult.context.request.body, testBody);
+    });
+
+    it("U-TEST-8 Should validate policy", async () => {
+        const policy = {
+            type: "element",
+            name: "xml-to-json",
+            attributes:
+            {
+                kind: "direct",
+                apply: "content-type-xml",
+            },
+        };
+        const xmlToJson = new XMLtoJSON();
+        const validationResult = xmlToJson.validate(policy);
+        assert.deepEqual(validationResult, []);
+    });
+
+    it("U-TEST-9 Should validate policy, with errors", async () => {
+        const policy = {
+            type: "element",
+            name: "xml-to-json",
+            attributes:
+            {
+                kind: "directy",
+                apply: "content-type-xml-json",
+            },
+        };
+        const xmlToJson = new XMLtoJSON();
+        const validationResult = xmlToJson.validate(policy);
+        assert.deepEqual(validationResult, [
+            "xml-to-json-ERR-001: attribute 'apply' is required and should be one of 'always', 'content-type-xml'",
+            "xml-to-json-ERR-002: attribute 'kind' is required and should be one of 'direct', 'javascript-friendly'",
+        ]);
     });
 });

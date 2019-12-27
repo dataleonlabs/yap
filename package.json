@@ -20,7 +20,7 @@
     "package.json"
   ],
   "scripts": {
-    "test": "ENV=local mocha -r ts-node/register test/**/*.ts  --timeout 30000 --watch-extensions ts --watch",
+    "test": "ENV=local mocha -r ts-node/register test/**/*.test.ts  --timeout 30000 --watch-extensions ts --watch",
     "test:integration": "nyc mocha -r ts-node/register test/**/*.ts",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "rm -rf dist && ./node_modules/.bin/tsc",

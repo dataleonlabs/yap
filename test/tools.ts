@@ -63,5 +63,6 @@ export function getTestContext() {
         response: getTestResponce(),
         fields: {},
         connection: {},
+        policies: {},
     };
 }

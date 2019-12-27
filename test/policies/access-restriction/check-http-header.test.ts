@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { get } from 'lodash';
+import { Scope } from '../../../src/policies';
 import CheckHTTPHeader from '../../../src/policies/access-restriction/check-http-header';
 import { getTestRequest } from '../../tools';
 
@@ -44,7 +45,7 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: 'inbound' });
+        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.notEqual(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.notEqual(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -82,7 +83,7 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: 'inbound' });
+        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.notEqual(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.notEqual(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -109,7 +110,7 @@ describe('<check-http-header />', () => {
             },
             elements: [],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: 'inbound' });
+        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -147,7 +148,7 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: 'inbound' });
+        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -185,7 +186,7 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: 'inbound' });
+        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -223,8 +224,51 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: 'inbound' });
+        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+    });
+
+    it("U-TEST-7 Should pass validation", async () => {
+        const checkHTTPHeader = new CheckHTTPHeader();
+        const policy = {
+            type: "element",
+            name: "check-header",
+            attributes:
+            {
+                "name": requiredHeaderName,
+                "failed-check-httpcode": unauthorizedCode,
+                "failed-check-error-message": unauthorizedMessage,
+                "ignore-case": "true",
+            },
+            elements: [{
+                type: "element",
+                name: "value",
+                elements: [
+                    { type: "text", text: "headerValue1" }],
+            },
+            {
+                type: "element",
+                name: "value",
+                elements:
+                    [{ type: "text", text: requiredHeaderValue }],
+            }],
+        };
+        const validationResult = checkHTTPHeader.validate(policy);
+        assert.deepEqual(validationResult, []);
+    });
+
+    it("U-TEST-8 Should get validation errors", async () => {
+        const checkHTTPHeader = new CheckHTTPHeader();
+        const policy = {
+            type: "element",
+            name: "check-header",
+        };
+        const validationResult = checkHTTPHeader.validate(policy);
+        assert.deepEqual(validationResult,
+            ["check-header-ERR-001: attribute 'failed-check-error-message' is required",
+            "check-header-ERR-002: attribute 'failed-check-httpcode' is required and should be integer",
+            "check-header-ERR-003: attribute 'name' is required",
+            "check-header-ERR-004: attribute 'ignore-case' is required, and should be either true or false"]);
     });
 });

@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { get } from 'lodash';
+import { Scope } from '../../../src/policies';
 import JSONtoXML from '../../../src/policies/transformation/json-to-xml';
 import { getTestContext } from '../../tools';
 
@@ -8,13 +9,13 @@ describe('<json-to-xml />', () => {
   const testBody = {
     firstName: "John",
     lastName: "Smith",
-    date:'2016-05-24T15:54:14.876Z',
+    date: '2016-05-24T15:54:14.876Z',
     address: {
       streetAddress: "3212 22nd St",
       city: "Chicago",
       state: "Illinois",
       zip: 10000,
-      date:'11-12-2018 not valid date',
+      date: '11-12-2018 not valid date',
     },
     email: "john@smith.com",
   };
@@ -44,7 +45,7 @@ describe('<json-to-xml />', () => {
     };
     const context = getTestContext();
     context.request.body = testBody;
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'inbound'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.inbound });
     assert.equal(get(appliedResult, 'context.request.requestContext.headers.Accept'), 'application/xml');
     assert.equal(appliedResult.context.request.body, testConvertedBody);
   });
@@ -62,7 +63,7 @@ describe('<json-to-xml />', () => {
     };
     const context = getTestContext();
     context.response.body = testBody;
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'outbound'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.outbound });
     assert.equal(get(appliedResult, 'context.response.headers.Content-Type'), 'application/xml');
     assert.equal(appliedResult.context.response.body, testConvertedBody);
   });
@@ -83,7 +84,7 @@ describe('<json-to-xml />', () => {
       response: { body: {} }, fields: {}, connection: {},
     };
     context.response.body = testBody;
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'on-error'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.onerror });
     assert.equal(appliedResult.context.response.body, testConvertedBody);
   });
 
@@ -103,7 +104,7 @@ describe('<json-to-xml />', () => {
     context.response.headers = {
       'Content-Type': 'application/json',
     };
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'inbound'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.inbound });
     assert.equal(appliedResult.context.request.body, testConvertedBody);
   });
 
@@ -120,7 +121,7 @@ describe('<json-to-xml />', () => {
     };
     const context = getTestContext();
     context.request.body = testBody;
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'inbound'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.inbound });
     assert.equal(appliedResult.context.request.body, testBody);
   });
 
@@ -140,7 +141,7 @@ describe('<json-to-xml />', () => {
     context.request.requestContext.headers = {
       Accept: 'application/json',
     };
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'inbound'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.inbound });
     assert.equal(appliedResult.context.request.body, testConvertedBody);
   });
 
@@ -160,7 +161,39 @@ describe('<json-to-xml />', () => {
     context.request.requestContext.headers = {
       Accept: 'application/json',
     };
-    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: 'inbound'});
+    const appliedResult = await jsonToXml.apply({ policyElement: policy, context, scope: Scope.inbound });
     assert.equal(appliedResult.context.request.body, testBody);
+  });
+
+  it('U-TEST-8 - Should validate policies', async () => {
+    const jsonToXml = new JSONtoXML();
+    const policy = {
+      type: "element",
+      name: "json-to-xml",
+      attributes:
+      {
+        "parse-date": "false",
+        "apply": "content-type-json",
+      },
+    };
+    const validationResult = jsonToXml.validate(policy);
+    assert.deepEqual(validationResult, []);
+  });
+
+  it('U-TEST-8 - Should validate policies, with error', async () => {
+    const jsonToXml = new JSONtoXML();
+    const policy = {
+      type: "element",
+      name: "json-to-xml",
+      attributes:
+      {
+        "parse-date": "false",
+        "apply": "content-type-wow-wronk",
+      },
+    };
+    const validationResult = jsonToXml.validate(policy);
+    assert.deepEqual(validationResult, [
+      "json-to-xml-ERR-001: attribute 'apply' is required and should be one of 'always', 'content-type-json '",
+    ]);
   });
 });

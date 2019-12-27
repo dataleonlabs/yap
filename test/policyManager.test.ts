@@ -1,7 +1,8 @@
 import assert from 'assert';
 import * as sinon from 'sinon';
-import policyManager, { ExecutionContext, PolicyManager, tryExecuteFieldValue } from '../src/policies';
+import policyManager, { ExecutionContext, PolicyCategory, PolicyManager, Scope, tryExecuteFieldValue } from '../src/policies';
 import { Context } from '../src/router';
+import { getTestContext } from './tools';
 
 describe("Policy manager", async () => {
 
@@ -14,8 +15,13 @@ describe("Policy manager", async () => {
         const policyManager = new PolicyManager();
         const policy = {
             id: "superPolicy",
+            name: "superPolicy",
+            description: "superPolicy",
+            scopes: [Scope.inbound],
+            category: PolicyCategory.cors,
+            isInternal: true,
             apply: async (executionContext:ExecutionContext) => executionContext,
-            validate: (policyElement: any) => true,
+            validate: (policyElement: any) => [],
         };
         policyManager.addPolicy(policy);
         assert(true, "Policy added");
@@ -25,8 +31,13 @@ describe("Policy manager", async () => {
         const policyManager = new PolicyManager();
         const policy = {
             id: "superPolicy",
+            name: "superPolicy",
+            description: "superPolicy",
+            scopes: [Scope.inbound],
+            category: PolicyCategory.cors,
+            isInternal: true,
             apply: async (executionContext:ExecutionContext) => executionContext,
-            validate: (policyElement: any) => true,
+            validate: (policyElement: any) => [],
         };
         policyManager.addPolicy(policy);
         assert.equal(policyManager.getPolicy(policy.id).id, policy.id);
@@ -36,12 +47,17 @@ describe("Policy manager", async () => {
         const policyManager = new PolicyManager();
         const policy = {
             id: "superPolicy",
+            name: "superPolicy",
+            description: "superPolicy",
+            scopes: [Scope.inbound],
+            category: PolicyCategory.cors,
+            isInternal: true,
             apply: async (executionContext:ExecutionContext) => executionContext,
-            validate: (policyElement: any) => true,
+            validate: (policyElement: any) => [],
         };
         policyManager.addPolicy(policy);
         const spy = sinon.spy(policy, 'apply');
-        policyManager.apply({ policyElement: { name: policy.id }, context: testContext, scope: 'inbound'});
+        policyManager.apply({ policyElement: { name: policy.id }, context: testContext, scope:Scope.inbound});
         assert.equal(spy.called, 1);
     });
 
@@ -49,8 +65,13 @@ describe("Policy manager", async () => {
         const policyManager = new PolicyManager();
         const policy = {
             id: "superPolicy",
+            name: "superPolicy",
+            description: "superPolicy",
+            scopes: [Scope.inbound],
+            category: PolicyCategory.cors,
+            isInternal: true,
             apply: async (executionContext:ExecutionContext) => executionContext,
-            validate: (policyElement: any) => true,
+            validate: (policyElement: any) => [],
         };
         policyManager.addPolicy(policy);
         const spy = sinon.spy(policy, 'validate');
@@ -62,12 +83,17 @@ describe("Policy manager", async () => {
         const policyManager = new PolicyManager();
         const policy = {
             id: "superPolicy",
+            name: "superPolicy",
+            description: "superPolicy",
+            scopes: [Scope.inbound],
+            category: PolicyCategory.cors,
+            isInternal: true,
             apply: async (executionContext:ExecutionContext) => executionContext,
-            validate: (policyElement: any) => true,
+            validate: (policyElement: any) => [],
         };
         policyManager.addPolicy(policy);
         assert.throws(() => policyManager.validate({ name: 'nonexistent' }), Error, `Policy with id nonexistent not registered`);
-        assert.throws(() => policyManager.apply({ policyElement: { name: 'nonexistent' }, context: testContext, scope: 'inbound'}), Error, `Policy with id nonexistent not registered`);
+        assert.throws(() => policyManager.apply({ policyElement: { name: 'nonexistent' }, context: testContext, scope:Scope.inbound}), Error, `Policy with id nonexistent not registered`);
     });
 
     it("U-TEST-6 Singleton should have required policy list", async () => {
@@ -101,12 +127,18 @@ describe("Policy manager", async () => {
         const policyManager = new PolicyManager();
         const policy = {
             id: "superPolicy",
+            name: "superPolicy",
+            description: "superPolicy",
+            scopes: [Scope.inbound],
+            category: PolicyCategory.cors,
+            isInternal: true,
             apply: async (executionContext:ExecutionContext) => {
+                // tslint:disable-next-line: no-invalid-template-strings
                 const value = tryExecuteFieldValue('@(`${scope}_${context.request.httpMethod}_${policyElement.attributes.wey}`)', executionContext);
                 executionContext.context.response.body = value;
                 return executionContext;
             },
-            validate: (policyElement: any) => true,
+            validate: (policyElement: any) => [],
         };
         policyManager.addPolicy(policy);
         const policyElement = {
@@ -115,7 +147,7 @@ describe("Policy manager", async () => {
                 wey: 'existingAttribute',
             },
         };
-        const { context } = await policyManager.apply({policyElement, context: testContext, scope: 'inbound'});
+        const { context } = await policyManager.apply({policyElement, context: testContext, scope:Scope.inbound});
         assert.equal(context.response.body, 'inbound_POST_existingAttribute');
     });
 });

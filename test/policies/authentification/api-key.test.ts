@@ -1,12 +1,13 @@
 import assert from 'assert';
 import { get } from 'lodash';
+import { Scope } from '../../../src/policies';
 import ApiKey from '../../../src/policies/authentification/api-key';
 import { getTestRequest } from '../../tools';
 
 const unauthorizedCode = 401;
 const unauthorizedMessage = "unauthorized";
 const allowedKey = "someAllowedKey";
-describe("<api-key />", ()=> {
+describe("<api-key />", () => {
     it("U-TEST-1 Should pass if api key in list", async () => {
         const apiKey = new ApiKey();
         const context = {
@@ -20,10 +21,10 @@ describe("<api-key />", ()=> {
             type: "element",
             name: "api-key",
             attributes:
-                {
-                    "failed-check-httpcode": unauthorizedCode,
-                    "failed-check-error-message": unauthorizedMessage,
-                },
+            {
+                "failed-check-httpcode": unauthorizedCode,
+                "failed-check-error-message": unauthorizedMessage,
+            },
             elements:
                 [{
                     type: "element", name: "value", elements:
@@ -34,7 +35,7 @@ describe("<api-key />", ()=> {
                         [{ type: "text", text: "someKey" }],
                 }],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: 'inbound'});
+        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.notEqual(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.notEqual(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -52,10 +53,10 @@ describe("<api-key />", ()=> {
             type: "element",
             name: "api-key",
             attributes:
-                {
-                    "failed-check-httpcode": unauthorizedCode,
-                    "failed-check-error-message": unauthorizedMessage,
-                },
+            {
+                "failed-check-httpcode": unauthorizedCode,
+                "failed-check-error-message": unauthorizedMessage,
+            },
             elements:
                 [{
                     type: "element", name: "value", elements:
@@ -66,7 +67,7 @@ describe("<api-key />", ()=> {
                         [{ type: "text", text: "someKey" }],
                 }],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: 'inbound'});
+        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -84,10 +85,10 @@ describe("<api-key />", ()=> {
             type: "element",
             name: "api-key",
             attributes:
-                {
-                    "failed-check-httpcode": unauthorizedCode,
-                    "failed-check-error-message": unauthorizedMessage,
-                },
+            {
+                "failed-check-httpcode": unauthorizedCode,
+                "failed-check-error-message": unauthorizedMessage,
+            },
             elements:
                 [{
                     type: "element", name: "value", elements:
@@ -98,7 +99,7 @@ describe("<api-key />", ()=> {
                         [{ type: "text", text: "someKey" }],
                 }],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: 'inbound'});
+        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
@@ -116,15 +117,55 @@ describe("<api-key />", ()=> {
             type: "element",
             name: "api-key",
             attributes:
-                {
-                    "failed-check-httpcode": unauthorizedCode,
-                    "failed-check-error-message": unauthorizedMessage,
-                },
+            {
+                "failed-check-httpcode": unauthorizedCode,
+                "failed-check-error-message": unauthorizedMessage,
+            },
             elements:
                 [],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: 'inbound'});
+        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
         assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
         assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+    });
+
+    it("U-TEST-4 Should validate policy", async () => {
+        const policy = {
+            type: "element",
+            name: "api-key",
+            attributes:
+            {
+                "failed-check-httpcode": unauthorizedCode,
+                "failed-check-error-message": unauthorizedMessage,
+            },
+            elements:
+                [{
+                    type: "element", name: "value", elements:
+                        [{ type: "text", text: "someKey" }],
+                }],
+        };
+        const apiKey = new ApiKey();
+        const validationResult = apiKey.validate(policy);
+        assert.deepEqual(validationResult, []);
+    });
+
+    it("U-TEST-5 Should validate policy, with errors", async () => {
+        const policy = {
+            type: "element",
+            name: "api-key",
+            attributes:
+            {
+
+            },
+            elements:
+                [],
+        };
+        const apiKey = new ApiKey();
+        const validationResult = apiKey.validate(policy);
+        assert.deepEqual(validationResult, [
+            "api-key-ERR-001: attribute 'failed-check-error-message' is required",
+            "api-key-ERR-002: attribute 'failed-check-httpcode' is required and should be integer",
+            "api-key-ERR-003: at least one api-key should be defined for policy",
+        ]);
     });
 });

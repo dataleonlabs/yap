@@ -1,23 +1,65 @@
-import { set } from 'lodash';
+import { get, set } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy } from "../index";
+import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
 
+/**
+ * <mock-response> policy
+ * The mock-response, as the name implies, is used to mock APIs and operations.
+ * It aborts normal pipeline execution and returns a mocked response to the caller.
+ * @example
+ *
+ *  Returns 200 OK status code. Content is based on parameter body (optional)
+ *  <mock-response status-code='200' content-type='application/json' body='someBody'/>
+ */
 export default class MockResponse implements IPolicy {
 
+    /**
+     * Policy id
+     */
     public get id() {
         return 'mock-response';
     }
 
     /**
-     * <mock-response> policy
-     * The mock-response, as the name implies, is used to mock APIs and operations.
-     * It aborts normal pipeline execution and returns a mocked response to the caller.
-     * @example
-     *
-     *  Returns 200 OK status code. Content is based on parameter body (optional)
-     *  <mock-response status-code='200' content-type='application/json' body='someBody'/>
+     * Policy name
      */
-public async apply(executionContext:ExecutionContext) {
+    public get name() {
+        return 'Mock response policy';
+    }
+
+    /**
+     * Policy category
+     */
+    public get category() {
+        return PolicyCategory.advanced;
+    }
+
+    /**
+     * Policy description
+     */
+    public get description() {
+        return "The mock-response, as the name implies, is used to mock APIs and operations.";
+    }
+
+    /**
+     * Policy available scopes
+     */
+    public get scopes() {
+        return [Scope.inbound, Scope.onerror, Scope.outbound];
+    }
+
+    /**
+     * If policy is YAP internal policy
+     */
+    public get isInternal() {
+        return true;
+    }
+
+    /**
+     * Applies mock response policy
+     * @param executionContext execution context
+     */
+    public async apply(executionContext: ExecutionContext) {
         const { policyElement, context, scope } = executionContext;
         context.response.body = policyElement.attributes.body || context.response.body;
         context.response.statusCode = policyElement.attributes['status-code'] || context.response.statusCode;
@@ -27,7 +69,16 @@ public async apply(executionContext:ExecutionContext) {
         return executionContext;
     }
 
+    /**
+     * Validates mock response policy
+     * @param policyElement policy element
+     */
     public validate(policyElement: any) {
-        return true;
+        const httpCode = get(policyElement, 'attributes.status-code');
+        const errors = [];
+        if (httpCode && isNaN(Number.parseInt(httpCode))) {
+            errors.push(`${this.id}-ERR-001: attribute 'status-code' should persist and be a number. Example status-code='200'`);
+        }
+        return errors;
     }
 }

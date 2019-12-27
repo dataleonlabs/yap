@@ -1,5 +1,6 @@
-import { get } from 'lodash';
+import { get, set } from 'lodash';
 import vm from 'vm';
+import { xml2js } from 'xml-js';
 import CheckHTTPHeader from '../policies/access-restriction/check-http-header';
 import { Context } from '../router';
 import HostFilter from './access-restriction/host-filter';
@@ -22,9 +23,44 @@ import SetHeader from './transformation/set-header';
 import SetQueryParameter from './transformation/set-query-parameter';
 import XMLtoJSON from './transformation/xml-to-json';
 
-export interface ExecutionContext { policyElement: any; context: Context; scope: 'inbound' | 'outbound' | 'on-error'; }
+/**
+ * Policy categories enum
+ */
+export enum PolicyCategory {
+    'accessrestriction' = 'access-restriction',
+    'advanced' = 'advanced',
+    'authentification' = 'authentification',
+    'cors' = 'cors',
+    'transformation' =
+    'transformation',
+}
 
-export const tryExecuteFieldValue = (field?: string, executionContext?:ExecutionContext) => {
+/**
+ * Policy scope enum
+ */
+export enum Scope { inbound = "inbound", outbound = "outbound", onerror = "on-error" }
+
+/**
+ * Execution context interface
+ */
+export interface ExecutionContext {
+    /**
+     * Policy element, which contains policy data
+     */
+    policyElement: any;
+
+    /**
+     * Request context
+     */
+    context: Context;
+
+    /**
+     * Request scope
+     */
+    scope: Scope;
+}
+
+export const tryExecuteFieldValue = (field?: string, executionContext?: ExecutionContext) => {
     if (field && executionContext && field.startsWith && field.startsWith('@(') && field.endsWith && field.endsWith(')')) {
         const scriptString = field.substring(2, field.length - 1);
         const vmExecutionContext = vm.createContext(executionContext);
@@ -39,13 +75,39 @@ export interface IPolicy {
     /**
      * String identificator for policy. Used to match policy-name with policy body
      */
-    id: string;
+    readonly id: string;
+
+    /**
+     * Name of a policy
+     */
+    readonly name: string;
+
+    /**
+     * Category of a policy
+     */
+    readonly category: PolicyCategory;
+
+    /**
+     * Descritpion of a policy
+     */
+    readonly description: string;
+
+    /**
+     * Acceptable scopes for a policy.
+     */
+    readonly scopes: Scope[];
+
+    /**
+     * Indicates if policy is internal
+     * Please, do not set it to true for custom policies
+     */
+    readonly isInternal: boolean;
 
     /**
      * Used to validate whether policyElement can be accepted by core
      * @param policyElement - policy element in a format of JS object
      */
-    validate(policyElement: any): boolean;
+    validate(policyElement: object): string[];
 
     /**
      * Applies policy to context
@@ -53,28 +115,50 @@ export interface IPolicy {
      * @param context - execution context
      * @param scope - execution scope
      */
-    apply(executionContext:ExecutionContext): Promise<ExecutionContext>;
+    apply(executionContext: ExecutionContext): Promise<ExecutionContext>;
 }
 
+/**
+ * Policy manager
+ */
 export class PolicyManager {
 
+    /**
+     * Registered policy definitions
+     */
     public policies: { [id: string]: IPolicy; } = {};
 
+    /**
+     * Adds policy definition to array of policies
+     * @param policy policy definition
+     */
     public addPolicy(policy: IPolicy) {
         this.policies[policy.id] = policy;
     }
 
+    /**
+     * Get policy by its id, or returns undefined
+     * @param id policy id, example set-header
+     */
     public getPolicy(id: string) {
         return this.policies[id];
     }
 
-    public apply(executionContext:ExecutionContext) {
+    /**
+     * APplies policy
+     * @param executionContext Execution context contains policy data, request context and request scope
+     */
+    public apply(executionContext: ExecutionContext) {
         if (!this.policies[executionContext.policyElement.name]) {
             throw new Error(`Policy with id ${executionContext.policyElement.name} not registered`);
         }
         return this.policies[executionContext.policyElement.name].apply(executionContext);
     }
 
+    /**
+     * Validates policy element
+     * @param policyElement policy element to validate
+     */
     public validate(policyElement: any) {
         if (!this.policies[policyElement.name]) {
             throw new Error(`Policy with id ${policyElement.name} not registered`);
