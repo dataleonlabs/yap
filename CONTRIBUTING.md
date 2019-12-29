@@ -16,8 +16,7 @@ The goal of this document is to create a contribution process that:
 
 Log an issue for any question or problem you might have. 
 
-When in doubt, log an issue, and any additional policies about what to include will be provided in the responses. The only
-exception is security disclosures which should be sent privately.
+When in doubt, log an issue, and any additional policies about what to include will be provided in the responses. Security-related disclosures should be sent in private messages.
 
 # Contributions
 
