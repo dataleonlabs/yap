@@ -1,21 +1,22 @@
 # Yap Community Contributing Guide 1.0
 
-Thank you for your interest in yap, an open source project administered by Young App.
+Thank you for interest in Yap, an open source project administered by Young App.
 The goal of this document is to create a contribution process that:
 
-* Encourages new contributions.
-* Encourages contributors to remain involved.
-* Avoids unnecessary processes and bureaucracy whenever possible.
+* Encourages new contributions
+* Encourages contributors to remain involved
+* Avoids unnecessary processes and bureaucracy
 
 ## Vocabulary
 
-* A **Contributor** is any individual creating or commenting on an issue or pull request.
+* A **Contributor** is any individual creating or commenting an issue or making pull request.
 * A **Committer** is a subset of contributors who have been given write access to the repository.
 
-# Logging Issues
+# Logging issues
 
-Log an issue for any question or problem you might have. When in doubt, log an issue, and
-any additional policies about what to include will be provided in the responses. The only
+Log an issue for any question or problem you might have. 
+
+When in doubt, log an issue, and any additional policies about what to include will be provided in the responses. The only
 exception is security disclosures which should be sent privately.
 
 # Contributions
@@ -40,10 +41,17 @@ In the case of an objection being raised in a pull request by another committer,
 committers should seek to arrive at a consensus by way of addressing concerns being expressed
 by discussion, compromise on the proposed change, or withdrawal of the proposed change.
 
-# Becoming a Committer
+# Becoming a committer
 
 All contributors who land a non-trivial contribution should be on-boarded in a timely manner,
 and added as a committer, and be given write access to the repository.
 
 Committers are expected to follow this policy and continue to send pull requests, go through
 proper review, and have other committers merge their pull requests.
+
+# Benefits for contributors
+
+- 30% discount on the YAP cloud edition.
+- Written feedback and recommendation (YAP certificate) on development skills.
+- Possibility to receive the job proposition from the YAP team in order to work on the project on freelance.
+- After the connector (wrapper that includes app and its API) created by contributor is published on the Young App platform and being used by consumers, a contributor receives compensation (the first part – after connector is published, the second part – after connector is being used by platform consumers); the amount of compensation depends on connector's complexity, popularity, the number of times being used; the size of compensation to be discussed individually with YAP team.
