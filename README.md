@@ -23,6 +23,8 @@ Yap offers powerful, yet lightweight features that allow fine-grained control ov
 * **Elegants XML Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants with XML
 * **Documentation with OpenAPI v3** – The OpenAPI defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code.
 * **YAML Functional testing** – CI-ready tests for REST APIs configured in YAML.
+* **Error handling with Policies** – Sentry provides self-hosted and cloud-based error monitoring that helps all software
+teams discover, triage, and prioritize errors in real-time.
 * **Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
 * **Universal middleware design** – Inspired by Express or KoaJS and adapted for Serverless application and low-code approach.
 * **Designed for Serverless** – Yap is designed for serverless event functions on AWS, GCP or Azure Functions.
