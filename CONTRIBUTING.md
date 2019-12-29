@@ -10,7 +10,7 @@ The goal of this document is to create a contribution process that:
 ## Vocabulary
 
 * A **Contributor** is any individual creating or commenting an issue or making pull request.
-* A **Committer** is a subset of contributors who have been given write access to the repository.
+* A **Committer** is a contributor who have been given write access to the repository.
 
 # Logging issues
 
