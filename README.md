@@ -102,7 +102,7 @@ This SDK is distributed under the GNU General Public License v3.0.
 See [LICENSE.txt](LICENSE.txt) for more information.
 
 ## Yap API management Cloud Edition (Coming soon) 🔥
-Yap API management Cloud Edition is a desktop version can be used with the Yap API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.io and to see the full feature set, explore https://manual.youngapp.co
+Yap API management Cloud Edition is a desktop version can be used with the Yap API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.co and to see the full feature set, explore https://manual.youngapp.co
 
 #### Feaures available for cloud edition 
 * **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
