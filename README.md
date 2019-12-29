@@ -86,6 +86,16 @@ Yap is the open source and we love contributions! If you have an idea for a grea
 
 No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
+## Community support
+For general help using Yap, please refer to [the official Yap documentation](https://manual.youngapp.co/community/). For additional help, you can use one of these channels to ask a question:
+- [StackOverflow](http://stackoverflow.com/questions/tagged/yap)
+- [Forum](https://forum.youngapp.co/) (Highly recommended for faster support)
+- [Spectrum](https://spectrum.chat/yap)
+- [GitHub](https://github.com/youngapp/yap) (Bug reports, contributions)
+- [Roadmap](https://yap.canny.io/) (Feature requests)
+- [Twitter](https://twitter.com/youngapp_platform) (Get the news fast)
+- [YouTube Channel](https://www.youtube.com/yap) (Learn from Video Tutorials)
+
 ## License
 
 This SDK is distributed under the GNU General Public License v3.0. 
