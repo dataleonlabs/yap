@@ -17,7 +17,7 @@ YAP combines router with XML policies, OpenAPI v3 and strong functional testing 
 
 ![Architecture](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-Lx7nwnF5v16-iOWhynh%2F-LxGiU-4HVj5q0Bbu_A4%2F-LxGj6uO6xbnLpT9z6wG%2FCapture%20d%E2%80%99e%CC%81cran%202019-12-29%20a%CC%80%2013.53.42.png?alt=media&token=5ef3ad2e-610d-4610-bc7b-b1bc99fb687c)
  
-## Key features of Yap
+## Key features of Yap 🙌
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
 * **Elegants XML Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants with XML
@@ -86,7 +86,7 @@ Yap is the open source and we love contributions! If you have an idea for a grea
 
 No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
-## Community support
+## Community support 🌍
 For general help using Yap, please refer to [the official Yap documentation](https://manual.youngapp.co/community/). For additional help, you can use one of these channels to ask a question:
 - [StackOverflow](http://stackoverflow.com/questions/tagged/yap)
 - [Forum](https://forum.youngapp.co/) (Highly recommended for faster support)
@@ -101,10 +101,10 @@ For general help using Yap, please refer to [the official Yap documentation](htt
 This SDK is distributed under the GNU General Public License v3.0. 
 See [LICENSE.txt](LICENSE.txt) for more information.
 
-## Yap API management Cloud Edition (Coming soon)
+## Yap API management Cloud Edition (Coming soon) 🔥
 Yap API management Cloud Edition is a desktop version can be used with the Yap API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.io and to see the full feature set, explore https://manual.youngapp.co
 
-#### Feaures available for cloud edition
+#### Feaures available for cloud edition 
 * **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
 * **Advanced policies** – use advanced policies for better and more security.
 * **Advanced connectors** – use complex app and connectors directly on the YAP platform.
