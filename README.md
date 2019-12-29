@@ -76,7 +76,6 @@ Attach the following details if appropriate:
 - SDK, Node.js
 - Environment and OS
 - Stack trace
-- Reduced repro case
 
 The GitHub issues are intended for bug reports and feature requests. 
 For quick help and questions on using the Yap SDK for JavaScript, please use the resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help) section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
