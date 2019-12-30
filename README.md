@@ -96,7 +96,7 @@ For general help using Yap, please refer to [the official Yap documentation](htt
 
 ## License
 
-This SDK is distributed under the GNU General Public License v3.0. 
+This SDK is distributed under Apache License 2.0. 
 See [LICENSE.txt](LICENSE.txt) for more information.
 
 ## Yap API management Cloud Edition (Coming soon) 🔥
