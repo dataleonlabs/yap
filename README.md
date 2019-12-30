@@ -1,34 +1,35 @@
-# Yap API gateway
+# Less code, safer API.
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/yap/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/570597c92b1e4ca9b67b2a49d9c2aa51)](https://www.codacy.com/gh/youngapp/yap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=youngapp/yap&amp;utm_campaign=Badge_Grade) ![Codacy branch coverage](https://img.shields.io/codacy/coverage/e3497699cef94781936c5103f84e46ab/master) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap) [![Requirements Status](https://requires.io/github/youngapp/yap/requirements.svg?branch=feature%2Fpolicies)](https://requires.io/github/youngapp/yap/requirements/?branch=feature%2Fpolicies)
 
-Yap is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security.
-
-By leveraging async functions, Yap allows you to exclude callbacks and greatly improve error handling and policies at the same time providing an elegant suite of Webhook- and HTTP-based methods, which make writing servers fast and enjoyable.
+Yap is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security entreprise-gradle.
 
 Please distinguish **Yap** (the core project of Young App) and **YAP** (the platform of Young App).
 
 ## Motivation
-The Young App Platform (YAP) helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
+Young App helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
 
-Without automated integration, organizations cannot leverage the full power of data in multiple applications, for example, to re-enter data in applications or constantly switch context across applications to accomplish tasks.
+Without API Management, we using Express, Koa or Hapi on Nodejs without security security handler, and all others NodeJS frameworks are based on http module, yap is different, designed only for serverless functions (event-driven).
 
-YAP combines the enterprise-grade workflow automation platform and ease of use expected from client apps supporting both cloud-based and on-premise systems.
+Yap combines the enterprise-grade api management and workflow automation platform and ease of use expected from client apps supporting on cloud-based.
 
 ## Architecture
-YAP combines the enterprise-grade api management with safe and serverless architecture.
+YAP combines router with XML policies, OpenAPI v3 and strong functional testing on serverless architecture.
 
 ![Architecture](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-Lx7nwnF5v16-iOWhynh%2F-LxGiU-4HVj5q0Bbu_A4%2F-LxGj6uO6xbnLpT9z6wG%2FCapture%20d%E2%80%99e%CC%81cran%202019-12-29%20a%CC%80%2013.53.42.png?alt=media&token=5ef3ad2e-610d-4610-bc7b-b1bc99fb687c)
  
-## Key features of Yap
+## Key features of Yap 🙌
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
-* **Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants.
-* **Designed for Serverless** – Yap is designed for serverless event functions on AWS, GCP or Azure Functions.
+* **Elegants XML Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants with XML
+* **Documentation with OpenAPI v3** – The OpenAPI defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code.
+* **YAML Functional testing** – CI-ready tests for REST APIs configured in YAML.
+* **Error handling with Policies** – Sentry provides self-hosted and cloud-based error monitoring that helps all software
+teams discover, triage, and prioritize errors in real-time.
 * **Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
-* **Universal middleware design** – Inspired by Express or KoaJS adapted for Serverless application and low-code approach.
+* **Universal middleware design** – Inspired by Express or KoaJS and adapted for Serverless application and low-code approach.
+* **Designed for Serverless** – Yap is designed for serverless event functions on AWS, GCP or Azure Functions.
 
 YAP is written in NodeJS, which makes it fast and easy to set up.
-
 
 ## Documentation
  - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
@@ -58,13 +59,14 @@ npm start
 
 ```javascript
 app.post('/posts/:id', async (ctx: Context) => {
-    const data = await mysql.findOne({ table: 'posts', values: { name: ctx.req.params.id } });
-    ctx.body = data;
+    ctx.body = "Hello world!";
 })
 ```
 
 Find more details on [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
- 
+
+Enjoy 🎉
+
 ## Opening issues
 If you encounter a bug with YAP, we would appreciate if you inform us about it. 
 Before opening a new issue, please go through [existing issues](https://github.com/youngapp/yap/issues)
@@ -74,7 +76,6 @@ Attach the following details if appropriate:
 - SDK, Node.js
 - Environment and OS
 - Stack trace
-- Reduced repro case
 
 The GitHub issues are intended for bug reports and feature requests. 
 For quick help and questions on using the Yap SDK for JavaScript, please use the resources listed within [Getting Help](https://github.com/youngapp/yap#getting-help) section. The time of our support experts is rushingly flying but even so, they would like to help you in time, and therefore, will appreciate your help in applying for support reasonably by providing full details and excluding duplicated issues.
@@ -84,17 +85,27 @@ Yap is the open source and we love contributions! If you have an idea for a grea
 
 No contribution is too small – we encourage you to provide feedback and [report issues](https://github.com/youngapp/yap/issues).
 
+## Community support 🌍
+For general help using Yap, please refer to [the official Yap documentation](https://manual.youngapp.co/community/). For additional help, you can use one of these channels to ask a question:
+- [StackOverflow](http://stackoverflow.com/questions/tagged/yap)
+- [Forum](https://forum.youngapp.co/) (Highly recommended for faster support)
+- [Spectrum](https://spectrum.chat/yap)
+- [GitHub](https://github.com/youngapp/yap) (Bug reports, contributions)
+- [Roadmap](https://yap.canny.io/) (Feature requests)
+- [Twitter](https://twitter.com/youngapp_platform) (Get the news fast)
+- [YouTube Channel](https://www.youtube.com/yap) (Learn from Video Tutorials)
+
 ## License
 
 This SDK is distributed under the GNU General Public License v3.0. 
 See [LICENSE.txt](LICENSE.txt) for more information.
 
-## Yap API management platform
-The YAP desktop version can be used with the YAP API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.io and to see the full feature set, explore https://manual.youngapp.co
+## Yap API management Cloud Edition (Coming soon) 🔥
+Yap API management Cloud Edition is a desktop version can be used with the Yap API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.co and to see the full feature set, explore https://manual.youngapp.co
 
-#### Feaures available for cloud edition
+#### Feaures available for cloud edition 
 * **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
-* **Advanced policies** – use advanced policies for better security.
+* **Advanced policies** – use advanced policies for better and more security.
 * **Advanced connectors** – use complex app and connectors directly on the YAP platform.
 * **Versioning** – use versionning for APIs and cloud processes.
 * **Support and integration** – beneficiate support by experts to select the best API and cloud integration.
