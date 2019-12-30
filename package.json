@@ -24,7 +24,7 @@
     "test:integration": "nyc mocha -r ts-node/register test/**/*.ts",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "rm -rf dist && ./node_modules/.bin/tsc",
-    "coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95 --statements 95",
+    "coverage": "nyc report --reporter=text-lcov | codacy-coverage --token e3497699cef94781936c5103f84e46ab",
     "release": "standard-version  --no-verify --commit-all --release-as minor --git-tag-fallback false"
   },
   "repository": {
@@ -52,16 +52,16 @@
     }
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
+    "@types/mocha": "^5.2.7",
+    "husky": "^3.0.0",
     "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
     "sinon": "^7.5.0",
     "ts-node": "^8.5.4",
-    "typescript": "^3.7.3",
-    "husky": "^3.0.0",
     "tslint": "^5.12.0",
-    "nyc": "^13.1.0"
+    "typescript": "^3.7.3"
   },
   "dependencies": {
     "@types/assert": "^1.4.3",
@@ -74,6 +74,7 @@
     "@types/xml-js": "^1.0.0",
     "aws-lambda": "^0.1.2",
     "aws-sdk": "^2.590.0",
+    "codacy-coverage": "^3.4.0",
     "ip": "^1.1.5",
     "lodash": "^4.17.15",
     "path-to-regexp": "^6.1.0",

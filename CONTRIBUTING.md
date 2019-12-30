@@ -10,14 +10,13 @@ The goal of this document is to create a contribution process that:
 ## Vocabulary
 
 * A **Contributor** is any individual creating or commenting an issue or making pull request.
-* A **Committer** is a subset of contributors who have been given write access to the repository.
+* A **Committer** is a contributor who have been given write access to the repository.
 
 # Logging issues
 
 Log an issue for any question or problem you might have. 
 
-When in doubt, log an issue, and any additional policies about what to include will be provided in the responses. The only
-exception is security disclosures which should be sent privately.
+When in doubt, log an issue, and any additional policies about what to include will be provided in the responses. Security-related disclosures should be sent in private messages.
 
 # Contributions
 

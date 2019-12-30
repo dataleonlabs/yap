@@ -1,4 +1,4 @@
-name: yap
+name: Node CI
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -28,6 +28,7 @@ jobs:
         npm ci
         yarn lint
         yarn test:integration
+        nyc check-coverage --lines 95 --functions 95 --branches 81 --statements 95
         yarn coverage
         yarn build
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
