@@ -88,7 +88,7 @@ No contribution is too small – we encourage you to provide feedback and [repor
 ## Community support 🌍
 For general help using Yap, please refer to [the official Yap documentation](https://manual.youngapp.co/community/). For additional help, you can use one of these channels to ask a question:
 - [StackOverflow](http://stackoverflow.com/questions/tagged/yap)
-- [Spectrum](https://spectrum.chat/yap) (Channel Community)
+- [Spectrum](https://spectrum.chat/yap) (Channel community)
 - [GitHub](https://github.com/youngapp/yap) (Bug reports, feature requests, contributions)
 - [Roadmap](https://github.com/youngapp/yap/projects/1) (Roadmap)
 - [Twitter](https://twitter.com/youngapp_pf) (Get the news fast)
