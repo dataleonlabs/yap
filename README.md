@@ -88,12 +88,11 @@ No contribution is too small – we encourage you to provide feedback and [repor
 ## Community support 🌍
 For general help using Yap, please refer to [the official Yap documentation](https://manual.youngapp.co/community/). For additional help, you can use one of these channels to ask a question:
 - [StackOverflow](http://stackoverflow.com/questions/tagged/yap)
-- [Forum](https://forum.youngapp.co/) (Highly recommended for faster support)
 - [Spectrum](https://spectrum.chat/yap)
-- [GitHub](https://github.com/youngapp/yap) (Bug reports, contributions)
-- [Roadmap](https://yap.canny.io/) (Feature requests)
-- [Twitter](https://twitter.com/youngapp_platform) (Get the news fast)
-- [YouTube Channel](https://www.youtube.com/yap) (Learn from Video Tutorials)
+- [GitHub](https://github.com/youngapp/yap) (Bug reports, feature requests, contributions)
+- [Roadmap](https://github.com/youngapp/yap/projects/1) (Roadmap)
+- [Twitter](https://twitter.com/youngapp_pf) (Get the news fast)
+- [YouTube Channel](https://www.youtube.com/channel/UCPY1PeAXPQIgo29e4Z9u5cA) (Learn from Video Tutorials)
 
 ## License
 
