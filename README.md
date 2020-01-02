@@ -1,4 +1,4 @@
-The project is under construction 💪🏾. You can contribute or click ⭐️ (see above :arrow_upper_right:) to support us. 
+The project is under construction 💪🏾. You can contribute or click ⭐️ (see above :arrow_upper_right:   ) to support us. 
 The first release to be available early February. Follow us on [Twitter](https://twitter.com/youngapp_pf) and [Spectrum](https://spectrum.chat/yap?tab=posts) for news 🏅
 
 # Less code, safer API.
