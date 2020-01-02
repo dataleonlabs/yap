@@ -1,5 +1,5 @@
 The project is under construction 💪🏾. You can contribute or click the star to support us. 
-The first release to be available early February. Follow us on (Twitter)[https://twitter.com/youngapp_pf] and (Spectru)[https://spectrum.chat/yap?tab=posts] for news 🏅
+The first release to be available early February. Follow us on [Twitter](https://twitter.com/youngapp_pf) and [Spectrum](https://spectrum.chat/yap?tab=posts) for news 🏅
 
 # Less code, safer API.
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/yap/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/570597c92b1e4ca9b67b2a49d9c2aa51)](https://www.codacy.com/gh/youngapp/yap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=youngapp/yap&amp;utm_campaign=Badge_Grade) ![Codacy branch coverage](https://img.shields.io/codacy/coverage/e3497699cef94781936c5103f84e46ab/master) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap) [![Requirements Status](https://requires.io/github/youngapp/yap/requirements.svg?branch=feature%2Fpolicies)](https://requires.io/github/youngapp/yap/requirements/?branch=feature%2Fpolicies)
