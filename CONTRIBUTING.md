@@ -1,4 +1,4 @@
-# Yap Community Contributing Guide 1.0
+# Yap Community Contribution Guide 1.0
 
 Thank you for interest in Yap, an open source project administered by Young App.
 The goal of this document is to create a contribution process that:
