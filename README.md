@@ -43,7 +43,7 @@ YAP is written in NodeJS, which makes it fast and easy to set up.
  - [Yap for Express Users](https://manual.youngapp.co/community/faq/faq-error-policies)
  - [FAQ](https://manual.youngapp.co/community/faq/frequently-asked-questions)
 
-## Installing
+## Installing ⏳
 It's an official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda.
 
 ##### With yarm
