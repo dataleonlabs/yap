@@ -1,9 +1,10 @@
-name: Check develop
+name: Check feature branches
 
 on:
   push:
     branches:
-      - features/*
+      - features/policies
+      - develop
 
 jobs:
   build:
