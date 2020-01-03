@@ -1,11 +1,9 @@
-name: Node CI
+name: Check develop
 
 on:
   push:
     branches:
-      - master
-    tags:
-      - release
+      - develop
 
 jobs:
   build:
@@ -28,11 +26,8 @@ jobs:
         npm ci
         yarn lint
         yarn test:integration
-        nyc check-coverage --lines 95 --functions 95 --branches 81 --statements 95
+        nyc check-coverage --lines 95 --functions 95 --branches 89 --statements 95
         yarn coverage
         yarn build
-        echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-        npm publish --access public
       env:
         CI: true
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
