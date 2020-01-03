@@ -46,7 +46,6 @@ export default class SetQueryParameter extends Policy {
                         context.request.queryStringParameters = { ...context.request.queryStringParameters, ...queryParam };
                     } else if (element.attributes['exists-action'] === "delete") {
                         unset(context, `request.queryStringParameters.${queryKey}`);
-                    } else {
                     }
                 });
             }
