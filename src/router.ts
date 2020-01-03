@@ -1,7 +1,8 @@
 import { get } from 'lodash';
 import { Key, pathToRegexp } from 'path-to-regexp';
 import { xml2js } from 'xml-js';
-import policyManager, { IPolicy, Scope } from './policies';
+import policyManager, { internalPolicies } from './policies';
+import { Scope } from './policies/policy';
 
 // API Gateway "event"
 export interface Request {
@@ -208,7 +209,7 @@ export default class Router {
                             if (!policyInstance) {
                                 errors.push(`policies-ERR-004: XML tag <${policy.name}> contains unknown policy <${policyElement.name}>. Please, load definition for this policy before loading of XML`);
                             } else {
-                                if (policyInstance.isInternal || validateAllPolicies) {
+                                if (validateAllPolicies || internalPolicies.indexOf(policyInstance.id) > -1) {
                                     const policyInstanceErrors = policyInstance.validate(policyElement);
                                     if (policyInstanceErrors.length) {
                                         errors = [...errors, ...policyInstanceErrors];

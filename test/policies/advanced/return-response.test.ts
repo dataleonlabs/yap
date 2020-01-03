@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
-import { Scope } from '../../../src/policies';
 import ReturnResponse from '../../../src/policies/advanced/return-response';
+import { Scope } from '../../../src/policies/policy';
 
 describe('<return-response />', () => {
 

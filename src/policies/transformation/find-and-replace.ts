@@ -1,6 +1,6 @@
 import { get, set } from 'lodash';
-import { ExecutionContext, PolicyCategory, Scope } from '..';
 import { Context } from "../../router";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * set-varable policy
@@ -10,49 +10,14 @@ import { Context } from "../../router";
  * @example
  * <find-and-replace from="field.subfield1" to="field.subfield2" />
  */
-export default class FindAndReplace {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'find-and-replace';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Find and replace policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.transformation;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Applies find and replace policy for body parameter in dot notation";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'find-and-replace',
+    name: 'Find and replace policy',
+    category: PolicyCategory.transformation,
+    description: "Applies find and replace policy for body parameter in dot notation",
+    scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+  })
+export default class FindAndReplace extends Policy {
 
     /**
      * Applies find and replace policy

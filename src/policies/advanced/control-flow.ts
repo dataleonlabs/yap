@@ -1,6 +1,6 @@
-import { get } from "lodash";
-import { Context } from "../../router";
-import policyManager, { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { get } from 'lodash';
+import policyManager, { tryExecuteFieldValue } from '..';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * control-flow policy
@@ -29,49 +29,14 @@ import policyManager, { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExe
  *  </otherwise>
  * </choose>
  */
-export default class ControlFlow implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'control-flow';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Control flow policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The control-flow policy applies enclosed policy statements based on the outcome";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'control-flow',
+    name: 'Control flow policy',
+    category: PolicyCategory.advanced,
+    description: "The control-flow policy applies enclosed policy statements based on the outcome",
+    scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+  })
+export default class ControlFlow extends Policy {
 
     /**
      * Applies control flow policy

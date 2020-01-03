@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { get } from 'lodash';
-import { Scope } from '../../../src/policies';
 import CheckHTTPHeader from '../../../src/policies/access-restriction/check-http-header';
+import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
 
 describe('<check-http-header />', () => {

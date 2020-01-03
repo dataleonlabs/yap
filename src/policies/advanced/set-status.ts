@@ -1,6 +1,6 @@
 import { get, set } from "lodash";
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from "../policy";
 
 /**
  * set-status policy
@@ -8,49 +8,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
  * @example
  * <set-status code="401" reason="Unauthorized" response-variable-name="someVar"/>
  */
-export default class SetStatus implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'set-status';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Set status policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Set status policy sets the HTTP status code to the specified value.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'set-status',
+    name: 'Set status policy',
+    category: PolicyCategory.advanced,
+    description: "Set status policy sets the HTTP status code to the specified value.",
+    scopes: [Scope.outbound, Scope.onerror],
+  })
+export default class SetStatus extends Policy {
 
     /**
      * Applies set status policy

@@ -1,6 +1,7 @@
 import { get } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * set-method policy
@@ -8,49 +9,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  * @example
  * <set-method>POST</set-method>
  */
-export default class SetMethod implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'set-method';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Set method policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The set-method policy allows you to change the HTTP request method for a request.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'set-method',
+    name: 'Set method policy',
+    category: PolicyCategory.advanced,
+    description: "The set-method policy allows you to change the HTTP request method for a request.",
+    scopes: [Scope.inbound, Scope.onerror],
+  })
+export default class SetMethod extends Policy {
 
     /**
      * Applies set method policy

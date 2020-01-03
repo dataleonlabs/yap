@@ -1,6 +1,7 @@
 import { get, set } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from '../index';
+import { tryExecuteFieldValue } from '../index';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * set-varable policy
@@ -11,49 +12,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  * @example
  * <set-variable name="variable name" value="Expression | String literal" />
  */
-export default class SetVariable implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'set-variable';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Set variable policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The set-variable policy declares a context variable and assigns";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'set-variable',
+    name: 'Set variable policy',
+    category: PolicyCategory.advanced,
+    description: "The set-variable policy declares a context variable and assigns",
+    scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+  })
+export default class SetVariable extends Policy {
 
     /**
      * Applies set variable policy

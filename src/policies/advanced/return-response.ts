@@ -1,6 +1,6 @@
 import { get, set } from "lodash";
-import { Context } from "../../router";
-import policyManager, { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
+import policyManager from "..";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from "../policy";
 const allowedPolicies = ["set-status", "set-header", "set-body"];
 
 /**
@@ -25,49 +25,14 @@ const allowedPolicies = ["set-status", "set-header", "set-body"];
  * </return-response>
  *
  */
-export default class ReturnResponse implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'return-response';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Return response policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The return-response policy aborts pipeline execution and returns either a default or custom response to the caller.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'return-response',
+    name: 'Return response policy',
+    category: PolicyCategory.advanced,
+    description: "The return-response policy aborts pipeline execution and returns either a default or custom response to the caller.",
+    scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+  })
+export default class ReturnResponse extends Policy {
 
     /**
      * Applies return response policy

@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
-import { Scope } from '../../../src/policies';
+import { Scope } from '../../../src/policies/policy';
 import FindAndReplace from '../../../src/policies/transformation/find-and-replace';
 
 describe('<find-and-replace />', () => {

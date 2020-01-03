@@ -1,8 +1,8 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import { Scope } from '../../../src/policies';
 import SetVariable from '../../../src/policies/advanced/set-variable';
+import { Scope } from '../../../src/policies/policy';
 
 describe('<set-variable />', () => {
 

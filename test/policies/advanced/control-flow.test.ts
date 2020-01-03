@@ -2,8 +2,9 @@ import assert from 'assert';
 import { cloneDeep, get, set } from 'lodash';
 import * as sinon from 'sinon';
 import { xml2js } from 'xml-js';
-import policyManager, { ExecutionContext, Scope } from '../../../src/policies';
+import policyManager from '../../../src/policies';
 import ControlFlow from '../../../src/policies/advanced/control-flow';
+import { ExecutionContext, Scope } from '../../../src/policies/policy';
 import { getTestContext } from '../../tools';
 
 const policy: any = {

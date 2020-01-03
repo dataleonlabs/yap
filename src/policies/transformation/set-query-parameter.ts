@@ -1,5 +1,6 @@
 import { get, unset } from 'lodash';
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from '../index';
+import { tryExecuteFieldValue } from '../index';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * set-query-parameter Policy
@@ -18,49 +19,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  *  <!-- for multiple parameters with the same name add additional value elements -->
  * </set-query-parameter>
  */
-export default class SetQueryParameter implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'set-query-parameter';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Set query parameter policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.transformation;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The set-query-parameter policy adds, replaces value of, or deletes request query string parameter. Can be used to pass query parameters expected";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'set-query-parameter',
+    name: 'Set query parameter policy',
+    category: PolicyCategory.transformation,
+    description: "The set-query-parameter policy adds, replaces value of, or deletes request query string parameter. Can be used to pass query parameters expected",
+    scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+  })
+export default class SetQueryParameter extends Policy {
 
     /**
      * Applies set query parameters policy

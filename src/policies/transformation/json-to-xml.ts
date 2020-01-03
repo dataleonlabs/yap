@@ -1,7 +1,7 @@
 import { get, set } from 'lodash';
 import { js2xml } from 'xml-js';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope } from '../index';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * Json to xml policy
@@ -9,49 +9,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope } from '../index';
  * @example
  * <json-to-xml apply="always | content-type-json" consider-accept-header="true | false" parse-date="true | false"/>
  */
-export default class JSONtoXML implements IPolicy {
-
-  /**
-   * Policy id
-   */
-  public get id() {
-    return 'json-to-xml';
-  }
-
-  /**
-   * Policy name
-   */
-  public get name() {
-    return 'Json to xml policy';
-  }
-
-  /**
-   * Policy category
-   */
-  public get category() {
-    return PolicyCategory.transformation;
-  }
-
-  /**
-   * Policy description
-   */
-  public get description() {
-    return "The json-to-xml policy converts a request or response body from JSON to XML.";
-  }
-
-  /**
-   * Policy available scopes
-   */
-  public get scopes() {
-    return [Scope.inbound, Scope.outbound, Scope.onerror];
-  }
-
-  /**
-   * If policy is YAP internal policy
-   */
-  public get isInternal() {
-    return true;
-  }
+@YapPolicy({
+  id: 'json-to-xml',
+  name: 'Json to xml policy',
+  category: PolicyCategory.transformation,
+  description: "The json-to-xml policy converts a request or response body from JSON to XML.",
+  scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+})
+export default class JSONtoXML extends Policy {
 
   /**
    * Applies json to xml policy

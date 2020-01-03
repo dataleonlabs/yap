@@ -1,6 +1,7 @@
 import { get } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * rewrite-path policy
@@ -9,49 +10,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  * @example
  * <rewrite-path>/services/T0DCUJB1Q/B0DD08H5G/bJtrpFi1fO1JMCcwLx8uZyAg</rewrite-path>
  */
-export default class RewritePath implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'rewrite-path';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Rewrite path policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.transformation;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The rewrite-path policy converts a request Path from its public form to the form expected";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.onerror, Scope.outbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'rewrite-path',
+    name: 'Rewrite path policy',
+    category: PolicyCategory.transformation,
+    description: "The rewrite-path policy converts a request Path from its public form to the form expected",
+    scopes: [Scope.inbound, Scope.onerror, Scope.outbound],
+  })
+export default class RewritePath extends Policy {
 
     /**
      * Applies rewrite path policy

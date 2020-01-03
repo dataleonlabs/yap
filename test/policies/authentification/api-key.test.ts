@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { get } from 'lodash';
-import { Scope } from '../../../src/policies';
 import ApiKey from '../../../src/policies/authentification/api-key';
+import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
 
 const unauthorizedCode = 401;

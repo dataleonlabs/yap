@@ -1,8 +1,8 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import { Scope } from '../../../src/policies';
 import AuthBasic from '../../../src/policies/authentification/authentication-basic';
+import { Scope } from '../../../src/policies/policy';
 
 describe('<authentication-basic />', () => {
 

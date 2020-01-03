@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
-import { Scope } from '../../../src/policies';
 import IpFilter from '../../../src/policies/access-restriction/ip-filter';
+import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
 
 describe('<ip-filter />', () => {

@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { get } from 'lodash';
-import { Scope } from '../../../src/policies';
 import HostFilter from "../../../src/policies/access-restriction/host-filter";
+import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
 
 const allowedHost = "allowedHost";

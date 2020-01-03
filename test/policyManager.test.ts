@@ -1,6 +1,7 @@
 import assert from 'assert';
 import * as sinon from 'sinon';
-import policyManager, { ExecutionContext, PolicyCategory, PolicyManager, Scope, tryExecuteFieldValue } from '../src/policies';
+import policyManager, { PolicyManager, tryExecuteFieldValue } from '../src/policies';
+import { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
 import { Context } from '../src/router';
 import { getTestContext } from './tools';
 

@@ -1,6 +1,7 @@
 import { get } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * CORS Policy
@@ -55,49 +56,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  *   </expose-headers>
  * </cors>
  */
-export default class CORS implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'cors';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'CORS Policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.cors;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The CORS policy adds cross-origin resource sharing (CORS) support";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'cors',
+    name: 'CORS Policy',
+    category: PolicyCategory.cors,
+    description: "The CORS policy adds cross-origin resource sharing (CORS) support",
+    scopes: [Scope.inbound],
+  })
+export default class CORS extends Policy {
 
     /**
      * Applies cors policy

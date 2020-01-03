@@ -1,6 +1,6 @@
 import { get } from 'lodash';
-import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from '..';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * Domain Filter Policy
@@ -10,49 +10,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  *     <host>13.66.201.168</host>
  * </host-filter>
  */
-export default class HostFilter implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'host-filter';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Host domain filter policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.accessrestriction;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Filters request by originated domain";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'host-filter',
+    name: 'Host domain filter policy',
+    category: PolicyCategory.accessrestriction,
+    description: "Filters request by originated domain",
+    scopes: [Scope.inbound],
+  })
+export default class HostFilter extends Policy {
 
     /**
      * Applies host filter policy

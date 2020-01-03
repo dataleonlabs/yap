@@ -15,6 +15,7 @@ import SetVariable from './advanced/set-variable';
 import ApiKey from './authentification/api-key';
 import AuthenticationBasic from './authentification/authentication-basic';
 import CORS from './cors/cors';
+import Policy, { ExecutionContext, PolicyCategory, Scope} from "./policy";
 import FindAndReplace from './transformation/find-and-replace';
 import JSONtoXML from './transformation/json-to-xml';
 import RewritePath from './transformation/rewrite-path';
@@ -22,43 +23,6 @@ import SetBody from './transformation/set-body';
 import SetHeader from './transformation/set-header';
 import SetQueryParameter from './transformation/set-query-parameter';
 import XMLtoJSON from './transformation/xml-to-json';
-
-/**
- * Policy categories enum
- */
-export enum PolicyCategory {
-    'accessrestriction' = 'access-restriction',
-    'advanced' = 'advanced',
-    'authentification' = 'authentification',
-    'cors' = 'cors',
-    'transformation' =
-    'transformation',
-}
-
-/**
- * Policy scope enum
- */
-export enum Scope { inbound = "inbound", outbound = "outbound", onerror = "on-error" }
-
-/**
- * Execution context interface
- */
-export interface ExecutionContext {
-    /**
-     * Policy element, which contains policy data
-     */
-    policyElement: any;
-
-    /**
-     * Request context
-     */
-    context: Context;
-
-    /**
-     * Request scope
-     */
-    scope: Scope;
-}
 
 /**
  * Tries to execute script in a given context, or just return script as string variable
@@ -75,54 +39,6 @@ export const tryExecuteFieldValue = (field?: string, executionContext?: Executio
     return field;
 };
 
-export interface IPolicy {
-
-    /**
-     * String identificator for policy. Used to match policy-name with policy body
-     */
-    readonly id: string;
-
-    /**
-     * Name of a policy
-     */
-    readonly name: string;
-
-    /**
-     * Category of a policy
-     */
-    readonly category: PolicyCategory;
-
-    /**
-     * Descritpion of a policy
-     */
-    readonly description: string;
-
-    /**
-     * Acceptable scopes for a policy.
-     */
-    readonly scopes: Scope[];
-
-    /**
-     * Indicates if policy is internal
-     * Please, do not set it to true for custom policies
-     */
-    readonly isInternal: boolean;
-
-    /**
-     * Used to validate whether policyElement can be accepted by core
-     * @param policyElement - policy element in a format of JS object
-     */
-    validate(policyElement: object): string[];
-
-    /**
-     * Applies policy to context
-     * @param policyElement  - policy element in a format of JS object
-     * @param context - execution context
-     * @param scope - execution scope
-     */
-    apply(executionContext: ExecutionContext): Promise<ExecutionContext>;
-}
-
 /**
  * Policy manager
  */
@@ -131,13 +47,25 @@ export class PolicyManager {
     /**
      * Registered policy definitions
      */
-    public policies: { [id: string]: IPolicy; } = {};
+    public policies: { [id: string]: Policy; } = {};
 
     /**
      * Adds policy definition to array of policies
      * @param policy policy definition
      */
-    public addPolicy(policy: IPolicy) {
+    public addPolicy(policy: Policy) {
+        if(!policy.id) {
+            throw new Error("Policy should have non-empty id value");
+        }
+        if(!policy.name) {
+            throw new Error("Policy should have non-empty name value");
+        }
+        if(policy.category === PolicyCategory.undefined) {
+            throw new Error("Policy should have policy category which not have undefined");
+        }
+        if(!policy.scopes.length) {
+            throw new Error("Policy should have at least one scope");
+        }
         this.policies[policy.id] = policy;
     }
 
@@ -197,5 +125,28 @@ policyManager.addPolicy(new RewritePath());
 policyManager.addPolicy(new SetBody());
 policyManager.addPolicy(new SetHeader());
 policyManager.addPolicy(new SetQueryParameter());
+
+export const internalPolicies = [
+    'check-header',
+    'host-filter',
+    'ip-filter',
+    'control-flow',
+    'mock-response',
+    'return-response',
+    'send-request',
+    'set-method',
+    'set-status',
+    'set-variable',
+    'api-key',
+    'authentication-basic',
+    'cors',
+    'find-and-replace',
+    'json-to-xml',
+    'rewrite-path',
+    'set-body',
+    'set-header',
+    'set-query-parameter',
+    'xml-to-json',
+];
 
 export default policyManager;

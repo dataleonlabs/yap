@@ -1,5 +1,6 @@
 import { get } from 'lodash';
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from '..';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * check-header policy to enforce that a request has a specified HTTP header.
@@ -14,49 +15,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  *     <value>f6dc69a089844cf6b2019bae6d36fac8</value>
  *  </check-header>
  */
-export default class CheckHTTPHeader implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'check-header';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Check HTTP header policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.accessrestriction;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "check-header policy to enforce that a request has a specified HTTP header.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'check-header',
+    name: 'Check HTTP header policy',
+    category: PolicyCategory.accessrestriction,
+    description: 'Check-header policy to enforce that a request has a specified HTTP header.',
+    scopes: [Scope.inbound, Scope.outbound],
+  })
+export default class CheckHTTPHeader extends Policy {
 
     /**
      * Apply check header policy

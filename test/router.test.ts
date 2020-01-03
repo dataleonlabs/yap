@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import 'mocha';
 import * as sinon from 'sinon';
 import { xml2js } from 'xml-js';
-import { Scope } from '../src/policies';
+import { Scope } from '../src/policies/policy';
 import Router, { Context } from '../src/router';
 import { getTestRequest } from './tools';
 

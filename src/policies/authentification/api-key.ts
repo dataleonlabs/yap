@@ -1,6 +1,7 @@
 import { get } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * api-key Policy
@@ -14,49 +15,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  * U-TEST-1 - Test API Key Success
  * U-TEST-2 - Test API Key Failed
  */
-export default class ApiKey implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'api-key';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Api key Policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.authentification;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Api key Policy authenticate with a backend service with an api key";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'api-key',
+    name: 'Api key Policy',
+    category: PolicyCategory.authentification,
+    description: "Api key Policy authenticate with a backend service with an api key",
+    scopes: [Scope.inbound],
+  })
+export default class ApiKey extends Policy {
 
     /**
      * Applies api key policy

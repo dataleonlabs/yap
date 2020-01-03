@@ -1,8 +1,9 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import policyManager, { Scope } from '../../../src/policies';
+import policyManager from '../../../src/policies';
 import SetMethod from '../../../src/policies/advanced/set-method';
+import { Scope } from '../../../src/policies/policy';
 
 describe('<set-method />', () => {
 

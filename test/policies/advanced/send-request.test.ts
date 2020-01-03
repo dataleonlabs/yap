@@ -2,8 +2,8 @@ import assert from 'assert';
 import * as axios from 'axios';
 import { cloneDeep, get, unset } from 'lodash';
 import * as sinon from 'sinon';
-import { Scope } from '../../../src/policies';
 import SendRequest from '../../../src/policies/advanced/send-request';
+import { Scope } from '../../../src/policies/policy';
 import { getTestContext } from '../../tools';
 
 describe("<send-request/>", () => {

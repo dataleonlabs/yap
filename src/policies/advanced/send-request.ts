@@ -1,7 +1,8 @@
 import * as axios from 'axios';
 import { cloneDeep, get, set } from 'lodash';
 import { Context } from "../../router";
-import policyManager, { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
+import policyManager from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 const allowedPolicies = ["set-method", "set-header", "set-body"];
 
@@ -34,49 +35,14 @@ const defaultRequest = {
  *   <set-body>@($"token={(string)context.variables["token"]}")</set-body>
  * </send-request>
  */
-export default class SendRequest implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'send-request';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Send request policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Send request policy sends the provided request to the specified URL, waiting no longer than the set timeout value.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'send-request',
+    name: 'Send request policy',
+    category: PolicyCategory.advanced,
+    description: "Send request policy sends the provided request to the specified URL, waiting no longer than the set timeout value.",
+    scopes: [Scope.inbound, Scope.onerror],
+  })
+export default class SendRequest extends Policy {
 
     /**
      * Applies send request policy

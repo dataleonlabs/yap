@@ -1,6 +1,5 @@
-import { get, set } from 'lodash';
-import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
+import { get, set } from "lodash";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from "../policy";
 
 /**
  * <mock-response> policy
@@ -11,49 +10,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
  *  Returns 200 OK status code. Content is based on parameter body (optional)
  *  <mock-response status-code='200' content-type='application/json' body='someBody'/>
  */
-export default class MockResponse implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'mock-response';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Mock response policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.advanced;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The mock-response, as the name implies, is used to mock APIs and operations.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.onerror, Scope.outbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'mock-response',
+    name: 'Mock response policy',
+    category: PolicyCategory.advanced,
+    description: "The mock-response, as the name implies, is used to mock APIs and operations.",
+    scopes: [Scope.inbound, Scope.onerror, Scope.outbound],
+  })
+export default class MockResponse extends Policy {
 
     /**
      * Applies mock response policy

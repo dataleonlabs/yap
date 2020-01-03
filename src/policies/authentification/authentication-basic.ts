@@ -1,6 +1,6 @@
 import { get, set } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * authentication-basic policy
@@ -11,49 +11,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope } from "../index";
  * @example
  * <authentication-basic username="username" password="password" />
  */
-export default class AuthenticationBasic implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'authentication-basic';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Authentication basic policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.authentification;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Use the authentication-basic policy to authenticate with a backend service using Basic authentication.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'authentication-basic',
+    name: 'Authentication basic policy',
+    category: PolicyCategory.authentification,
+    description: "Use the authentication-basic policy to authenticate with a backend service using Basic authentication.",
+    scopes: [Scope.inbound],
+  })
+export default class AuthenticationBasic extends Policy {
 
     /**
      * Applies authentication basic policy

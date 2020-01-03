@@ -1,7 +1,8 @@
 import { get, set, take, unset } from 'lodash';
 import { isArray } from "util";
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 const separateHeadersNames =
     ["User-Agen", "WWW-Authenticate", "Proxy-Authenticate",
         "Cookie", "Set-Cookie", "Warning",
@@ -21,49 +22,14 @@ const separateHeadersNames =
  *   <value>Bearer error="invalid_token"</value>
  * </set-header>
  */
-export default class SetHeader implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'set-header';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Set header policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.transformation;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The set-header policy assigns a value to an existing response and/or request";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound, Scope.outbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'set-header',
+    name: 'Set header policy',
+    category: PolicyCategory.transformation,
+    description: "The set-header policy assigns a value to an existing response and/or request",
+    scopes: [Scope.inbound, Scope.outbound, Scope.onerror],
+  })
+export default class SetHeader extends Policy {
 
     /**
      * Applies set header policy

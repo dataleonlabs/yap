@@ -1,6 +1,7 @@
 import { get, set } from 'lodash';
 import { Context } from "../../router";
-import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from "../index";
+import { tryExecuteFieldValue } from "../index";
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * set-body policy
@@ -11,49 +12,14 @@ import { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue 
  * @example
  * <set-body>bJtrpFi1fO1JMCcwLx8uZyAg</set-body>
  */
-export default class SetBody implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'set-body';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'Set body policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.transformation;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "Use the set-body policy to set the message body for incoming and outgoing requests.";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.outbound, Scope.inbound, Scope.onerror];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'set-body',
+    name: 'Set body policy',
+    category: PolicyCategory.transformation,
+    description: "Use the set-body policy to set the message body for incoming and outgoing requests.",
+    scopes: [Scope.outbound, Scope.inbound, Scope.onerror],
+  })
+export default class SetBody extends Policy {
 
     /**
      * Applies set body policy

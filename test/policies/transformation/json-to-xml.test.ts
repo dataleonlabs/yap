@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { get } from 'lodash';
-import { Scope } from '../../../src/policies';
+import { Scope } from '../../../src/policies/policy';
 import JSONtoXML from '../../../src/policies/transformation/json-to-xml';
 import { getTestContext } from '../../tools';
 

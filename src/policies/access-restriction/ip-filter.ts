@@ -1,7 +1,8 @@
-import { cidrSubnet, isEqual, toLong } from 'ip';
-import { get } from 'lodash';
+import { cidrSubnet, toLong } from 'ip';
+import { get, isEqual } from 'lodash';
 import { isIP } from 'net';
-import policyManager, { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExecuteFieldValue } from '../index';
+import { tryExecuteFieldValue } from '..';
+import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * ip-filter policy
@@ -14,49 +15,14 @@ import policyManager, { ExecutionContext, IPolicy, PolicyCategory, Scope, tryExe
  *     <address-range from="13.66.140.128" to="13.66.255.143"></address-subnet>
  * </ip-filter>
  */
-export default class IpFilter implements IPolicy {
-
-    /**
-     * Policy id
-     */
-    public get id() {
-        return 'ip-filter';
-    }
-
-    /**
-     * Policy name
-     */
-    public get name() {
-        return 'IP filter policy';
-    }
-
-    /**
-     * Policy category
-     */
-    public get category() {
-        return PolicyCategory.accessrestriction;
-    }
-
-    /**
-     * Policy description
-     */
-    public get description() {
-        return "The ip-filter policy filters (allows/denies) calls from specific";
-    }
-
-    /**
-     * Policy available scopes
-     */
-    public get scopes() {
-        return [Scope.inbound];
-    }
-
-    /**
-     * If policy is YAP internal policy
-     */
-    public get isInternal() {
-        return true;
-    }
+@YapPolicy({
+    id: 'ip-filter',
+    name: 'IP filter policy',
+    category: PolicyCategory.accessrestriction,
+    description: "The ip-filter policy filters (allows/denies) calls from specific",
+    scopes: [Scope.inbound],
+  })
+export default class IpFilter extends Policy {
 
     /**
      * Applies IP filter policy
