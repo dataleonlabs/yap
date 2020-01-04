@@ -3,7 +3,7 @@ name: Check feature branches
 on:
   push:
     branches:
-      - features/policies
+      - feature/policies
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: features/policies
+        ref: feature/policies
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
