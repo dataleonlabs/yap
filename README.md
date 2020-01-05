@@ -4,7 +4,7 @@ The first release to be available early February. Follow our news 🏅 on [Twitt
 # Less code, safer API.
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/yap) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/yap/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/570597c92b1e4ca9b67b2a49d9c2aa51)](https://www.codacy.com/gh/youngapp/yap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=youngapp/yap&amp;utm_campaign=Badge_Grade) ![Codacy branch coverage](https://img.shields.io/codacy/coverage/e3497699cef94781936c5103f84e46ab/master) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap) [![Requirements Status](https://requires.io/github/youngapp/yap/requirements.svg?branch=feature%2Fpolicies)](https://requires.io/github/youngapp/yap/requirements/?branch=feature%2Fpolicies)
 
-Yap is the lightweight microservices API gateway that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security entreprise-gradle.
+Yap is the lightweight microservices API gateway in GraphQL that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security entreprise-gradle.
 
 Please distinguish **Yap** (the core project of Young App) and **YAP** (the platform of Young App).
 
@@ -16,7 +16,7 @@ Without API Management, we using Express, Koa or Hapi on Nodejs without security
 Yap combines the enterprise-grade api management and workflow automation platform and ease of use expected from client apps supporting on cloud-based.
 
 ## Architecture
-YAP combines router with XML policies, OpenAPI v3 and strong functional testing on serverless architecture.
+YAP combines GraphQL, XML policies and strong functional testing on serverless architecture.
 
 ![Architecture](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-Lx7nwnF5v16-iOWhynh%2F-LxGiU-4HVj5q0Bbu_A4%2F-LxGj6uO6xbnLpT9z6wG%2FCapture%20d%E2%80%99e%CC%81cran%202019-12-29%20a%CC%80%2013.53.42.png?alt=media&token=5ef3ad2e-610d-4610-bc7b-b1bc99fb687c)
  
@@ -24,15 +24,14 @@ YAP combines router with XML policies, OpenAPI v3 and strong functional testing 
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
 * **Elegants XML Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants with XML
-* **Documentation with OpenAPI v3** – The OpenAPI defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code.
+* **API Gateway GraphQL** – GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. Yap use only GraphQL as API Gateway.
 * **YAML Functional testing** – CI-ready tests for REST APIs configured in YAML.
 * **Error handling with Policies** – Sentry provides self-hosted and cloud-based error monitoring that helps all software
 teams discover, triage, and prioritize errors in real-time.
 * **Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
 * **Universal middleware design** – Inspired by Express or KoaJS and adapted for Serverless application and low-code approach.
 * **Designed for Serverless** – Yap is designed for serverless event functions on AWS, GCP or Azure Functions.
-
-YAP is written in NodeJS, which makes it fast and easy to set up.
+* **TypeScript** – YAP is written in NodeJS and TypeScript, which makes it fast and easy to set up.
 
 ## Documentation
  - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
