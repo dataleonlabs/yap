@@ -11,9 +11,9 @@ Please distinguish **Yap** (the core project of Young App) and **YAP** (the plat
 ## Motivation
 Young App helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
 
-Without API Management, we using Express, Koa or Hapi on Nodejs without security security handler, and all others NodeJS frameworks are based on http module, yap is different, designed only for serverless functions (event-driven).
+Without API Management, we using Express, Koa or Hapi on Nodejs without security security handler, and all others NodeJS frameworks are based on http module, yap is different, designed only for serverless functions (event-driven) and GraphQL.
 
-Yap combines the enterprise-grade api management and workflow automation platform and ease of use expected from client apps supporting on cloud-based.
+Yap combines the enterprise-grade api management and workflow automation platform and ease of use expected from client apps supporting on cloud-based with GraphQL and Policies.
 
 ## Architecture
 YAP combines GraphQL, XML policies and strong functional testing on serverless architecture.
