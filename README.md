@@ -24,7 +24,7 @@ YAP combines GraphQL, XML policies and strong functional testing on serverless a
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
 * **Elegants XML Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants with XML
-* **API Gateway GraphQL** – GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. Yap use only GraphQL as API Gateway.
+* **GraphQL as API Gateway** – GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. Yap use only GraphQL as API Gateway.
 * **YAML Functional testing** – CI-ready tests for REST APIs configured in YAML.
 * **Error handling with Policies** – Sentry provides self-hosted and cloud-based error monitoring that helps all software
 teams discover, triage, and prioritize errors in real-time.
