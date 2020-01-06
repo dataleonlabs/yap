@@ -61,7 +61,7 @@ export function getTestContext() {
     return {
         request: getTestRequest(),
         response: getTestResponce(),
-        fields: {},
+        variables: {},
         connection: {},
         policies: {},
     };

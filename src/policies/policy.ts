@@ -25,12 +25,11 @@ export interface ExecutionContext {
  */
 export enum PolicyCategory {
     'undefined' = 'undefined',
-    'accessrestriction' = 'access-restriction',
+    'accessrestriction' = 'accessRestriction',
     'advanced' = 'advanced',
     'authentification' = 'authentification',
     'cors' = 'cors',
-    'transformation' =
-    'transformation',
+    'transformation' = 'transformation',
 }
 
 /**

@@ -126,9 +126,6 @@ export interface Context {
     /** throw */
     throw?: (statusCode: number, body: any) => void;
 
-    /** policies */
-    policy?: { [key: string]: string[] };
-
     /** Fields */
     readonly fields?: { [key: string]: any };
 
@@ -137,6 +134,9 @@ export interface Context {
 
     /** Variables */
     readonly variables?: { [key: string]: any };
+
+    /** Last execution error */
+    LastError?: Error;
 }
 
 export interface Middleware {
@@ -154,6 +154,10 @@ export interface Middleware {
  * Router
  */
 export default class Router {
+
+    /** policies */
+    public policy: { [key: string]: string[] } = {};
+
     /**
      * Middlewares
      * @param {Object} middlewares Middlewares available for request
@@ -164,7 +168,7 @@ export default class Router {
      * Fields
      * @param {Object} fields fields from ui interface
      */
-    private context: Context = { request: {}, response: {}, fields: {}, connection: {} };
+    private context: Context = { request: {}, response: {}, variables: {}, connection: {} };
 
     /**
      * Loads context to router
@@ -198,7 +202,8 @@ export default class Router {
         } else {
             for (const policy of policiesContainer.elements) {
                 if (Object.values(Scope).indexOf(policy.name) === -1) {
-                    errors.push(`policies-ERR-002: XML tag <policies/> must only contains <inbound />, <outbound />, <on-error /> XML Tag, found <${policy.name}>`);
+                    errors.push(`policies-ERR-002: XML tag <policies/> must only contains `
+                        + `<inbound />, <outbound />, <on-error /> XML Tag, found <${policy.name}>`);
                 } else {
                     if (!(policy.elements instanceof Array)) {
                         errors.push(
@@ -207,7 +212,8 @@ export default class Router {
                         for (const policyElement of policy.elements) {
                             const policyInstance = policyManager.getPolicy(policyElement.name);
                             if (!policyInstance) {
-                                errors.push(`policies-ERR-004: XML tag <${policy.name}> contains unknown policy <${policyElement.name}>. Please, load definition for this policy before loading of XML`);
+                                errors.push(`policies-ERR-004: XML tag <${policy.name}> contains unknown policy <${policyElement.name}>. `
+                                    + `Please, load definition for this policy before loading of XML`);
                             } else {
                                 if (validateAllPolicies || internalPolicies.indexOf(policyInstance.id) > -1) {
                                     const policyInstanceErrors = policyInstance.validate(policyElement);
@@ -235,9 +241,9 @@ export default class Router {
         if (validationResult.length) {
             throw new Error(`Error validating policies. Please, fix errors in XML: \n ${validationResult.join('\n')}`);
         }
-        this.context.policy = {};
+        this.policy = {};
         for (const entry of parsedXML.elements[0].elements) {
-            this.context.policy[entry.name] = entry.elements;
+            this.policy[entry.name] = entry.elements;
         }
     }
 
@@ -279,7 +285,7 @@ export default class Router {
      * triggerMiddleWare
      * Manage next and throw function
      */
-    public triggerMiddleWare = (middleware: Middleware) => {
+    public triggerMiddleWare(middleware: Middleware) {
         return new Promise(async (resolve: (value?: unknown) => void, reject: (reason?: any) => void) => {
             // functio next
             this.context.next = () => resolve();
@@ -305,30 +311,32 @@ export default class Router {
     public async getResponse(): Promise<Response> {
         // Get middlewares matched
         const middlewares = this.getMiddlewaresMatched();
-        try {
-            await this.applyPolicies(Scope.inbound);
-            if (middlewares.length) {
-                // Loop
-                for (const middleware of middlewares) {
-                    await this.triggerMiddleWare(middleware);
-                }
-                await this.applyPolicies(Scope.outbound);
-            } else {
-                this.context.response.statusCode = 404;
-                this.context.response.body = 'Not found middleware';
-            }
-
-        } catch (error) {
+        if (middlewares && middlewares.length) {
             try {
-                await this.applyPolicies(Scope.onerror);
-                this.context.response.statusCode = this.context.response.statusCode || 500;
-                this.context.response.body = this.context.response.body || error;
-            } catch (applyOnErrorPoliciesError) {
-                this.context.response.statusCode = this.context.response.statusCode || 500;
-                this.context.response.body = this.context.response.body || applyOnErrorPoliciesError;
+                await this.applyPolicies(Scope.inbound);
+                if (middlewares.length) {
+                    // Loop
+                    for (const middleware of middlewares) {
+                        await this.triggerMiddleWare(middleware);
+                    }
+                    await this.applyPolicies(Scope.outbound);
+                } else {
+                    this.context.response.statusCode = 404;
+                    this.context.response.body = 'Not found middleware';
+                }
+
+            } catch (error) {
+                try {
+                    this.context.LastError = error;
+                    await this.applyPolicies(Scope.onerror);
+                    this.context.response.statusCode = this.context.response.statusCode || 500;
+                    this.context.response.body = this.context.response.body || error;
+                } catch (applyOnErrorPoliciesError) {
+                    this.context.response.statusCode = this.context.response.statusCode || 500;
+                    this.context.response.body = this.context.response.body || applyOnErrorPoliciesError;
+                }
             }
         }
-
         return this.context.response;
     }
 
@@ -336,8 +344,8 @@ export default class Router {
      * Apply policies
      */
     public async applyPolicies(scope: Scope): Promise<boolean> {
-        if (this.context.policy && this.context.policy[scope]) {
-            for (const policyElement of this.context.policy[scope]) {
+        if (this.policy[scope]) {
+            for (const policyElement of this.policy[scope]) {
                 await this.triggerPolicy(policyElement, scope);
             }
         }
@@ -348,7 +356,7 @@ export default class Router {
      * triggerPolicy
      * Manage next and throw function
      */
-    public triggerPolicy = (policyElement: any, scope: Scope) => {
+    public triggerPolicy(policyElement: any, scope: Scope) {
         return new Promise(async (resolve: (value?: unknown) => void, reject: (reason?: any) => void) => {
             // functio next
             this.context.next = () => resolve();

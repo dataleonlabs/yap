@@ -1,28 +1,30 @@
 import { get, set } from 'lodash';
 import vm from 'vm';
 import { xml2js } from 'xml-js';
-import CheckHTTPHeader from '../policies/access-restriction/check-http-header';
 import { Context } from '../router';
-import HostFilter from './access-restriction/host-filter';
-import IpFilter from './access-restriction/ip-filter';
-import ControlFlow from './advanced/control-flow';
-import MockResponse from './advanced/mock-response';
-import ReturnResponse from './advanced/return-response';
-import SendRequest from './advanced/send-request';
-import SetMethod from './advanced/set-method';
-import SetStatus from './advanced/set-status';
-import SetVariable from './advanced/set-variable';
-import ApiKey from './authentification/api-key';
-import AuthenticationBasic from './authentification/authentication-basic';
-import CORS from './cors/cors';
+import CheckHTTPHeader from './accessRestriction/CheckHttpHeader';
+import HostFilter from './accessRestriction/HostFilter';
+import IpFilter from './accessRestriction/IpFilter';
+import CloudWatchLogs from './advanced/CloudwatchLogs';
+import ControlFlow from './advanced/ControlFlow';
+import MockResponse from './advanced/MockResponse';
+import ReturnResponse from './advanced/ReturnResponse';
+import SendRequest from './advanced/SendRequest';
+import Sentry from './advanced/Sentry';
+import SetMethod from './advanced/SetMethod';
+import SetStatus from './advanced/SetStatus';
+import SetVariable from './advanced/SetVariable';
+import ApiKey from './authentification/ApiKey';
+import AuthenticationBasic from './authentification/AuthenticationBasic';
+import CORS from './cors/CORS';
 import Policy, { ExecutionContext, PolicyCategory, Scope} from "./policy";
-import FindAndReplace from './transformation/find-and-replace';
-import JSONtoXML from './transformation/json-to-xml';
-import RewritePath from './transformation/rewrite-path';
-import SetBody from './transformation/set-body';
-import SetHeader from './transformation/set-header';
-import SetQueryParameter from './transformation/set-query-parameter';
-import XMLtoJSON from './transformation/xml-to-json';
+import FindAndReplace from './transformation/FindAndReplace';
+import JSONtoXML from './transformation/JSONToXML';
+import RewritePath from './transformation/RewritePath';
+import SetBody from './transformation/SetBody';
+import SetHeader from './transformation/SetHeader';
+import SetQueryParameter from './transformation/SetQueryParameter';
+import XMLtoJSON from './transformation/XMLToJSON';
 
 /**
  * Tries to execute script in a given context, or just return script as string variable
@@ -106,9 +108,11 @@ policyManager.addPolicy(new CheckHTTPHeader());
 policyManager.addPolicy(new HostFilter());
 policyManager.addPolicy(new IpFilter());
 
+policyManager.addPolicy(new CloudWatchLogs());
 policyManager.addPolicy(new ControlFlow());
 policyManager.addPolicy(new MockResponse());
 policyManager.addPolicy(new ReturnResponse());
+policyManager.addPolicy(new Sentry());
 policyManager.addPolicy(new SendRequest());
 policyManager.addPolicy(new SetMethod());
 policyManager.addPolicy(new SetStatus());
@@ -130,10 +134,12 @@ export const internalPolicies = [
     'check-header',
     'host-filter',
     'ip-filter',
+    'cloudwatch-logs',
     'control-flow',
     'mock-response',
     'return-response',
     'send-request',
+    'sentry',
     'set-method',
     'set-status',
     'set-variable',

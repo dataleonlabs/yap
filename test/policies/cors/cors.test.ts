@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import CORS from '../../../src/policies/cors/cors';
+import CORS from '../../../src/policies/cors/CORS';
 import { Scope } from '../../../src/policies/policy';
 
 // follow https://stackoverflow.com/questions/33062097/how-can-i-retrieve-a-users-public-ip-address-via-amazon-api-gateway-lambda-n
@@ -38,7 +38,7 @@ describe('<cors />', () => {
     const resIp = await cors.apply({
       policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
-        response: {}, fields: {}, connection: {},
+        response: {}, variables: {}, connection: {},
       }, scope: Scope.inbound,
     });
 
@@ -63,7 +63,7 @@ describe('<cors />', () => {
     const resIp = await cors.apply({
       policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
-        response: {}, fields: {}, connection: {},
+        response: {}, variables: {}, connection: {},
       }, scope: Scope.inbound,
     });
 
@@ -87,7 +87,7 @@ describe('<cors />', () => {
     const resIp = await cors.apply({
       policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
-        response: {}, fields: {}, connection: {},
+        response: {}, variables: {}, connection: {},
       }, scope: Scope.inbound,
     });
 
@@ -113,7 +113,7 @@ describe('<cors />', () => {
     const resIp = await cors.apply({
       policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
-        response: {}, fields: {}, connection: {},
+        response: {}, variables: {}, connection: {},
       }, scope: Scope.inbound,
     });
 
@@ -135,7 +135,7 @@ describe('<cors />', () => {
     const resIp = await cors.apply({
       policyElement: res.elements[0], context: {
         request: { httpMethod: 'POST', path: '/contacts/yap' },
-        response: {}, fields: {}, connection: {},
+        response: {}, variables: {}, connection: {},
       }, scope: Scope.inbound,
     });
     assert.equal(get(resIp, 'context.response.headers.expose-headers'), "x-zumo-installation-id,x-zumo-application");

@@ -35,11 +35,8 @@ export default class Yap {
      * @param request Incomig request
      */
     public async execute(request: Request) {
-        const context: Context = {
-            request,
-            response: {},
-        };
-        this.router.Context = context;
+        this.router.Context.request = request;
+        this.router.Context.response = {};
         return this.router.getResponse();
     }
 
@@ -86,5 +83,14 @@ export default class Yap {
      */
     public all(path: string, action: any) {
         this.router.register(null, path, action);
+    }
+
+    /**
+     * Loads policies from XML file
+     * Use @validatePolicies to validate XML string first
+     * @param xml policy in a format of XML
+     */
+    public loadPolicies(xml:string) {
+        return this.Router.loadPolicies(xml);
     }
 }

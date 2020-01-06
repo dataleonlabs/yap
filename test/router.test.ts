@@ -12,7 +12,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -26,7 +26,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -41,7 +41,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -56,7 +56,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -71,7 +71,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -102,7 +102,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -140,7 +140,7 @@ describe('Router', () => {
         `;
         const spyValidate = sinon.spy(router, 'validatePolicies');
         router.loadPolicies(xml);
-        assert.deepEqual(router.Context.policy, {
+        assert.deepEqual(router.policy, {
             "inbound": [
                 {
                     attributes: {
@@ -225,7 +225,7 @@ describe('Router', () => {
         request.requestContext.identity.sourceIp = "13.66.201.169";
         router.Context = {
             request,
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
         router.loadPolicies(`
         <policies>
@@ -252,7 +252,7 @@ describe('Router', () => {
         request.requestContext.identity.sourceIp = "13.66.140.129";
         router.Context = {
             request,
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.loadPolicies(`
@@ -284,7 +284,7 @@ describe('Router', () => {
         request.requestContext.identity.sourceIp = "13.66.140.129";
         router.Context = {
             request,
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.loadPolicies(`
@@ -313,7 +313,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -344,7 +344,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {

@@ -107,7 +107,8 @@ export default class CORS extends Policy {
     public validate(policyElement: any) {
         const errors = [];
         if (!policyElement.elements || !policyElement.elements.length) {
-            errors.push(`${this.id}-ERR-001: should have at least one element, of <allowed-origins>, <allowed-methods>, <allowed-headers> or <expose-headers>`);
+            errors.push(`${this.id}-ERR-001: should have at least one element, of `
+            +`<allowed-origins>, <allowed-methods>, <allowed-headers> or <expose-headers>`);
         } else {
             let allowedOriginsSet = false;
             for (const element of policyElement.elements) {
@@ -133,7 +134,8 @@ export default class CORS extends Policy {
                         }
                         break;
                     default:
-                        errors.push(`${this.id}-ERR-002: Element <${element.name}> is forbiden. Should be <allowed-origins>, <allowed-methods>, <allowed-headers> or <expose-headers> only`);
+                        errors.push(`${this.id}-ERR-002: Element <${element.name}> is forbiden. `
+                        +`Should be <allowed-origins>, <allowed-methods>, <allowed-headers> or <expose-headers> only`);
                         break;
                 }
             }

@@ -9,7 +9,7 @@ describe("Policy manager", async () => {
 
     const testContext = {
         request: { httpMethod: 'POST' },
-        response: {}, fields: {}, connection: {},
+        response: {}, variables: {}, connection: {},
     };
 
     it("U-TEST-1 Should add policy", async () => {
@@ -102,9 +102,11 @@ describe("Policy manager", async () => {
             'check-header',
             'host-filter',
             'ip-filter',
+            'cloudwatch-logs',
             'control-flow',
             'mock-response',
             'return-response',
+            'sentry',
             'send-request',
             'set-method',
             'set-status',
