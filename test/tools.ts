@@ -1,11 +1,16 @@
+/**
+ * Creates mock request for testing
+ */
 export function getTestRequest() {
     return {
         httpMethod: 'GET',
         path: '',
+        body: new Object(),
         requestContext: {
             accountId: "",
             apiId: "",
             authorizer: {},
+            headers: {},
             connectedAt: 1,
             connectionId: "",
             domainName: "",
@@ -35,5 +40,29 @@ export function getTestRequest() {
                 userArn: null,
             },
         },
+    };
+}
+
+/**
+ * Creates mock responce for testing
+ */
+export function getTestResponce() {
+    return {
+        body: {},
+        statusCode: 200,
+        headers: {},
+    };
+}
+
+/**
+ * Creates mock context for testing
+ */
+export function getTestContext() {
+    return {
+        request: getTestRequest(),
+        response: getTestResponce(),
+        variables: {},
+        connection: {},
+        policies: {},
     };
 }

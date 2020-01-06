@@ -1,9 +1,14 @@
 {
-  "extends":[
+  "extends": [
     "tslint:latest"
   ],
-  "rules":{
-    "align":[
+  "linterOptions": {
+    "exclude": [
+      "test"
+    ]
+  },
+  "rules": {
+    "align": [
       false,
       "parameters",
       "arguments",
@@ -13,31 +18,34 @@
       true,
       "dev"
     ],
-    "ban":[
+    "ban": [
       true,
       [
         "angular",
         "forEach"
       ]
     ],
-    "class-name":true,
-    "comment-format":[
+    "class-name": true,
+    "comment-format": [
       false,
       "check-space",
       "check-lowercase"
     ],
-    "curly":true,
-    "eofline":false,
-    "forin":true,
-    "indent":[
+    "curly": true,
+    "eofline": false,
+    "forin": true,
+    "indent": [
       true,
       "spaces",
       2
     ],
-    "no-console": [true, "log"],
-    "interface-name":false,
-    "jsdoc-format":true,
-    "label-position":true,
+    "no-console": [
+      true,
+      "log"
+    ],
+    "interface-name": false,
+    "jsdoc-format": true,
+    "label-position": true,
     "object-literal-sort-keys": false,
     "member-ordering": [
       false,
@@ -49,49 +57,67 @@
         ]
       }
     ],
-    "no-any":false,
+    "no-any": false,
     "no-submodule-imports": false,
-    "no-arg":true,
-    "no-bitwise":true,
-    "no-construct":true,
-    "no-constructor-vars":false,
-    "no-debugger":false,
-    "no-shadowed-variable":false,
-    "no-duplicate-variable":true,
-    "no-empty":false,
-    "no-eval":true,
-    "no-require-imports":false,
-    "no-string-literal":false,
-    "no-switch-case-fall-through":false,
-    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
-    "no-trailing-whitespace":true,
-    "no-unused-expression":false,
-    "no-use-before-declare":true,
-    "no-var-keyword":true,
-    "no-var-requires":false,
-    "max-classes-per-file": [true, 1],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-construct": true,
+    "no-constructor-vars": false,
+    "no-debugger": false,
+    "no-shadowed-variable": false,
+    "no-duplicate-variable": true,
+    "no-empty": false,
+    "no-eval": true,
+    "no-require-imports": false,
+    "no-string-literal": false,
+    "no-switch-case-fall-through": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "no-trailing-whitespace": true,
+    "no-unused-expression": false,
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "no-var-requires": false,
+    "max-classes-per-file": [
+      true,
+      1
+    ],
     "no-duplicate-imports": true,
     "no-irregular-whitespace": true,
-    "max-line-length": [true, {"limit": 150, "ignore-pattern": "^import |^export {(.*?)}"}],
-    "max-file-line-count": [true, 1000],
-    "one-line":[
+    "max-line-length": [
+      true,
+      {
+        "limit": 150,
+        "ignore-pattern": "^import |^export {(.*?)}"
+      }
+    ],
+    "max-file-line-count": [
+      true,
+      1000
+    ],
+    "one-line": [
       true,
       "check-catch",
       "check-else",
       "check-open-brace",
       "check-whitespace"
     ],
-    "quotemark":[
+    "quotemark": [
       false,
       "double"
     ],
-    "radix":false,
-    "semicolon":true,
-    "triple-equals":[
+    "radix": false,
+    "semicolon": true,
+    "triple-equals": [
       true,
       "allow-null-check"
     ],
-    "typedef":[
+    "typedef": [
       false,
       "callSignature",
       "catchClause",
@@ -100,22 +126,29 @@
       "propertySignature",
       "variableDeclarator"
     ],
-    "completed-docs": [true, "enums", "functions", "methods", "properties", "classes"],
-    "typedef-whitespace":[
+    "completed-docs": [
+      true,
+      "enums",
+      "functions",
+      "methods",
+      "properties",
+      "classes"
+    ],
+    "typedef-whitespace": [
       true,
       {
-        "call-signature":"nospace",
-        "index-signature":"nospace",
-        "parameter":"nospace",
-        "property-declaration":"nospace",
-        "variable-declaration":"nospace"
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
       }
     ],
-    "variable-name":[
+    "variable-name": [
       true,
       "allow-leading-underscore"
     ],
-    "whitespace":[
+    "whitespace": [
       false,
       "check-branch",
       "check-decl",

@@ -1,7 +1,9 @@
 import * as assert from 'assert';
 import 'mocha';
 import * as sinon from 'sinon';
-import Router, { Context, policiesRegistry } from '../src/router';
+import { xml2js } from 'xml-js';
+import { Scope } from '../src/policies/policy';
+import Router, { Context } from '../src/router';
 import { getTestRequest } from './tools';
 
 describe('Router', () => {
@@ -10,7 +12,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -24,7 +26,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -39,7 +41,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -54,7 +56,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         router.register('POST', '/', () => { });
@@ -69,7 +71,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -100,7 +102,7 @@ describe('Router', () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -121,103 +123,197 @@ describe('Router', () => {
         assert.equal(res.body, 'hello error');
     });
 
-    it('U-TEST-7 - Test policies inbound', async () => {
+    it("U-TEST-7 - Should load policy structure, and trigger validation", () => {
+        const router = new Router();
+        const xml = `
+        <policies>
+            <inbound>
+                <set-status code="401" reason="Unauthorized"/>
+            </inbound>
+            <outbound>
+                <set-variable name="server" value="prod" />
+            </outbound>
+            <on-error>
+                <set-status code="500" reason="Server error"/>
+            </on-error>
+        </policies>
+        `;
+        const spyValidate = sinon.spy(router, 'validatePolicies');
+        router.loadPolicies(xml);
+        assert.deepEqual(router.policy, {
+            "inbound": [
+                {
+                    attributes: {
+                        code: "401",
+                        reason: "Unauthorized",
+                    },
+                    name: "set-status",
+                    type: "element",
+                },
+            ],
+            "outbound": [
+                {
+                    attributes: {
+                        name: "server",
+                        value: "prod",
+                    },
+                    name: "set-variable",
+                    type: "element",
+                },
+            ],
+            "on-error": [
+                {
+                    attributes: {
+                        code: "500",
+                        reason: "Server error",
+                    },
+                    name: "set-status",
+                    type: "element",
+                },
+            ],
+        });
+        assert.ok(spyValidate.calledOnceWithExactly(xml2js(xml), false));
+    });
+
+    it("U-TEST-8 - Should validate policy structure", () => {
+        const router = new Router();
+        const xml = `<policies>
+                        <inbound>
+                            <set-status code="401" reason="Unauthorized"/>
+                        </inbound>
+                        <outbound>
+                            <set-variable name="server" value="prod" />
+                        </outbound>
+                        <on-error>
+                            <set-status code="500" reason="Server error"/>
+                        </on-error>
+                    </policies>`;
+        const parsedXML = xml2js(xml);
+        const validationResult = router.validatePolicies(parsedXML);
+        assert.deepEqual(validationResult, []);
+    });
+
+    it("U-TEST-9 - Should validate policy structure with validation errors", () => {
+        const router = new Router();
+        const xml = `<policies>
+                        <inboundу>
+                            <set-status code="401" reason="Unauthorized"/>
+                        </inboundу>
+                        <outbound>
+                        </outbound>
+                        <on-error>
+                            <set-status code="500" reason="Server error"/>
+                            <unknown-policy/>
+                            <check-header/>
+                        </on-error>
+                    </policies>`;
+        const parsedXML = xml2js(xml);
+        const validationResult = router.validatePolicies(parsedXML);
+        assert.deepEqual(validationResult, [
+            "policies-ERR-002: XML tag <policies/> must only contains <inbound />, <outbound />, <on-error /> XML Tag, found <inboundу>",
+            "policies-ERR-003: XML tag <policies/> should contains at least one policy. Tag <outbound> have no elements",
+            "policies-ERR-004: XML tag <on-error> contains unknown policy <unknown-policy>. Please, load definition for this policy before loading of XML",
+            "check-header-ERR-001: attribute 'failed-check-error-message' is required",
+            "check-header-ERR-002: attribute 'failed-check-httpcode' is required and should be integer",
+            "check-header-ERR-003: attribute 'name' is required",
+            "check-header-ERR-004: attribute 'ignore-case' is required, and should be either true or false"]);
+    });
+
+    it('U-TEST-10 - Test policies inbound', async () => {
         const router = new Router();
         const request = getTestRequest();
         request.requestContext.identity.sourceIp = "13.66.201.169";
         router.Context = {
             request,
-            response: {}, fields: {}, connection: {},
-            policies: `
-                <policies>
-                    <inbound>
-                    <ip-filter action="allow">
-                        <address>13.66.201.169</address>
-                        <address-range from="13.66.140.128" to="13.66.255.143" />
-                    </ip-filter>
-                    </inbound>
-                    <outbound/>
-                </policies>
-          `,
+            response: {}, variables: {}, connection: {},
         };
+        router.loadPolicies(`
+        <policies>
+            <inbound>
+                <ip-filter action="allow">
+                    <address>13.66.201.169</address>
+                    <address-range from="13.66.140.128" to="13.66.255.143" />
+                </ip-filter>
+            </inbound>
+        </policies>`);
 
-        const spy = sinon.spy(policiesRegistry, 'ip-filter');
-        await router.applyPolicies('inbound');
+        const spy = sinon.spy(router, 'triggerPolicy');
+        await router.applyPolicies(Scope.inbound);
         assert.equal(spy.callCount, 1);
 
-        await router.applyPolicies('inbound');
+        await router.applyPolicies(Scope.inbound);
         assert.equal(spy.callCount, 2);
         spy.restore();
     });
 
-    it('U-TEST-8 - Test policies inbound and outbound', async () => {
+    it('U-TEST-11 - Test policies inbound and outbound', async () => {
         const router = new Router();
         const request = getTestRequest();
         request.requestContext.identity.sourceIp = "13.66.140.129";
         router.Context = {
             request,
-            response: {}, fields: {}, connection: {},
-            policies: `
-                <policies>
-                    <inbound>
-                    <ip-filter action="allow">
-                        <address>13.66.140.129</address>
-                        <address-range from="13.66.140.128" to="13.66.140.143" />
-                    </ip-filter>
-                    </inbound>
-                    <outbound>
-                    <ip-filter action="allow">
-                        <address>13.66.140.129</address>
-                        <address-range from="13.66.140.128" to="13.66.140.143" />
-                    </ip-filter>
-                    </outbound>
-                </policies>
-                    `,
+            response: {}, variables: {}, connection: {},
         };
 
-        const spy = sinon.spy(policiesRegistry, 'ip-filter');
-        await router.applyPolicies('inbound');
-        await router.applyPolicies('outbound');
+        router.loadPolicies(`
+        <policies>
+            <inbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </inbound>
+            <outbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </outbound>
+        </policies>`);
+
+        const spy = sinon.spy(router, 'triggerPolicy');
+        await router.applyPolicies(Scope.inbound);
+        await router.applyPolicies(Scope.outbound);
         assert.equal(spy.callCount, 2);
         spy.restore();
     });
 
-    it('U-TEST-9 - Test policies error', async () => {
+    it('U-TEST-12 - Test policies error', async () => {
         const router = new Router();
         const request = getTestRequest();
         request.requestContext.identity.sourceIp = "13.66.140.129";
         router.Context = {
             request,
-            response: {}, fields: {}, connection: {},
-            policies: `
-                <policies>
-                    <inbound>
-                    <ip-filter action="allow">
-                        <address>13.66.140.129</address>
-                        <address-range from="13.66.140.128" to="13.66.140.143" />
-                    </ip-filter>
-                    </inbound>
-                    <outbound>
-                    <ip-filter action="allow">
-                        <address>13.66.140.129</address>
-                        <address-range from="13.66.140.128" to="13.66.140.143" />
-                    </ip-filter>
-                    </outbound>
-                </policies>
-          `,
+            response: {}, variables: {}, connection: {},
         };
 
-        const spy = sinon.spy(policiesRegistry, 'ip-filter');
-        await router.applyPolicies('inbound');
+        router.loadPolicies(`
+        <policies>
+            <inbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </inbound>
+            <outbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </outbound>
+        </policies>`);
+
+        const spy = sinon.spy(router, 'triggerPolicy');
+        await router.applyPolicies(Scope.inbound);
         assert.equal(spy.callCount, 1);
         spy.restore();
     });
 
-    it('U-TEST-10 - getResponse with next', async () => {
+    it('U-TEST-13 - getResponse with next', async () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -244,11 +340,11 @@ describe('Router', () => {
         assert.equal(res.body, 'hellohello');
     });
 
-    it('U-TEST-11 - getResponse with error throw', async () => {
+    it('U-TEST-14 - getResponse with error throw', async () => {
         const router = new Router();
         router.Context = {
             request: { httpMethod: 'POST', path: '/contacts/yap' },
-            response: {}, fields: {}, connection: {},
+            response: {}, variables: {}, connection: {},
         };
 
         const spyed = {
@@ -273,4 +369,5 @@ describe('Router', () => {
         assert.equal(res.body, 'hello error');
         assert.equal(res.statusCode, 422);
     });
+
 });

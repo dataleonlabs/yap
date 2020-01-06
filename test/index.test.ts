@@ -82,7 +82,7 @@ describe('Core', () => {
         const context = {
             request: awsEvent,
             response: {},
-            fields: {},
+            variables: {},
             connection: {},
         };
         const stub = sinon.stub(yap.Router, "getResponse");
