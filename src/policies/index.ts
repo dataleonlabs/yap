@@ -1,7 +1,4 @@
-import { get, set } from 'lodash';
 import vm from 'vm';
-import { xml2js } from 'xml-js';
-import { Context } from '../router';
 import CheckHTTPHeader from './accessRestriction/CheckHttpHeader';
 import HostFilter from './accessRestriction/HostFilter';
 import IpFilter from './accessRestriction/IpFilter';
@@ -69,6 +66,14 @@ export class PolicyManager {
             throw new Error("Policy should have at least one scope");
         }
         this.policies[policy.id] = policy;
+    }
+
+    /**
+     * Deletes policy definition
+     * @param id id of policy which should be deleted
+     */
+    public deletePolicy(id: string) {
+        delete this.policies[id];
     }
 
     /**

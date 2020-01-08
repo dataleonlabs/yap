@@ -1,5 +1,4 @@
 import { get, set } from 'lodash';
-import { Context } from "../../router";
 import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**

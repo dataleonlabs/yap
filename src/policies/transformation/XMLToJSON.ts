@@ -1,6 +1,5 @@
 import { get, set } from 'lodash';
 import { xml2js } from 'xml-js';
-import { Context } from "../../router";
 import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**

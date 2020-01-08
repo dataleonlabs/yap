@@ -1,6 +1,4 @@
 import { get, set, take, unset } from 'lodash';
-import { isArray } from "util";
-import { Context } from "../../router";
 import { tryExecuteFieldValue } from "../index";
 import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 const separateHeadersNames =

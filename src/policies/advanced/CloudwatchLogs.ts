@@ -97,6 +97,5 @@ export default class CloudWatchLogs extends Policy {
             }
         }
         return errors;
-        return errors;
     }
 }

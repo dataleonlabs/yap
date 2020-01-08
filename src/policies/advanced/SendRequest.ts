@@ -1,6 +1,5 @@
 import * as axios from 'axios';
 import { cloneDeep, get, set } from 'lodash';
-import { Context } from "../../router";
 import policyManager from "../index";
 import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
