@@ -2,10 +2,11 @@
  * Creates mock request for testing
  */
 export function getTestRequest() {
-    return {
+    const request = {
         httpMethod: 'GET',
         path: '',
         body: new Object(),
+        headers: {},
         requestContext: {
             accountId: "",
             apiId: "",
@@ -41,6 +42,7 @@ export function getTestRequest() {
             },
         },
     };
+    return request;
 }
 
 /**
@@ -64,5 +66,25 @@ export function getTestContext() {
         variables: {},
         connection: {},
         policies: {},
+    };
+}
+
+/**
+ * Creates test AWS context
+ */
+export function getTestAwsContext() {
+    return {
+        callbackWaitsForEmptyEventLoop: false,
+        functionName: "1",
+        functionVersion: "1",
+        invokedFunctionArn: "1",
+        memoryLimitInMB: "100",
+        awsRequestId: "1",
+        logGroupName: "1",
+        logStreamName: "1",
+        getRemainingTimeInMillis: () => 1,
+        done: (error?: Error, result?: any) => void 0,
+        fail: (error: Error | string) => void 0,
+        succeed: (messageOrObject: any) => void 0,
     };
 }

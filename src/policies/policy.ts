@@ -1,4 +1,4 @@
-import { Context } from '../router';
+import { Context } from "..";
 
 /**
  * Execution context interface

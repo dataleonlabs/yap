@@ -2,8 +2,6 @@ import assert from 'assert';
 import * as sinon from 'sinon';
 import policyManager, { PolicyManager, tryExecuteFieldValue } from '../src/policies';
 import { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
-import { Context } from '../src/router';
-import { getTestContext } from './tools';
 
 describe("Policy manager", async () => {
 
