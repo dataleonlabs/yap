@@ -14,7 +14,7 @@ import SetVariable from './advanced/SetVariable';
 import ApiKey from './authentification/ApiKey';
 import AuthenticationBasic from './authentification/AuthenticationBasic';
 import CORS from './cors/CORS';
-import Policy, { ExecutionContext, PolicyCategory, Scope} from "./policy";
+import Policy, { ExecutionContext, PolicyCategory, Scope } from "./policy";
 import FindAndReplace from './transformation/FindAndReplace';
 import JSONtoXML from './transformation/JSONToXML';
 import RewritePath from './transformation/RewritePath';
@@ -39,6 +39,28 @@ export const tryExecuteFieldValue = (field?: string, executionContext?: Executio
 };
 
 /**
+ * Replaces all execution placeholder in string with execution result
+ * @param field string, contains @(...) execution placehoders
+ * @param executionContext execution context
+ */
+export const executeInString = (field: string, executionContext?: any) => {
+    if (field && executionContext && typeof field === "string" && field.indexOf('@(') > -1) {
+        const entries =
+            field.split('@(')
+                .map((entry) => entry.substring(0, entry.lastIndexOf(')')));
+        for (const entry of entries) {
+            if (entry) {
+                const vmExecutionContext = vm.createContext(executionContext);
+                const script = new vm.Script(entry);
+                const newValue = script.runInContext(vmExecutionContext);
+                field = field.replace(`@(${entry})`, newValue);
+            }
+        }
+    }
+    return field;
+};
+
+/**
  * Policy manager
  */
 export class PolicyManager {
@@ -53,16 +75,16 @@ export class PolicyManager {
      * @param policy policy definition
      */
     public addPolicy(policy: Policy) {
-        if(!policy.id) {
+        if (!policy.id) {
             throw new Error("Policy should have non-empty id value");
         }
-        if(!policy.name) {
+        if (!policy.name) {
             throw new Error("Policy should have non-empty name value");
         }
-        if(policy.category === PolicyCategory.undefined) {
+        if (policy.category === PolicyCategory.undefined) {
             throw new Error("Policy should have policy category which not have undefined");
         }
-        if(!policy.scopes.length) {
+        if (!policy.scopes.length) {
             throw new Error("Policy should have at least one scope");
         }
         this.policies[policy.id] = policy;

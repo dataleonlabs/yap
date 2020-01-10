@@ -1,0 +1,26 @@
+version: 1.0.0
+info:
+  title: Sample API BDD Testing
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+  # silent: true # Prevent tests from printing messages through the console.
+
+scenarios:
+  testScenario:
+    describe: U-TEST-1 create new user.
+    # silent: true # Prevent tests from printing messages through the console.
+    # only: true # uncomment this to only execute this scenario
+    variables: # Add variables in context
+      fullName: "@(faker.name.findName())"
+      email: "@(faker.internet.email())"
+    request:
+      body: |
+        { "fullName": "@(variables.fullName)",
+        "email": "@(variables.email)" }
+    tests:
+      - - expect: "@(response.statusCode)"
+        - toEqual: "200"
+      - - expect: "@(response.body.fullName)"
+        - toEqual: "@(variables.fullName)"
+      - - expect: "@(response.body.email)"
+        - toEqual: "@(variables.email)"
