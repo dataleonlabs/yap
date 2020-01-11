@@ -1,4 +1,4 @@
-name: Publish NPM
+name: PublishNPM
 
 on:
   push:
@@ -31,8 +31,17 @@ jobs:
         nyc check-coverage --lines 94 --functions 94 --branches 89 --statements 94
         yarn coverage
         yarn build
+        npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
+        git push --follow-tags
+        git fetch --depth=10000
+        git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+        git fetch origin
+        git checkout --track origin/develop
+        git merge --no-ff master
+        git commit --amend -m "chore(release) - [skip ci]"
+        git push origin develop
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
