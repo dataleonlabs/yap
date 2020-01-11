@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: test and publish
       run: |
-        npm install -g standard-version nyc mocha typescript ts-node yarn
+        npm install -g standard-version nyc mocha typescript ts-node yarn auto-changelog
         npm ci
         yarn lint
         yarn test:integration
@@ -42,9 +42,13 @@ jobs:
         git checkout develop
         git checkout master
         git checkout develop
+        auto-changelog
         git merge --no-ff master
         git commit --amend -m "chore(release) - [skip ci]"
-        git push origin develop --follow-tags
+        git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git develop --follow-tags
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
