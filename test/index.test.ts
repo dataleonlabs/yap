@@ -1,138 +1,334 @@
 import assert from 'assert';
+import { APIGatewayProxyEvent, APIGatewayProxyResult, Context as AWSContext } from 'aws-lambda';
+import AWS from 'aws-sdk';
+import { get, set } from 'lodash';
 import 'mocha';
 import * as sinon from 'sinon';
+import { xml2js } from 'xml-js';
 import Yap from '../src/index';
+import policyManager from '../src/policies';
+import { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
+import { getTestAwsContext, getTestContext, getTestRequest } from './tools';
 
 describe('Core', () => {
-    it('U-TEST-1 - Constructor creates router', () => {
-        const yap = new Yap();
-        assert(yap.Router);
+
+    const result = [
+        {
+            id: "1",
+            data: "first",
+        },
+        {
+            id: "2",
+            data: "second",
+        },
+    ];
+    const typeDefs = `
+        type Query { fields: [Field] }
+        type Field { id: String, data: String }
+    `;
+
+    const resolvers = {
+        Query: { fields: () => result },
+    };
+
+    const query = JSON.stringify({
+        query: "query fields{ fields { id, data } }",
     });
 
-    it('U-TEST-2 - Execute pass context and calls getResponse', async () => {
-        const yap = new Yap();
-        const mock = sinon.mock(yap.Router);
-        const request = {
-            body: { a: 1 },
-            httpMethod: 'GET',
-            path: '/',
-        };
-        const context = {
-            request,
-            response: {},
-        };
-        await yap.execute(request);
-        assert.deepEqual(yap.Router.Context.request, context.request);
-        mock.expects("getResponse").once();
+    it('U-TEST-1 - Creates Yap core, executes request', async () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const request = getTestRequest();
+        const awsContext = getTestAwsContext();
+        request.body = query;
+        request.httpMethod = 'POST';
+        set(request, 'headers.Accept', 'application/json');
+        const queryResult = await yap.handler(request as unknown as APIGatewayProxyEvent, awsContext);
+        const payload = JSON.parse(queryResult.body).data.fields;
+        assert.deepEqual(payload, result);
     });
 
-    it('U-TEST-3 - AWS execute correctly pass context to handler function', async () => {
-        const yap = new Yap();
-        const awsEvent = {
-            body: null,
-            headers: {},
-            multiValueHeaders: {},
-            httpMethod: "",
-            isBase64Encoded: false,
-            path: "/api",
-            pathParameters: null,
-            queryStringParameters: null,
-            multiValueQueryStringParameters: null,
-            stageVariables: null,
-            requestContext: {
-                accountId: "",
-                apiId: "",
-                authorizer: null,
-                connectedAt: 0,
-                connectionId: "",
-                domainName: "",
-                domainPrefix: "",
-                eventType: "",
-                extendedRequestId: "",
-                httpMethod: "",
-                identity: {
-                    accessKey: null,
-                    accountId: null,
-                    apiKey: null,
-                    apiKeyId: null,
-                    caller: null,
-                    cognitoAuthenticationProvider: null,
-                    cognitoAuthenticationType: null,
-                    cognitoIdentityId: null,
-                    cognitoIdentityPoolId: null,
-                    principalOrgId: null,
-                    sourceIp: "",
-                    user: null,
-                    userAgent: null,
-                    userArn: null,
+    it('U-TEST-2 - Creates Yap core, executes request, handle exception', async () => {
+        const errResolvers = {
+            Query: { fields: () => { throw new Error("Some error"); } },
+        };
+        const yap = new Yap({ typeDefs, resolvers: errResolvers });
+        const request = getTestRequest();
+        const awsContext = getTestAwsContext();
+        request.body = query;
+        request.httpMethod = 'POST';
+        set(request, 'headers.Accept', 'application/json');
+        const queryResult = await yap.handler(request as unknown as APIGatewayProxyEvent, awsContext);
+        const payload = JSON.parse(queryResult.body);
+        assert.equal(get(payload, 'errors[0].message'), 'Some error');
+        assert.deepEqual(get(payload, 'errors[0].locations'), [{ line: 1, column: 15 }]);
+    });
+
+    it("U-TEST-3 - Should load policy structure, and trigger validation", () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const xml = `
+        <policies>
+            <inbound>
+                <set-status code="401" reason="Unauthorized"/>
+            </inbound>
+            <outbound>
+                <set-variable name="server" value="prod" />
+            </outbound>
+            <on-error>
+                <set-status code="500" reason="Server error"/>
+            </on-error>
+        </policies>
+        `;
+        const spyValidate = sinon.spy(yap, 'validatePolicies');
+        yap.loadPolicies(xml);
+        assert.deepEqual(yap.policy, {
+            "inbound": [
+                {
+                    attributes: {
+                        code: "401",
+                        reason: "Unauthorized",
+                    },
+                    name: "set-status",
+                    type: "element",
                 },
-                messageDirection: "",
-                messageId: null,
-                path: "",
-                stage: "",
-                requestId: "",
-                requestTime: "",
-                requestTimeEpoch: 0,
-                resourceId: "",
-                resourcePath: "",
-                routeKey: "",
+            ],
+            "outbound": [
+                {
+                    attributes: {
+                        name: "server",
+                        value: "prod",
+                    },
+                    name: "set-variable",
+                    type: "element",
+                },
+            ],
+            "on-error": [
+                {
+                    attributes: {
+                        code: "500",
+                        reason: "Server error",
+                    },
+                    name: "set-status",
+                    type: "element",
+                },
+            ],
+        });
+        assert.ok(spyValidate.calledOnceWithExactly(xml2js(xml), false));
+    });
+
+    it("U-TEST-4 - Should validate policy structure", () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const xml = `<policies>
+                        <inbound>
+                            <set-status code="401" reason="Unauthorized"/>
+                        </inbound>
+                        <outbound>
+                            <set-variable name="server" value="prod" />
+                        </outbound>
+                        <on-error>
+                            <set-status code="500" reason="Server error"/>
+                        </on-error>
+                    </policies>`;
+        const parsedXML = xml2js(xml);
+        const validationResult = yap.validatePolicies(parsedXML);
+        assert.deepEqual(validationResult, []);
+    });
+
+    it("U-TEST-5 - Should validate policy structure with validation errors", () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const xml = `<policies>
+                        <inboundу>
+                            <set-status code="401" reason="Unauthorized"/>
+                        </inboundу>
+                        <outbound>
+                        </outbound>
+                        <on-error>
+                            <set-status code="500" reason="Server error"/>
+                            <unknown-policy/>
+                            <check-header/>
+                        </on-error>
+                    </policies>`;
+        const parsedXML = xml2js(xml);
+        const validationResult = yap.validatePolicies(parsedXML);
+        assert.deepEqual(validationResult, [
+            "policies-ERR-002: XML tag <policies/> must only contains <inbound />, <outbound />, <on-error /> XML Tag, found <inboundу>",
+            "policies-ERR-003: XML tag <policies/> should contains at least one policy. Tag <outbound> have no elements",
+            "policies-ERR-004: XML tag <on-error> contains unknown policy <unknown-policy>. Please, load definition for this policy before loading of XML",
+            "check-header-ERR-001: attribute 'failed-check-error-message' is required",
+            "check-header-ERR-002: attribute 'failed-check-httpcode' is required and should be integer",
+            "check-header-ERR-003: attribute 'name' is required",
+            "check-header-ERR-004: attribute 'ignore-case' is required, and should be either true or false"]);
+    });
+
+    it('U-TEST-6 - Test policies inbound', async () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const request = getTestRequest();
+        request.requestContext.identity.sourceIp = "13.66.201.169";
+        const context = getTestContext();
+        context.request = request;
+        yap.loadPolicies(`
+        <policies>
+            <inbound>
+                <ip-filter action="allow">
+                    <address>13.66.201.169</address>
+                    <address-range from="13.66.140.128" to="13.66.255.143" />
+                </ip-filter>
+            </inbound>
+        </policies>`);
+
+        const spy = sinon.spy(yap, 'triggerPolicy');
+        await yap.applyPolicies(Scope.inbound, context);
+        assert.equal(spy.callCount, 1);
+
+        await yap.applyPolicies(Scope.inbound, context);
+        assert.equal(spy.callCount, 2);
+        spy.restore();
+    });
+
+    it('U-TEST-7 - Test policies inbound and outbound', async () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const request = getTestRequest();
+        request.requestContext.identity.sourceIp = "13.66.140.129";
+        const context = getTestContext();
+        context.request = request;
+
+        yap.loadPolicies(`
+        <policies>
+            <inbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </inbound>
+            <outbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </outbound>
+        </policies>`);
+
+        const spy = sinon.spy(yap, 'triggerPolicy');
+        await yap.applyPolicies(Scope.inbound, context);
+        await yap.applyPolicies(Scope.outbound, context);
+        assert.equal(spy.callCount, 2);
+        spy.restore();
+    });
+
+    it('U-TEST-8 - Test policies error', async () => {
+        const yap = new Yap({ typeDefs, resolvers });
+        const request = getTestRequest();
+        request.requestContext.identity.sourceIp = "13.66.140.129";
+        const context = getTestContext();
+        context.request = request;
+        yap.loadPolicies(`
+        <policies>
+            <inbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </inbound>
+            <outbound>
+                <ip-filter action="allow">
+                    <address>13.66.140.129</address>
+                    <address-range from="13.66.140.128" to="13.66.140.143" />
+                </ip-filter>
+            </outbound>
+        </policies>`);
+
+        const spy = sinon.spy(yap, 'triggerPolicy');
+        await yap.applyPolicies(Scope.inbound, context);
+        assert.equal(spy.callCount, 1);
+        spy.restore();
+    });
+
+    it('U-TEST-9 - Should add custom policy, and execute', async () => {
+        const customResponse = 'Custom-Response-Set';
+        const customPolicy = {
+            id: 'custom-policy',
+            name: 'Custom',
+            category: PolicyCategory.advanced,
+            description: 'Does stuff',
+            scopes: [Scope.outbound],
+            apply: async (executionContext: ExecutionContext) => {
+                set(executionContext, 'context.response.body', customResponse);
+                return executionContext;
             },
-            resource: "",
+            validate: () => [],
         };
-        const context = {
-            request: awsEvent,
-            response: {},
-            fields: {},
-            connection: {},
+        const policiesXML = `
+        <policies>
+            <outbound>
+                <custom-policy>
+                </custom-policy>
+            </outbound>
+        </policies>`;
+        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const request = getTestRequest();
+        const awsContext = getTestAwsContext();
+        request.body = query;
+        request.httpMethod = 'POST';
+        set(request, 'headers.Accept', 'application/json');
+        const queryResult = await yap.handler(request as unknown as APIGatewayProxyEvent, awsContext);
+        const payload = queryResult.body;
+        assert.deepEqual(payload, customResponse);
+    });
+
+    it('U-TEST-10 - Should add custom policy, and delete it', async () => {
+        const customPolicy = {
+            id: 'custom-policy',
+            name: 'Custom',
+            category: PolicyCategory.advanced,
+            description: 'Does stuff',
+            scopes: [Scope.outbound],
+            apply: async (executionContext: ExecutionContext) => {
+                throw new Error("Policy error");
+            },
+            validate: () => [],
         };
-        const stub = sinon.stub(yap.Router, "getResponse");
-        await yap.handler(awsEvent);
-        assert.deepEqual(yap.Router.Context.request, context.request);
-        assert.equal(stub.callCount, 1);
+        const policiesXML = `
+        <policies>
+            <outbound>
+                <custom-policy>
+                </custom-policy>
+            </outbound>
+        </policies>`;
+        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        yap.deletePolicy('custom-policy');
+        assert.equal(policyManager.getPolicy('custom-policy'), undefined);
+        assert.equal(yap.policy[Scope.outbound].find((p) => p.id === 'custom-policy'), undefined);
     });
 
-    it('U-TEST-4 - get registers GET middleware', async () => {
-        const yap = new Yap();
-        const mock = sinon.mock(yap.Router);
-        const path = '/somepath';
-        const action = () => {};
-        yap.get(path, action);
-        mock.expects("register").once().withExactArgs('GET', path, action);
-    });
-
-    it('U-TEST-5 - post registers POST middleware', async () => {
-        const yap = new Yap();
-        const mock = sinon.mock(yap.Router);
-        const path = '/somepath';
-        const action = () => { };
-        yap.post(path, action);
-        mock.expects("register").once().withExactArgs('POST', path, action);
-    });
-
-    it('U-TEST-6 - put registers PUT middleware', async () => {
-        const yap = new Yap();
-        const mock = sinon.mock(yap.Router);
-        const path = '/somepath';
-        const action = () => { };
-        yap.put(path, action);
-        mock.expects("register").once().withExactArgs('PUT', path, action);
-    });
-
-    it('U-TEST-7 - delete registers DELETE middleware', async () => {
-        const yap = new Yap();
-        const mock = sinon.mock(yap.Router);
-        const path = '/somepath';
-        const action = () => { };
-        yap.delete(path, action);
-        mock.expects("register").once().withExactArgs('DELETE', path, action);
-    });
-
-    it('U-TEST-8 - delete registers ALL middleware', async () => {
-        const yap = new Yap();
-        const mock = sinon.mock(yap.Router);
-        const path = '/somepath';
-        const action = () => { };
-        yap.all(path, action);
-        mock.expects("register").once().withExactArgs(null, path, action);
+    it('U-TEST-11 - Should add custom policy, and handle exception', async () => {
+        const customResponse = 'Custom-Response-Set';
+        const customPolicy = {
+            id: 'custom-policy',
+            name: 'Custom',
+            category: PolicyCategory.advanced,
+            description: 'Does stuff',
+            scopes: [Scope.outbound],
+            apply: async (executionContext: ExecutionContext) => {
+                set(executionContext, 'context.response.body', customResponse);
+                return executionContext;
+            },
+            validate: () => [],
+        };
+        const policiesXML = `
+        <policies>
+            <outbound>
+                <custom-policy>
+                </custom-policy>
+            </outbound>
+        </policies>`;
+        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const request = getTestRequest();
+        const awsContext = getTestAwsContext();
+        request.body = query;
+        request.httpMethod = 'POST';
+        set(request, 'headers.Accept', 'application/json');
+        const queryResult = await yap.handler(request as unknown as APIGatewayProxyEvent, awsContext);
+        const payload = queryResult.body;
+        yap.deletePolicy('custom-policy');
+        assert.deepEqual(payload, customResponse);
     });
 });
