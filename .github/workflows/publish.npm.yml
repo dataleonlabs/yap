@@ -36,14 +36,13 @@ jobs:
         npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
-        git push --follow-tags
         git fetch --depth=10000
         git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
         git fetch origin
         git checkout --track origin/develop
         git merge --no-ff master
         git commit --amend -m "chore(release) - [skip ci]"
-        git push origin develop
+        git push origin develop --follow-tags
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
