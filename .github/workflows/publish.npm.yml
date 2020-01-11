@@ -1,4 +1,4 @@
-name: Publish NPM
+name: PublishNPM
 
 on:
   push:
@@ -24,15 +24,31 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: test and publish
       run: |
-        npm install -g standard-version nyc mocha typescript ts-node yarn
+        npm install -g standard-version nyc mocha typescript ts-node yarn auto-changelog
         npm ci
         yarn lint
         yarn test:integration
-        nyc check-coverage --lines 95 --functions 95 --branches 89 --statements 95
+        nyc check-coverage --lines 94 --functions 94 --branches 89 --statements 94
         yarn coverage
         yarn build
+        git config --global user.email "devops@youngapp.co"
+        git config user.name "devops"
+        npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
+        git fetch --all
+        git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+        git fetch origin
+        git checkout develop
+        git checkout master
+        git checkout develop
+        auto-changelog
+        git commit -am "chore(release) - [skip ci]"
+        git merge --no-ff master
+        git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git develop --follow-tags
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}

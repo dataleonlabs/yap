@@ -1,9 +1,12 @@
 {
   "name": "@youngapp/yap",
-  "version": "1.0.1",
+  "version": "1.7.0",
   "description": "Yap Core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "directories": {
     "doc": "docs"
   },
