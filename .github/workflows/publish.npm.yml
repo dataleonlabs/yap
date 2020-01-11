@@ -31,6 +31,8 @@ jobs:
         nyc check-coverage --lines 94 --functions 94 --branches 89 --statements 94
         yarn coverage
         yarn build
+        git config --global user.email "devops@youngapp.co"
+        git config user.name "devops"
         npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
