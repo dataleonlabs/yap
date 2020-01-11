@@ -28,7 +28,7 @@ jobs:
         npm ci
         yarn lint
         yarn test:integration
-        nyc check-coverage --lines 95 --functions 95 --branches 89 --statements 95
+        nyc check-coverage --lines 94 --functions 94 --branches 89 --statements 94
         yarn coverage
         yarn build
       env:
