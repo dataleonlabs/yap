@@ -1,4 +1,4 @@
-name: Node CI
+name: Publish NPM
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         npm ci
         yarn lint
         yarn test:integration
-        nyc check-coverage --lines 95 --functions 95 --branches 81 --statements 95
+        nyc check-coverage --lines 95 --functions 95 --branches 89 --statements 95
         yarn coverage
         yarn build
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc

@@ -1,4 +1,4 @@
-# Yap Community Contributing Guide 1.0
+# Yap Community Contribution Guide 1.0
 
 Thank you for interest in Yap, an open source project administered by Young App.
 The goal of this document is to create a contribution process that:
@@ -50,7 +50,8 @@ proper review, and have other committers merge their pull requests.
 
 # Benefits for contributors
 
+- Monthly trainings to support you in your beginnings.
+- Written feedback and recommendation (YAP certificate) on your development skills and contribution work.
+- Opportunity to receive the full-time job proposition – we are constantly growing.
+- After the connector (wrapper that includes app and its API) is created by contributor, published on the Young App platform, and being used by consumers, a contributor receives compensation; the amount of compensation depends on connector's complexity, popularity, the number of times being used; the size of compensation to be discussed individually with YAP team.
 - 30% discount on the YAP cloud edition.
-- Written feedback and recommendation (YAP certificate) on development skills.
-- Possibility to receive the job proposition from the YAP team in order to work on the project on freelance.
-- After the connector (wrapper that includes app and its API) created by contributor is published on the Young App platform and being used by consumers, a contributor receives compensation (the first part – after connector is published, the second part – after connector is being used by platform consumers); the amount of compensation depends on connector's complexity, popularity, the number of times being used; the size of compensation to be discussed individually with YAP team.
