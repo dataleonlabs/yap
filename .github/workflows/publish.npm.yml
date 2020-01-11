@@ -43,7 +43,8 @@ jobs:
         git checkout master
         git checkout develop
         auto-changelog
-        git commit -am "chore(release) - [skip ci]"
+        git add CHANGELOG.md
+        git commit --amend -m "chore(release) - [ci skip]"
         git merge --no-ff master
         git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git develop --follow-tags
       env:
