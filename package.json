@@ -1,6 +1,6 @@
 {
   "name": "@youngapp/yap",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Yap Core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
