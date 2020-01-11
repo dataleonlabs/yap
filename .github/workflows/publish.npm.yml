@@ -46,6 +46,7 @@ jobs:
         git add CHANGELOG.md
         git commit --amend -m "chore(release) - [ci skip]"
         git merge --no-ff master
+        git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git --follow-tags
         git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git develop --follow-tags
       env:
         CI: true
