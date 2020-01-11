@@ -1,9 +1,12 @@
 {
   "name": "@youngapp/yap",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Yap Core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "directories": {
     "doc": "docs"
   },
