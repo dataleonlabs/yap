@@ -4,6 +4,9 @@
   "description": "Yap Core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "yap-api-test": "src/bin/apitest.js"
+  },
   "directories": {
     "doc": "docs"
   },
@@ -86,7 +89,6 @@
     "ip": "^1.1.5",
     "lodash": "^4.17.15",
     "mocha": "^6.2.2",
-    "ts-jest": "^24.3.0",
     "path-to-regexp": "^6.1.0",
     "xml-js": "^1.6.11"
   }

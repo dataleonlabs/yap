@@ -10,7 +10,9 @@
         "esModuleInterop": true
     },
     "include": [
-        "src/*"
+        "src/*",
+        "src/bin/*",
+        "test/apitest/api_example.ts"
     ],
     "exclude": [
         "node_modules"

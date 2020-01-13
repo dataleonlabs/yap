@@ -24,10 +24,10 @@ describe("Running API tests...", () => {
     if (!apiclass || !testcases) {
         throw new Error("apiclass && testcases env variables should be set");
     } else {
-        const { testApi } = require(apiclass);
-        const ymlFiles = fs.readdirSync(path.resolve(__dirname, testcases)).filter((file) => file.endsWith('.yml'));
+        const { testApi } = require(path.resolve(process.cwd(), apiclass));
+        const ymlFiles = fs.readdirSync(path.resolve(process.cwd(), testcases)).filter((file) => file.endsWith('.yml'));
         for (const file of ymlFiles) {
-            const testFile = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, testcases, file), 'utf8'));
+            const testFile = yaml.safeLoad(fs.readFileSync(path.resolve(process.cwd(), testcases, file), 'utf8'));
             describe(testFile.info.title, () => {
                 for (const [scenarioName, value] of Object.entries(testFile.scenarios)) {
                     const scenarioValue = value as any;
