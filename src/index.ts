@@ -1,3 +1,10 @@
+export * from './policies/policy';
+export * from './connectors/connector';
+export * from './connectors/connection';
+export * from './connectors/decorator';
+export * from './connectors/fieldParameter';
+export * from './connectors/ui';
+
 import { ApolloServer } from 'apollo-server-lambda';
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context as AWSContext } from 'aws-lambda';
 import { get, set } from 'lodash';

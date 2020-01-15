@@ -5,10 +5,12 @@ import { get, set } from 'lodash';
 import 'mocha';
 import * as sinon from 'sinon';
 import { xml2js } from 'xml-js';
-import Yap from '../src/index';
+import Yap, { Context } from '../src/index';
 import policyManager from '../src/policies';
-import { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
+import Policy, { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
 import { getTestAwsContext, getTestContext, getTestRequest } from './tools';
+import { YapConnector } from '../src/connectors/decorator';
+import { ConnectorCategory, Connector } from '../src/connectors/connector';
 
 describe('Core', () => {
 
@@ -27,13 +29,38 @@ describe('Core', () => {
         type Field { id: String, data: String }
     `;
 
-    const resolvers = {
-        Query: { fields: () => result },
-    };
-
     const query = JSON.stringify({
         query: "query fields{ fields { id, data } }",
     });
+
+    @YapConnector({
+        id: "testConnector",
+        name: "testConnector",
+        category: ConnectorCategory.dataprocessing,
+        description: "testDescription"
+    })
+    class TestConnector extends Connector {
+        public async execute(parent: any, args: any, context: Context, info: any) {
+            return new Promise(res=>res(result));
+        }
+    }
+    @YapConnector({
+        id: "testErrorConnector",
+        name: "testErrorConnector",
+        category: ConnectorCategory.dataprocessing,
+        description: "testDescription"
+    })
+    class TestErrorConnector extends Connector {
+        public execute(parent: any, args: any, context: Context, info: any) {
+            throw new Error("Some error");
+        }
+    }
+
+    const testConnector = new TestConnector;
+
+    const resolvers = {
+        Query: { fields: testConnector.execute },
+    };
 
     it('U-TEST-1 - Creates Yap core, executes request', async () => {
         const yap = new Yap({ typeDefs, resolvers });
@@ -48,8 +75,9 @@ describe('Core', () => {
     });
 
     it('U-TEST-2 - Creates Yap core, executes request, handle exception', async () => {
+        const connector  = new TestErrorConnector();
         const errResolvers = {
-            Query: { fields: () => { throw new Error("Some error"); } },
+            Query: { fields: connector.execute },
         };
         const yap = new Yap({ typeDefs, resolvers: errResolvers });
         const request = getTestRequest();
