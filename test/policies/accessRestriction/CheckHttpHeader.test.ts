@@ -3,6 +3,7 @@ import { get } from 'lodash';
 import CheckHTTPHeader from '../../../src/policies/accessRestriction/CheckHttpHeader';
 import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
+import assertThrowsAsync from 'assert-throws-async';
 
 describe('<check-http-header />', () => {
 
@@ -88,7 +89,7 @@ describe('<check-http-header />', () => {
         assert.notEqual(get(appliedResult, 'context.response.body'), unauthorizedMessage);
     });
 
-    it("U-TEST-3 Shoud reject if no headers defined in policy", async () => {
+    it("U-TEST-3 Should reject if no headers defined in policy", async () => {
         const checkHTTPHeader = new CheckHTTPHeader();
         const request = getTestRequest();
         request.requestContext.headers = {
@@ -110,9 +111,9 @@ describe('<check-http-header />', () => {
             },
             elements: [],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-4 Should reject incorrect header with ignore-case false custom code and message", async () => {
@@ -148,9 +149,9 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-5 Should reject incorrect header with custom code and message", async () => {
@@ -186,9 +187,9 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-6 Should reject if header not in list", async () => {
@@ -224,9 +225,9 @@ describe('<check-http-header />', () => {
                     [{ type: "text", text: requiredHeaderValue }],
             }],
         };
-        const appliedResult = await checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => checkHTTPHeader.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-7 Should pass validation", async () => {
