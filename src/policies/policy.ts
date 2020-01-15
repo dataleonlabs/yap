@@ -170,7 +170,7 @@ export function YapPolicy(policyMetadata: {
             /**
              * Category of a policy
              */
-            public category: string = category;
+            public category: PolicyCategory = category;
 
             /**
              * Descritpion of a policy
