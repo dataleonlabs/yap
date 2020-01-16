@@ -39,7 +39,7 @@ describe('Core', () => {
     })
     class TestConnector extends Connector {
         public async execute(parent: any, args: any, context: Context, info: any) {
-            return new Promise(res=>res(result));
+            return new Promise(res => res(result));
         }
     }
     @YapConnector({
@@ -73,7 +73,7 @@ describe('Core', () => {
     });
 
     it('U-TEST-2 - Creates Yap core, executes request, handle exception', async () => {
-        const connector  = new TestErrorConnector();
+        const connector = new TestErrorConnector();
         const errResolvers = {
             Query: { fields: connector.execute },
         };
@@ -201,7 +201,7 @@ describe('Core', () => {
             </inbound>
         </policies>`);
 
-        const spy = sinon.spy(yap, 'triggerPolicy');
+        const spy = sinon.spy(policyManager, 'apply');
         await yap.applyPolicies(Scope.inbound, context);
         assert.equal(spy.callCount, 1);
 
@@ -233,7 +233,7 @@ describe('Core', () => {
             </outbound>
         </policies>`);
 
-        const spy = sinon.spy(yap, 'triggerPolicy');
+        const spy = sinon.spy(policyManager, 'apply');
         await yap.applyPolicies(Scope.inbound, context);
         await yap.applyPolicies(Scope.outbound, context);
         assert.equal(spy.callCount, 2);
@@ -262,7 +262,7 @@ describe('Core', () => {
             </outbound>
         </policies>`);
 
-        const spy = sinon.spy(yap, 'triggerPolicy');
+        const spy = sinon.spy(policyManager, 'apply');
         await yap.applyPolicies(Scope.inbound, context);
         assert.equal(spy.callCount, 1);
         spy.restore();

@@ -116,7 +116,7 @@ export default class Yap {
     public async applyPolicies(scope: Scope, context: Context): Promise<boolean> {
         if (this.policy[scope]) {
             for (const policyElement of this.policy[scope]) {
-                await this.triggerPolicy(policyElement, scope, context);
+                await policyManager.apply({ policyElement, context, scope });
             }
         }
         return true;
@@ -136,31 +136,6 @@ export default class Yap {
                 }
             }
         }
-    }
-
-    /**
-     * triggerPolicy
-     * Manage next and throw function
-     */
-    public triggerPolicy(policyElement: any, scope: Scope, context: Context) {
-        return new Promise(async (resolve: (value?: unknown) => void, reject: (reason?: any) => void) => {
-            // functio next
-            context.next = () => resolve();
-            context.throw = (statusCode: number, body: string) => {
-                context.response.statusCode = statusCode;
-                context.response.body = body;
-                reject(body);
-            };
-
-            try {
-                await policyManager.apply({ policyElement, context, scope });
-                resolve();
-            } catch (error) {
-                context.response.statusCode = 500;
-                context.response.body = error.message;
-                reject(error);
-            }
-        });
     }
 
     /**
