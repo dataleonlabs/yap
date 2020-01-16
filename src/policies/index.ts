@@ -1,4 +1,5 @@
 import vm from 'vm';
+import { ExecutionContext, PolicyCategory } from '..';
 import CheckHTTPHeader from './accessRestriction/CheckHttpHeader';
 import HostFilter from './accessRestriction/HostFilter';
 import IpFilter from './accessRestriction/IpFilter';
@@ -14,7 +15,7 @@ import SetVariable from './advanced/SetVariable';
 import ApiKey from './authentification/ApiKey';
 import AuthenticationBasic from './authentification/AuthenticationBasic';
 import CORS from './cors/cors';
-import Policy, { ExecutionContext, PolicyCategory, Scope} from "./policy";
+import Policy from "./policy";
 import FindAndReplace from './transformation/FindAndReplace';
 import JSONtoXML from './transformation/JSONToXML';
 import RewritePath from './transformation/RewritePath';

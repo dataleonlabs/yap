@@ -5,12 +5,10 @@ import { get, set } from 'lodash';
 import 'mocha';
 import * as sinon from 'sinon';
 import { xml2js } from 'xml-js';
-import Yap, { Context } from '../src/index';
+import Yap, { Context, Scope, ExecutionContext, PolicyCategory, YapConnector, Connector, } from '../src/index';
 import policyManager from '../src/policies';
-import Policy, { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
 import { getTestAwsContext, getTestContext, getTestRequest } from './tools';
-import { YapConnector } from '../src/connectors/decorator';
-import { ConnectorCategory, Connector } from '../src/connectors/connector';
+import { ConnectorCategory } from '../src/connectors/connector';
 
 describe('Core', () => {
 
@@ -284,14 +282,14 @@ describe('Core', () => {
             },
             validate: () => [],
         };
-        const policiesXML = `
+        const policies = `
         <policies>
             <outbound>
                 <custom-policy>
                 </custom-policy>
             </outbound>
         </policies>`;
-        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const yap = new Yap({ typeDefs, resolvers, policies, customPolicies: [customPolicy] });
         const request = getTestRequest();
         const awsContext = getTestAwsContext();
         request.body = query;
@@ -314,14 +312,14 @@ describe('Core', () => {
             },
             validate: () => [],
         };
-        const policiesXML = `
+        const policies = `
         <policies>
             <outbound>
                 <custom-policy>
                 </custom-policy>
             </outbound>
         </policies>`;
-        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const yap = new Yap({ typeDefs, resolvers, policies, customPolicies: [customPolicy] });
         yap.deletePolicy('custom-policy');
         assert.equal(policyManager.getPolicy('custom-policy'), undefined);
         assert.equal(yap.policy[Scope.outbound].find((p) => p.id === 'custom-policy'), undefined);
@@ -341,14 +339,14 @@ describe('Core', () => {
             },
             validate: () => [],
         };
-        const policiesXML = `
+        const policies = `
         <policies>
             <outbound>
                 <custom-policy>
                 </custom-policy>
             </outbound>
         </policies>`;
-        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const yap = new Yap({ typeDefs, resolvers, policies, customPolicies: [customPolicy] });
         const request = getTestRequest();
         const awsContext = getTestAwsContext();
         request.body = query;

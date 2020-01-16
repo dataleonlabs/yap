@@ -1,14 +1,11 @@
 import * as SentryNode from "@sentry/node";
 import assert from 'assert';
-import * as axios from 'axios';
-import { cloneDeep, get, set, unset } from 'lodash';
 import * as sinon from 'sinon';
 import { xml2js } from 'xml-js';
-import policyManager from "../../../src/policies";
-import SendRequest from '../../../src/policies/advanced/SendRequest';
 import Sentry from '../../../src/policies/advanced/Sentry';
-import Policy, { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 import { getTestContext } from '../../tools';
+import { set } from 'lodash';
 
 describe("<sentry/>", () => {
     it("Should init sentry with dsn", async () => {

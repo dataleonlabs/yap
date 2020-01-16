@@ -1,6 +1,6 @@
 import { get, set } from "lodash";
 import policyManager from "..";
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from "../policy";
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 const allowedPolicies = ["set-status", "set-header", "set-body"];
 
 /**

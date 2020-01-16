@@ -1,8 +1,8 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
 import IpFilter from '../../../src/policies/accessRestriction/IpFilter';
-import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
+import { Scope } from '../../../src';
 
 describe('<ip-filter />', () => {
   it('U-TEST-1 check allow IP', async () => {

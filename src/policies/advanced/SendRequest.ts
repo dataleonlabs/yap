@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 import { cloneDeep, get, set } from 'lodash';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 import policyManager from "../index";
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 const allowedPolicies = ["set-method", "set-header", "set-body"];
 

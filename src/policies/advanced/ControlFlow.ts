@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import policyManager, { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * control-flow policy

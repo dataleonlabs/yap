@@ -5,7 +5,7 @@ import { UI } from "./ui";
 /**
  * Connector class
  */
-export class Connector {
+export default class Connector {
     /**
      * String identificator for connector.
      */

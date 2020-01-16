@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
 import ReturnResponse from '../../../src/policies/advanced/ReturnResponse';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 import assertThrowsAsync from 'assert-throws-async';
 import { get } from 'lodash';
 import { getTestRequest } from '../../tools';

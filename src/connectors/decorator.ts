@@ -7,7 +7,7 @@ import { UI } from "./ui";
  * Decorates id, name, category, and ui params of connector
  * @param connectorMetadata argu
  */
-export function YapConnector(connectorMetadata: {
+export default function YapConnector(connectorMetadata: {
 
     /**
      * String identificator for connector.

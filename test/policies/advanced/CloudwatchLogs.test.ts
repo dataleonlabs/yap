@@ -2,15 +2,12 @@ import assert from 'assert';
 import * as AWS from 'aws-sdk';
 import { PutLogEventsResponse } from 'aws-sdk/clients/cloudwatchlogs';
 import { PromiseResult, Request } from 'aws-sdk/lib/request';
-import * as axios from 'axios';
-import { cloneDeep, get, set, unset } from 'lodash';
-import * as sinon from 'sinon';
+import { get, set, unset } from 'lodash';
 import { Readable } from 'stream';
 import { xml2js } from 'xml-js';
 import CloudWatchLogs from '../../../src/policies/advanced/CloudwatchLogs';
-import SendRequest from '../../../src/policies/advanced/SendRequest';
-import Policy, { Scope } from '../../../src/policies/policy';
 import { getTestContext } from '../../tools';
+import { Scope } from '../../../src';
 
 const putLogsResult: PromiseResult<AWS.CloudWatchLogs.PutLogEventsResponse, AWS.AWSError>
     = {
