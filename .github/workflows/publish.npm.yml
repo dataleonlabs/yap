@@ -25,7 +25,7 @@ jobs:
     - name: test and publish
       run: |
         npm install -g standard-version nyc mocha typescript ts-node yarn auto-changelog
-        npm ci
+        yarn
         yarn lint
         yarn test:integration
         nyc check-coverage --lines 94 --functions 94 --branches 89 --statements 94
