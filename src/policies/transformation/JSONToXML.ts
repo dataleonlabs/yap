@@ -1,6 +1,6 @@
 import { get, set } from 'lodash';
 import { js2xml } from 'xml-js';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * Json to xml policy

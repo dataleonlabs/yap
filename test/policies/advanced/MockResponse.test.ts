@@ -2,7 +2,7 @@ import assert from 'assert';
 import { get, set } from 'lodash';
 import { xml2js } from 'xml-js';
 import MockResponse from '../../../src/policies/advanced/MockResponse';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 
 describe('<mock-response />', () => {
 

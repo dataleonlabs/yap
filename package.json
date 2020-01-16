@@ -2,8 +2,8 @@
   "name": "@youngapp/yap",
   "version": "1.13.0",
   "description": "Yap Core",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -58,6 +58,7 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@types/mocha": "^5.2.7",
+    "assert-throws-async": "^3.0.0",
     "husky": "^3.0.0",
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
@@ -73,6 +74,7 @@
     "@types/ip": "^1.1.0",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.17",
+    "@types/node-fetch": "^2.5.4",
     "@types/path-to-regexp": "^1.7.0",
     "@types/sinon": "^7.5.1",
     "@types/xml-js": "^1.0.0",

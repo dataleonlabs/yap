@@ -1,8 +1,9 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import ApiKey from '../../../src/policies/authentification/ApiKey';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 import { getTestRequest } from '../../tools';
+import assertThrowsAsync from 'assert-throws-async';
 
 const unauthorizedCode = 401;
 const unauthorizedMessage = "unauthorized";
@@ -67,9 +68,9 @@ describe("<api-key />", () => {
                         [{ type: "text", text: "someKey" }],
                 }],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => apiKey.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-3 Should not pass if no key sent", async () => {
@@ -99,9 +100,9 @@ describe("<api-key />", () => {
                         [{ type: "text", text: "someKey" }],
                 }],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => apiKey.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-3 Should not pass if api key sent but list is empty", async () => {
@@ -124,9 +125,9 @@ describe("<api-key />", () => {
             elements:
                 [],
         };
-        const appliedResult = await apiKey.apply({ policyElement: policy, context, scope: Scope.inbound });
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => apiKey.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-4 Should validate policy", async () => {

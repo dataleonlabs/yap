@@ -1,6 +1,6 @@
 import { get } from 'lodash';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 import { tryExecuteFieldValue } from "../index";
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
 
 /**
  * set-method policy

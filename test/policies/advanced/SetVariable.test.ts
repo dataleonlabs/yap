@@ -2,7 +2,7 @@ import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
 import SetVariable from '../../../src/policies/advanced/SetVariable';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 
 describe('<set-variable />', () => {
 

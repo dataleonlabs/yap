@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
 import SetStatus from '../../../src/policies/advanced/SetStatus';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 
 describe('<set-status />', () => {
 

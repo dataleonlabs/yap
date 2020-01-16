@@ -1,7 +1,7 @@
 import * as AWS from 'aws-sdk';
 import { get, set } from 'lodash';
 import policyManager, { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * The cloudwatch-logs policy sends logs to Amazon CloudWatch.

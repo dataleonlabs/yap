@@ -5,10 +5,10 @@ import { get, set } from 'lodash';
 import 'mocha';
 import * as sinon from 'sinon';
 import { xml2js } from 'xml-js';
-import Yap from '../src/index';
+import Yap, { Context, Scope, ExecutionContext, PolicyCategory, YapConnector, Connector, } from '../src/index';
 import policyManager from '../src/policies';
-import { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
 import { getTestAwsContext, getTestContext, getTestRequest } from './tools';
+import { ConnectorCategory } from '../src/connectors/connector';
 
 describe('Core', () => {
 
@@ -27,13 +27,38 @@ describe('Core', () => {
         type Field { id: String, data: String }
     `;
 
-    const resolvers = {
-        Query: { fields: () => result },
-    };
-
     const query = JSON.stringify({
         query: "query fields{ fields { id, data } }",
     });
+
+    @YapConnector({
+        id: "testConnector",
+        name: "testConnector",
+        category: ConnectorCategory.dataprocessing,
+        description: "testDescription"
+    })
+    class TestConnector extends Connector {
+        public async execute(parent: any, args: any, context: Context, info: any) {
+            return new Promise(res=>res(result));
+        }
+    }
+    @YapConnector({
+        id: "testErrorConnector",
+        name: "testErrorConnector",
+        category: ConnectorCategory.dataprocessing,
+        description: "testDescription"
+    })
+    class TestErrorConnector extends Connector {
+        public execute(parent: any, args: any, context: Context, info: any) {
+            throw new Error("Some error");
+        }
+    }
+
+    const testConnector = new TestConnector;
+
+    const resolvers = {
+        Query: { fields: testConnector.execute },
+    };
 
     it('U-TEST-1 - Creates Yap core, executes request', async () => {
         const yap = new Yap({ typeDefs, resolvers });
@@ -48,8 +73,9 @@ describe('Core', () => {
     });
 
     it('U-TEST-2 - Creates Yap core, executes request, handle exception', async () => {
+        const connector  = new TestErrorConnector();
         const errResolvers = {
-            Query: { fields: () => { throw new Error("Some error"); } },
+            Query: { fields: connector.execute },
         };
         const yap = new Yap({ typeDefs, resolvers: errResolvers });
         const request = getTestRequest();
@@ -256,14 +282,14 @@ describe('Core', () => {
             },
             validate: () => [],
         };
-        const policiesXML = `
+        const policies = `
         <policies>
             <outbound>
                 <custom-policy>
                 </custom-policy>
             </outbound>
         </policies>`;
-        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const yap = new Yap({ typeDefs, resolvers, policies, customPolicies: [customPolicy] });
         const request = getTestRequest();
         const awsContext = getTestAwsContext();
         request.body = query;
@@ -286,14 +312,14 @@ describe('Core', () => {
             },
             validate: () => [],
         };
-        const policiesXML = `
+        const policies = `
         <policies>
             <outbound>
                 <custom-policy>
                 </custom-policy>
             </outbound>
         </policies>`;
-        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const yap = new Yap({ typeDefs, resolvers, policies, customPolicies: [customPolicy] });
         yap.deletePolicy('custom-policy');
         assert.equal(policyManager.getPolicy('custom-policy'), undefined);
         assert.equal(yap.policy[Scope.outbound].find((p) => p.id === 'custom-policy'), undefined);
@@ -313,14 +339,14 @@ describe('Core', () => {
             },
             validate: () => [],
         };
-        const policiesXML = `
+        const policies = `
         <policies>
             <outbound>
                 <custom-policy>
                 </custom-policy>
             </outbound>
         </policies>`;
-        const yap = new Yap({ typeDefs, resolvers, policiesXML, policies: [customPolicy] });
+        const yap = new Yap({ typeDefs, resolvers, policies, customPolicies: [customPolicy] });
         const request = getTestRequest();
         const awsContext = getTestAwsContext();
         request.body = query;

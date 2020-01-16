@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * Domain Filter Policy
@@ -39,6 +39,7 @@ export default class HostFilter extends Policy {
         if (!authorised) {
             context.response.statusCode = policyElement.attributes["failed-check-httpcode"];
             context.response.body = policyElement.attributes["failed-check-error-message"];
+            throw new Error("Not authorized");
         }
         return executionContext;
     }

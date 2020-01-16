@@ -1,6 +1,6 @@
 import { get, set } from "lodash";
 import policyManager from "..";
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from "../policy";
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 const allowedPolicies = ["set-status", "set-header", "set-body"];
 
 /**
@@ -48,10 +48,11 @@ export default class ReturnResponse extends Policy {
                 if (responseVariableName) {
                     set(policy, 'attributes.response-variable-name', responseVariableName);
                 }
-                const appliedResult: any = await policy.apply({ policyElement: element, context, scope });
+                const appliedResult: any = await policy.apply({ policyElement: element, context, scope: Scope.outbound });
                 context = appliedResult.context;
             }
         }
+        throw new Error("Response terminated by <return-response>");
         return executionContext;
     }
 

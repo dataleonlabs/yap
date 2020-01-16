@@ -1,7 +1,10 @@
 import assert from 'assert';
 import { xml2js } from 'xml-js';
 import ReturnResponse from '../../../src/policies/advanced/ReturnResponse';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
+import assertThrowsAsync from 'assert-throws-async';
+import { get } from 'lodash';
+import { getTestRequest } from '../../tools';
 
 describe('<return-response />', () => {
 
@@ -12,16 +15,20 @@ describe('<return-response />', () => {
                 <set-header name="WWW-Authenticate" exists-action="override">
                    <value>Bearer error="invalid_token"</value>
                 </set-header>
+                <set-body>bJtrpFi1fO1JMCcwLx8uZyAg</set-body>
              </return-response>
             `);
     const returnResponse = new ReturnResponse();
-    const resIp = await returnResponse.apply({
-      policyElement: res.elements[0], context: {
-        request: { httpMethod: 'POST', path: '/contacts/yap' },
-        response: {}, variables: {}, connection: {},
-      }, scope: Scope.inbound,
-    });
-    assert(resIp.context);
+    const context = {
+      request: getTestRequest(),
+      response: {}, variables: {}, connection: {},
+    };
+    await assertThrowsAsync(() => returnResponse.apply({
+      policyElement: res.elements[0], context, scope: Scope.inbound
+    }), Error)
+    assert.equal(get(context, 'response.statusCode'), '401');
+    assert.equal(get(context, 'response.body'), 'bJtrpFi1fO1JMCcwLx8uZyAg');
+    assert.deepEqual(get(context, `response.headers['WWW-Authenticate']`), [ 'Bearer error="invalid_token"' ])
   });
 
   it('U-TEST-2 - Should validate policy', async () => {

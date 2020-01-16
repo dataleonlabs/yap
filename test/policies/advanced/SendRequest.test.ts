@@ -3,8 +3,8 @@ import * as axios from 'axios';
 import { cloneDeep, get, unset } from 'lodash';
 import * as sinon from 'sinon';
 import SendRequest from '../../../src/policies/advanced/SendRequest';
-import { Scope } from '../../../src/policies/policy';
 import { getTestContext } from '../../tools';
+import { Scope } from '../../../src';
 
 describe("<send-request/>", () => {
 

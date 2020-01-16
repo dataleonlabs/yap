@@ -2,7 +2,7 @@ import { cidrSubnet, toLong } from 'ip';
 import { get, isEqual } from 'lodash';
 import { isIP } from 'net';
 import { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * ip-filter policy

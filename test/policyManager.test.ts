@@ -1,7 +1,7 @@
 import assert from 'assert';
 import * as sinon from 'sinon';
 import policyManager, { PolicyManager, tryExecuteFieldValue } from '../src/policies';
-import { ExecutionContext, PolicyCategory, Scope } from '../src/policies/policy';
+import { ExecutionContext, PolicyCategory, Scope } from '../src/index';
 
 describe("Policy manager", async () => {
 

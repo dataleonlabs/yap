@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { xml2js } from 'xml-js';
 import policyManager from '../../../src/policies';
 import SetMethod from '../../../src/policies/advanced/SetMethod';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 
 describe('<set-method />', () => {
 

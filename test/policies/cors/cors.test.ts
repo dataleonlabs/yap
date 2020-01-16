@@ -2,7 +2,7 @@ import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
 import CORS from '../../../src/policies/cors/cors';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 
 // follow https://stackoverflow.com/questions/33062097/how-can-i-retrieve-a-users-public-ip-address-via-amazon-api-gateway-lambda-n
 describe('<cors />', () => {

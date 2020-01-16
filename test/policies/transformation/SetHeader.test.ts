@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import { xml2js } from 'xml-js';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 import SetHeader from '../../../src/policies/transformation/SetHeader';
 
 describe('<set-header />', () => {

@@ -1,8 +1,9 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import HostFilter from "../../../src/policies/accessRestriction/HostFilter";
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 import { getTestRequest } from '../../tools';
+import assertThrowsAsync from 'assert-throws-async';
 
 const allowedHost = "allowedHost";
 const deniedHost = "deniedHost";
@@ -71,9 +72,9 @@ describe("<host-filter />", () => {
                         [{ type: "text", text: allowedHost + '1' }],
                 }],
         };
-        const appliedResult = await hostFilter.apply({ policyElement: policy, context, scope:Scope.inbound});
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => hostFilter.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-3 Should not pass if host in forbid list", async () => {
@@ -104,9 +105,9 @@ describe("<host-filter />", () => {
                         [{ type: "text", text: deniedHost }],
                 }],
         };
-        const appliedResult = await hostFilter.apply({ policyElement: policy, context, scope:Scope.inbound});
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => hostFilter.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-4 Should pass if host in not in forbid list", async () => {
@@ -163,9 +164,9 @@ describe("<host-filter />", () => {
             elements:
                 [],
         };
-        const appliedResult = await hostFilter.apply({ policyElement: policy, context, scope:Scope.inbound});
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => hostFilter.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-6 Should pass if forbid list empty", async () => {
@@ -222,9 +223,9 @@ describe("<host-filter />", () => {
                         [{ type: "text", text: allowedHost }],
                 }],
         };
-        const appliedResult = await hostFilter.apply({ policyElement: policy, context, scope:Scope.inbound});
-        assert.equal(get(appliedResult, 'context.response.statusCode'), unauthorizedCode);
-        assert.equal(get(appliedResult, 'context.response.body'), unauthorizedMessage);
+        await assertThrowsAsync(() => hostFilter.apply({ policyElement: policy, context, scope: Scope.inbound }), Error)
+        assert.equal(get(context, 'response.statusCode'), unauthorizedCode);
+        assert.equal(get(context, 'response.body'), unauthorizedMessage);
     });
 
     it("U-TEST-8 Should pass if forbid and no header sent", async () => {
