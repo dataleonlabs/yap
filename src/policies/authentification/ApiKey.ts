@@ -43,6 +43,7 @@ export default class ApiKey extends Policy {
         if (!authorised) {
             context.response.statusCode = policyElement.attributes["failed-check-httpcode"];
             context.response.body = policyElement.attributes["failed-check-error-message"];
+            throw new Error("API Key not authorized");
         }
         return executionContext;
     }
