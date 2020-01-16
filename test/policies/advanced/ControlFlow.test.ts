@@ -1,11 +1,10 @@
 import assert from 'assert';
 import { cloneDeep, get, set } from 'lodash';
 import * as sinon from 'sinon';
-import { xml2js } from 'xml-js';
 import policyManager from '../../../src/policies';
 import ControlFlow from '../../../src/policies/advanced/ControlFlow';
-import { ExecutionContext, Scope } from '../../../src/policies/policy';
 import { getTestContext } from '../../tools';
+import { ExecutionContext, Scope } from '../../../src';
 
 const policy: any = {
     type: "element",

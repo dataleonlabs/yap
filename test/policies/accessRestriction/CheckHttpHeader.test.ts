@@ -1,9 +1,9 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import CheckHTTPHeader from '../../../src/policies/accessRestriction/CheckHttpHeader';
-import { Scope } from '../../../src/policies/policy';
 import { getTestRequest } from '../../tools';
 import assertThrowsAsync from 'assert-throws-async';
+import { Scope } from '../../../src';
 
 describe('<check-http-header />', () => {
 

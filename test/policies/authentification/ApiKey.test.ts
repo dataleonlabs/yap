@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { get } from 'lodash';
 import ApiKey from '../../../src/policies/authentification/ApiKey';
-import { Scope } from '../../../src/policies/policy';
+import { Scope } from '../../../src';
 import { getTestRequest } from '../../tools';
 import assertThrowsAsync from 'assert-throws-async';
 

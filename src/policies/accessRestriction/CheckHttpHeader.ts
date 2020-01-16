@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * check-header policy to enforce that a request has a specified HTTP header.

@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * Domain Filter Policy

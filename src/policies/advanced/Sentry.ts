@@ -1,7 +1,7 @@
 import { captureException, init } from "@sentry/node";
 import { get } from 'lodash';
 import policyManager, { tryExecuteFieldValue } from '..';
-import Policy, { ExecutionContext, PolicyCategory, Scope, YapPolicy } from '../policy';
+import { ExecutionContext, Policy, PolicyCategory, Scope, YapPolicy } from '../../';
 
 /**
  * The sentry policy prevent crashes across your entire stack.
