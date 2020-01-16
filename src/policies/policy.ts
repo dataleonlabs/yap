@@ -1,5 +1,5 @@
 import { Context } from "..";
-import ExecutionContext from "./executioncontext";
+import ExecutionContext from "./ExecutionContext";
 import PolicyCategory from "./PolicyCategory";
 import Scope from "./Scope";
 
