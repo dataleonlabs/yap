@@ -1,8 +1,8 @@
 The project is under construction 💪🏾. You can contribute or click ⭐️ (see above :arrow_upper_right:   ) to support us. 
-The first release to be available early February. Follow our news 🏅 on [Twitter](https://twitter.com/youngapp_pf) and [Spectrum](https://spectrum.chat/yap?tab=posts).
+The first release to be available early February. Follow our news 🏅 on [Twitter](https://twitter.com/youngapp_pf) and [Slack](https://join.slack.com/t/yapcommunity/shared_invite/enQtOTA2NTcxNjc1OTI2LTA3YmNjMWRhY2E1NjdkODE2MjU4ZTcxZmU0ZmYyMzkyMDliYjM3Nzk4YzI1NTEzYjA1MjYxNWJlNGFlMjIzMDY).
 
 # Less code, safer API.
-[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/yap) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/PublishNPM/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/570597c92b1e4ca9b67b2a49d9c2aa51)](https://www.codacy.com/gh/youngapp/yap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=youngapp/yap&amp;utm_campaign=Badge_Grade) ![Codacy branch coverage](https://img.shields.io/codacy/coverage/e3497699cef94781936c5103f84e46ab/master) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap) [![Requirements Status](https://requires.io/github/youngapp/yap/requirements.svg?branch=master)](https://requires.io/github/youngapp/yap/requirements/?branch=master)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/PublishNPM/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/570597c92b1e4ca9b67b2a49d9c2aa51)](https://www.codacy.com/gh/youngapp/yap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=youngapp/yap&amp;utm_campaign=Badge_Grade) ![Codacy branch coverage](https://img.shields.io/codacy/coverage/e3497699cef94781936c5103f84e46ab/master) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap) [![Requirements Status](https://requires.io/github/youngapp/yap/requirements.svg?branch=master)](https://requires.io/github/youngapp/yap/requirements/?branch=master)
 
 Yap is the lightweight microservices API gateway in GraphQL that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security entreprise-gradle.
 
@@ -84,7 +84,7 @@ No contribution is too small – we encourage you to provide feedback and [repor
 ## Community support 🌍
 For general help using Yap, please refer to [the official Yap documentation](https://manual.youngapp.co/community/). For additional help, you can use one of these channels to ask a question:
 - [StackOverflow](http://stackoverflow.com/questions/tagged/yap)
-- [Spectrum](https://spectrum.chat/yap) (Channel community)
+- [Slack](https://join.slack.com/t/yapcommunity/shared_invite/enQtOTA2NTcxNjc1OTI2LTA3YmNjMWRhY2E1NjdkODE2MjU4ZTcxZmU0ZmYyMzkyMDliYjM3Nzk4YzI1NTEzYjA1MjYxNWJlNGFlMjIzMDY) (Channel community)
 - [GitHub](https://github.com/youngapp/yap) (Bug reports, feature requests, contributions)
 - [Roadmap](https://github.com/youngapp/yap/projects/1) (Roadmap)
 - [Twitter](https://twitter.com/youngapp_pf) (Get the news fast)
