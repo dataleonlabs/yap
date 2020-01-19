@@ -33,9 +33,9 @@ jobs:
         yarn build
         git config --global user.email "devops@youngapp.co"
         git config user.name "devops"
-        npm version minor
-        echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-        npm publish --access public
+        # npm version minor
+        # echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+        # npm publish --access public
         git fetch --all
         git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
         git fetch origin
