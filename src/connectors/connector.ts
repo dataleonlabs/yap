@@ -34,14 +34,14 @@ export default class Connector {
     /**
      * Test function
      */
-    public test() {
+    public async test() {
         throw new Error("Method validate is not implemented");
     }
 
     /**
      * Execute function
      */
-    public execute(parent: any, args: any, context: Context, info: any) {
+    public async execute(parent: any, args: any, context: Context, info: any):Promise<any> {
         throw new Error("Method validate is not implemented");
     }
 

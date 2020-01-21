@@ -39,7 +39,7 @@ describe('Core', () => {
     })
     class TestConnector extends Connector {
         public async execute(parent: any, args: any, context: Context, info: any) {
-            return new Promise(res => res(result));
+            return await new Promise(res => res(result));
         }
     }
     @YapConnector({
@@ -49,7 +49,7 @@ describe('Core', () => {
         description: "testDescription"
     })
     class TestErrorConnector extends Connector {
-        public execute(parent: any, args: any, context: Context, info: any) {
+        public async execute(parent: any, args: any, context: Context, info: any) {
             throw new Error("Some error");
         }
     }
