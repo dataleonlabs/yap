@@ -1,4 +1,4 @@
-import { ConnectorCategory } from "./connector";
+import ConnectorCategory from "./ConnectorCategory";
 
 import { UI } from "./ui";
 

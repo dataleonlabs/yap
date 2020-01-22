@@ -8,7 +8,7 @@ import { xml2js } from 'xml-js';
 import Yap, { Context, Scope, ExecutionContext, PolicyCategory, YapConnector, Connector, } from '../src/index';
 import policyManager from '../src/policies';
 import { getTestAwsContext, getTestContext, getTestRequest } from './tools';
-import { ConnectorCategory } from '../src/connectors/connector';
+import ConnectorCategory from '../src/connectors/ConnectorCategory';
 
 describe('Core', () => {
 
