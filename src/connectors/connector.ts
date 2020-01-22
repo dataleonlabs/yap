@@ -1,7 +1,7 @@
-import { Context } from "..";
 import IConnection from "./connection";
 import ConnectorCategory from "./ConnectorCategory";
 import { UI } from "./ui";
+import Context from "../Context";
 
 /**
  * Connector class
@@ -36,14 +36,14 @@ export default class Connector {
      * Test function
      */
     public async test() {
-        throw new Error("Method validate is not implemented");
+        throw new Error("Method test is not implemented");
     }
 
     /**
      * Execute function
      */
     public async execute(parent: any, args: any, context: Context, info: any):Promise<any> {
-        throw new Error("Method validate is not implemented");
+        throw new Error("Method execute is not implemented");
     }
 
     /**
