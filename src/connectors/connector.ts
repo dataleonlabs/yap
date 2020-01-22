@@ -1,7 +1,7 @@
+import Context from "../Context";
 import IConnection from "./connection";
 import ConnectorCategory from "./ConnectorCategory";
 import { UI } from "./ui";
-import Context from "../Context";
 
 /**
  * Connector class
