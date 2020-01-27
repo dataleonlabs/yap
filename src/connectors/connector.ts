@@ -1,5 +1,6 @@
-import { Context } from "..";
+import Context from "../Context";
 import IConnection from "./connection";
+import ConnectorCategory from "./ConnectorCategory";
 import { UI } from "./ui";
 
 /**
@@ -49,12 +50,4 @@ export default class Connector {
      * Connector UI
      */
     public ui?: UI;
-}
-
-/**
- * Connector category enum
- */
-export enum ConnectorCategory {
-    'undefined' = 'undefined',
-    'dataprocessing' = 'data-processing',
 }

@@ -8,6 +8,7 @@ export { default as YapPolicy } from "./policies/decorator";
 export { default as Policy } from './policies/policy';
 
 export { default as Connector } from './connectors/connector';
+export { default as ConnectorCategory } from './connectors/ConnectorCategory';
 export { default as Connection } from './connectors/connection';
 export { default as YapConnector } from './connectors/decorator';
 export { default as fieldParameter } from './connectors/fieldParameter';

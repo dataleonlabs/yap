@@ -31,8 +31,8 @@ export default class Yap {
      * Instance of async lambda server handler
      */
     private lambdaServerHandler: (
-        event: APIGatewayProxyEvent,
-        context: AWSContext,
+        context: Context,
+        awsContext: AWSContext,
     ) => Promise<APIGatewayProxyResult>;
 
     /**
@@ -84,16 +84,19 @@ export default class Yap {
         }
         this.lambdaServer = new ApolloServer({ typeDefs, resolvers, schemaDirectives });
         const awsHandler = this.lambdaServer.createHandler();
-        this.lambdaServerHandler = (event: APIGatewayProxyEvent,
-            context: AWSContext) => new Promise((resolve, reject) => {
+        this.lambdaServerHandler = (context: Context,
+            awsContext: AWSContext) => new Promise((resolve, reject) => {
                 try {
-                    awsHandler(event, context, (error?: Error | null | string, result?: APIGatewayProxyResult) => {
-                        if (error) {
-                            reject(error);
-                        } else {
-                            resolve(result);
-                        }
-                    });
+                    awsHandler(
+                        context.request as APIGatewayProxyEvent,
+                        context as any,
+                        (error?: Error | null | string, result?: APIGatewayProxyResult) => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(result);
+                            }
+                        });
                 } catch (callError) {
                     reject(callError);
                 }
@@ -109,7 +112,7 @@ export default class Yap {
         try {
             await this.applyPolicies(Scope.inbound, context);
 
-            const response = await this.lambdaServerHandler(context.request, awsContext);
+            const response = await this.lambdaServerHandler(context, awsContext);
             context.response = response;
 
             await this.applyPolicies(Scope.outbound, context);
@@ -145,9 +148,9 @@ export default class Yap {
      * @param id id of policy
      */
     public deletePolicy(id: string) {
-        for(const [scope, policies] of Object.entries(this.policy)) {
-            for(let i=0; i<policies.length; i++) {
-                if(this.policy[scope][i].name === id) {
+        for (const [scope, policies] of Object.entries(this.policy)) {
+            for (let i = 0; i < policies.length; i++) {
+                if (this.policy[scope][i].name === id) {
                     policies.splice(i, 1);
                     policyManager.deletePolicy(id);
                     break;

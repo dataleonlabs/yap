@@ -11,12 +11,6 @@ export default interface Context {
     /** response */
     response: Response;
 
-    /** next function */
-    next?: () => void;
-
-    /** throw */
-    throw?: (statusCode: number, body: any) => void;
-
     /** Fields */
     readonly fields?: { [key: string]: any };
 
