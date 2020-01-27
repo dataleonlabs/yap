@@ -12,6 +12,8 @@ import { get, set } from "lodash";
 
 import { xml2js } from "xml-js";
 
+import directives from "./directives";
+
 /**
  * Yap api gateway
  */
@@ -41,7 +43,12 @@ export default class Yap {
         /**
          * Graph QL type definitions as string
          */
-        typeDefs: string,
+        typeDefs: string | string[],
+
+        /**
+         * Graph QL Directives
+         */
+        schemaDirectives?: { [key: string]: any},
 
         /**
          * Graph QL resolvers
@@ -57,14 +64,25 @@ export default class Yap {
          */
         customPolicies?: Policy[],
     }) {
-        const { typeDefs, resolvers, policies, customPolicies } = args;
+        const { resolvers, policies, customPolicies } = args;
+        let { typeDefs, schemaDirectives } = args;
         if (customPolicies) {
             customPolicies.map((policy) => policyManager.addPolicy(policy));
         }
         if (policies) {
             this.loadPolicies(policies);
         }
-        this.lambdaServer = new ApolloServer({ typeDefs, resolvers });
+        if(typeof typeDefs === "string") {
+            typeDefs = [ typeDefs ];
+        }
+        if(!schemaDirectives) {
+            schemaDirectives = {};
+        }
+        for(const [ directiveKey, directive] of Object.entries(directives)) {
+            typeDefs.push(directive.definition);
+            schemaDirectives[directiveKey] = directive.directive;
+        }
+        this.lambdaServer = new ApolloServer({ typeDefs, resolvers, schemaDirectives });
         const awsHandler = this.lambdaServer.createHandler();
         this.lambdaServerHandler = (context: Context,
             awsContext: AWSContext) => new Promise((resolve, reject) => {
