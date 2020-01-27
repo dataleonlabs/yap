@@ -96,6 +96,7 @@ describe("Policy manager", async () => {
     });
 
     it("U-TEST-6 Singleton should have required policy list", async () => {
+        policyManager.deletePolicy('custom-policy');
         const requiredPolicies = [
             'check-header',
             'host-filter',
