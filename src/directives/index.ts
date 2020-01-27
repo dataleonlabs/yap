@@ -1,6 +1,6 @@
 import trim from './trim';
 
-const directives = {
+const directives:{ [key:string]:any } = {
     trim,
 };
 
