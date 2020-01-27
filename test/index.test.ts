@@ -21,6 +21,10 @@ describe('Core', () => {
             id: "2",
             data: "second",
         },
+        {
+            id: "3",
+            data: "thirdUntrim    ",
+        },
     ];
     const typeDefs = `
         type Query { fields: [Field] }
