@@ -45,7 +45,7 @@ teams discover, triage, and prioritize errors in real-time.
 ## Installing
 It's an official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda.
 
-###### With yarm
+###### With yarn
 ```
 npx create yap my-api
 cd my-api
