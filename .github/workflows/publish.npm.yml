@@ -36,18 +36,18 @@ jobs:
         npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
-        git fetch --all
-        git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-        git fetch origin
-        git checkout develop
-        git checkout master
-        git checkout develop
-        auto-changelog
-        git add CHANGELOG.md
-        git commit --amend -m "chore(release) - [ci skip]"
-        git merge --no-ff master
-        git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git --follow-tags
-        git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git develop --follow-tags
+        # git fetch --all
+        # git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+        # git fetch origin
+        # git checkout develop
+        # git checkout master
+        # git checkout develop
+        # auto-changelog
+        # git add CHANGELOG.md
+        # git commit --amend -m "chore(release) - [ci skip]"
+        # git merge --no-ff master
+        # git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git --follow-tags
+        # git push https://$USERNAME:$PASSWORD@github.com/youngapp/yap.git develop --follow-tags
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
