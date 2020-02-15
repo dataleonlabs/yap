@@ -1,9 +1,7 @@
 import { SchemaDirectiveVisitor } from "apollo-server-lambda";
-import { readFileSync } from "fs";
 import { defaultFieldResolver } from "graphql";
-import { resolve } from "path";
 
-const definition = readFileSync(resolve(__dirname, './trim.graphql')).toString();
+const definition = 'directive @trim on FIELD_DEFINITION';
 
 /**
  * GraphQL Directive to trim a string
