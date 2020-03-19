@@ -25,12 +25,12 @@ It's an official version for JavaScript, available for Node.js backends, Serverl
 
 ###### With yarn
 ```
-$ yarn install koa
+yarn install yap
 ```
 
 ###### With npm
 ```
-$ npm install yap
+npm install yap
 ```
 
 ## Hello API
