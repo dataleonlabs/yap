@@ -7,6 +7,7 @@ import { Context, Scope } from ".";
 import directives from "./directives";
 import policyManager, { internalPolicies } from "./policies";
 import Policy from "./policies/policy";
+import scalars from "./scalars";
 const colors = require('colors/safe');
 
 /**
@@ -81,7 +82,7 @@ export default class Yap {
             this.loadPolicies(policies);
         }
         if(typeof typeDefs === "string") {
-            typeDefs = [ typeDefs ];
+            typeDefs = [scalars.typeDefs, typeDefs];
         }
         if(!schemaDirectives) {
             schemaDirectives = {};
@@ -90,7 +91,8 @@ export default class Yap {
             typeDefs.push(directive.definition);
             schemaDirectives[directiveKey] = directive.directive;
         }
-        this.lambdaServer = new ApolloServer({ typeDefs, resolvers, schemaDirectives });
+
+        this.lambdaServer = new ApolloServer({ typeDefs, resolvers: { ...scalars.resolvers, ...resolvers }, schemaDirectives });
         const awsHandler = this.lambdaServer.createHandler();
         this.lambdaServerHandler = (context: Context,
             awsContext: AWSContext) => new Promise((resolve, reject) => {
