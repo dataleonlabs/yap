@@ -41,11 +41,9 @@ import { Yap } from "@youngapp/yap";
 import typeDefs from "./schema.graphql";
 import resolvers from "./resolvers.ts";
 
-// The Yap constructor requires three parameters:
-// your schema definition, resolvers.
+// Your schema definition and resolvers GraphQL
 const app = new Yap({ typeDefs, resolvers });
 
-// Listen on http
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!')
 })
@@ -57,8 +55,7 @@ import { Yap } from "@youngapp/yap";
 import typeDefs from "./schema.graphql";
 import resolvers from "./resolvers.ts";
 
-// The Yap constructor requires three parameters:
-// your schema definition and resolvers.
+// Your schema definition and resolvers GraphQL
 const app = new Yap({ typeDefs, resolvers });
 
 // A simple handler for AWS Lambda.
