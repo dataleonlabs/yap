@@ -33,7 +33,7 @@ jobs:
         yarn build
         # git config --global user.email "devops@youngapp.co"
         # git config user.name "devops"
-        npm version minor
+        # npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
         # git fetch --all
