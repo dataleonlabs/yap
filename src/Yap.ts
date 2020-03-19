@@ -1,18 +1,21 @@
-import Policy from "./policies/policy";
-
 import { ApolloServer } from "apollo-server-lambda";
-
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context as AWSContext } from "aws-lambda";
-
-import policyManager, { internalPolicies } from "./policies";
-
-import { Context, Scope } from ".";
-
+import http from "http";
 import { get, set } from "lodash";
-
 import { xml2js } from "xml-js";
-
+import { Context, Scope } from ".";
 import directives from "./directives";
+import policyManager, { internalPolicies } from "./policies";
+import Policy from "./policies/policy";
+const colors = require('colors/safe');
+
+/**
+ * Options for http server
+ */
+interface Options {
+    /** env for debug log */
+    env: "development" | "production";
+}
 
 /**
  * Yap api gateway
@@ -26,6 +29,11 @@ export default class Yap {
      * Instance of lambda server
      */
     public lambdaServer: ApolloServer;
+
+    /**
+     * httpServer
+     */
+    public server: http.Server | null = null;
 
     /**
      * Instance of async lambda server handler
@@ -129,6 +137,77 @@ export default class Yap {
             }
         }
         return context.response;
+    }
+
+    /**
+     * Listen for connections.
+     *
+     * A node `http.Server` is returned, with this
+     * application (which is a `Function`) as its
+     * callback. If you wish to create both an HTTP
+     * and HTTPS server you may do so with the "http"
+     * and "https" modules as shown here:
+     *
+     *    var http = require('http')
+     *      , https = require('https')
+     *      , yap = require('yap')
+     *      , app = new Yap();
+     *
+     *    http.createServer(app).listen(80);
+     *    https.createServer({ ... }, app).listen(443);
+     *
+     * @return {http.Server}
+     * @public
+     */
+    public listen(port: number, options?: Options): http.Server {
+        this.server = http.createServer(async (req: any, res: any) => {
+            let body: any = [];
+            req.on('data', (chunk: string) => {
+                body.push(chunk);
+            });
+            req.on('end', () => {
+                body = Buffer.concat(body).toString();
+            });
+            const event: any = {
+                httpMethod: req.method,
+                ...req,
+                body,
+            };
+            const queryResponse = await this.handler(event, {
+                callbackWaitsForEmptyEventLoop: false,
+                functionName: "1",
+                functionVersion: "1",
+                invokedFunctionArn: "1",
+                memoryLimitInMB: "100",
+                awsRequestId: "1",
+                logGroupName: "1",
+                logStreamName: "1",
+                getRemainingTimeInMillis: () => 1,
+                done: (error?: Error, result?: any) => void 0,
+                fail: (error: Error | string) => void 0,
+                succeed: (messageOrObject: any) => void 0,
+            });
+            res.writeHead(queryResponse.statusCode, queryResponse.headers);
+            res.write(queryResponse.body);
+
+            if (options && options.env === "development") {
+                console.info(
+                    (queryResponse.statusCode < 400 ? colors.green.bold(req.method) : colors.red.bold(req.method))
+                    + ' ' + req.url + ' - ' + queryResponse.statusCode);
+            }
+
+            res.end();
+        });
+        return this.server.listen(port) as http.Server;
+    }
+
+    /**
+     * Close server
+     */
+    public close() {
+        if (this.server) {
+            return this.server.close();
+        }
     }
 
     /**
