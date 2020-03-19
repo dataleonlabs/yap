@@ -28,12 +28,12 @@ jobs:
         yarn
         yarn lint
         yarn test:integration
-        nyc check-coverage --lines 94 --functions 94 --branches 89 --statements 94
+        nyc check-coverage --lines 93 --functions 89 --branches 81 --statements 93
         yarn coverage
         yarn build
-        git config --global user.email "devops@youngapp.co"
-        git config user.name "devops"
-        npm version minor
+        # git config --global user.email "devops@youngapp.co"
+        # git config user.name "devops"
+        # npm version minor
         echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         npm publish --access public
         # git fetch --all
