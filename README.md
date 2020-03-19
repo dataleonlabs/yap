@@ -20,15 +20,6 @@ Yap offers powerful, yet lightweight features that allow fine-grained control ov
 * **GraphQL as API Gateway** – GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. Yap use only GraphQL as API Gateway.
 * **API Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
 
-## Documentation
- - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
- - [Application and middlewares](https://manual.youngapp.co/community/application-and-middlewares)
- - [Connectors](https://manual.youngapp.co/community/connectors)
- - [Policies](https://manual.youngapp.co/community/policies)
- - [Error handling](https://manual.youngapp.co/community/error-handling)
- - [Yap for Express Users](https://manual.youngapp.co/community/faq/faq-error-policies)
- - [FAQ](https://manual.youngapp.co/community/faq/frequently-asked-questions)
-
 ## Installing
 It's an official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda.
 
@@ -42,9 +33,37 @@ $ yarn install koa
 $ npm install yap
 ```
 
+## Hello API
+Yap application is an object containing resolvers functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
+
+###### Minimalist application
+```
+import { Yap } from "@youngapp/yap";
+import typeDefs from "./schema.graphql";
+import resolvers from "./resolvers.ts";
+import policies from "./policies.xml";
+
+// The Yap constructor requires three parameters:
+// your schema definition, policies and resolvers.
+const app = new Yap({ typeDefs, resolvers, policies });
+
+// A simple typescript node project for AWS Lambda.
+exports.handler = app.handler;
+```
+
 Find more details on [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
 
 Enjoy 🎉
+
+
+## Documentation
+ - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
+ - [Gateway](https://manual.youngapp.co/community/application-and-middlewares)
+ - [Connectors](https://manual.youngapp.co/community/connectors)
+ - [Policies](https://manual.youngapp.co/community/policies)
+ - [Error handling](https://manual.youngapp.co/community/error-handling)
+ - [Yap for Express Users](https://manual.youngapp.co/community/faq/faq-error-policies)
+ - [FAQ](https://manual.youngapp.co/community/faq/frequently-asked-questions)
 
 ## Opening issues
 If you encounter a bug with YAP, we would appreciate if you inform us about it. 
