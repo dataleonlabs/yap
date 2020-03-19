@@ -1,18 +1,11 @@
-import Policy from "./policies/policy";
-
 import { ApolloServer } from "apollo-server-lambda";
-
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context as AWSContext } from "aws-lambda";
-
-import policyManager, { internalPolicies } from "./policies";
-
-import { Context, Scope } from ".";
-
 import { get, set } from "lodash";
-
 import { xml2js } from "xml-js";
-
+import { Context, Scope } from ".";
 import directives from "./directives";
+import policyManager, { internalPolicies } from "./policies";
+import Policy from "./policies/policy";
 
 /**
  * Yap api gateway

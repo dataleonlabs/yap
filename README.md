@@ -1,10 +1,9 @@
-The project is under construction 💪🏾. You can contribute or click ⭐️ (see above :arrow_upper_right:   ) to support us. 
-The first release to be available early February. Follow our news 🏅 on [Twitter](https://twitter.com/youngapp_pf) and [Slack](https://join.slack.com/t/yapcommunity/shared_invite/enQtOTA2NTcxNjc1OTI2LTA3YmNjMWRhY2E1NjdkODE2MjU4ZTcxZmU0ZmYyMzkyMDliYjM3Nzk4YzI1NTEzYjA1MjYxNWJlNGFlMjIzMDY).
+We love contributors, you can contribute or click ⭐️ (see above :arrow_upper_right:) to support us. Follow our news 🏅 on [Twitter](https://twitter.com/youngapp_pf) and [Slack](https://join.slack.com/t/yapcommunity/shared_invite/enQtOTA2NTcxNjc1OTI2LTA3YmNjMWRhY2E1NjdkODE2MjU4ZTcxZmU0ZmYyMzkyMDliYjM3Nzk4YzI1NTEzYjA1MjYxNWJlNGFlMjIzMDY).
 
 # Less code, safer API.
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/youngapp/yap/blob/master/CONTRIBUTING.md) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/youngapp/yap/PublishNPM/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/570597c92b1e4ca9b67b2a49d9c2aa51)](https://www.codacy.com/gh/youngapp/yap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=youngapp/yap&amp;utm_campaign=Badge_Grade) ![Codacy branch coverage](https://img.shields.io/codacy/coverage/e3497699cef94781936c5103f84e46ab/master) ![GitHub last commit](https://img.shields.io/github/last-commit/youngapp/yap) [![Requirements Status](https://requires.io/github/youngapp/yap/requirements.svg?branch=master)](https://requires.io/github/youngapp/yap/requirements/?branch=master)
 
-Yap is the lightweight microservices API gateway in GraphQL that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation for API management and automation workflows with low-code approach and security entreprise-gradle.
+Yap is the lightweight microservices API gateway with GraphQL that shines at the heart of any microservices or serverless architecture, which aims to be a smaller, more expressive, and more robust foundation with low-code approach and security entreprise-gradle.
 
 Please distinguish **Yap** (the core project of Young App) and **YAP** (the platform of Young App).
 
@@ -12,56 +11,58 @@ Please distinguish **Yap** (the core project of Young App) and **YAP** (the plat
 Young App helps to automate business workflows across cloud and on-premise apps providing employees with prompt communication and building in teams sophisticated collaboration. As an illustration, YAP automates quotes processing for cash business, which may involve multiple apps.
 
 Without API Management, we are using Express, Koa or Hapi on Nodejs without security handler, and all others NodeJS frameworks are based on http module, yap is different, designed only for serverless functions (event-driven) and GraphQL.
-
-Yap combines the enterprise-grade api management and workflow automation platform and ease of use expected from client apps supporting on cloud-based with GraphQL and Policies.
-
-## Architecture
-YAP combines GraphQL, XML policies and strong functional testing on serverless architecture.
-
-![Architecture](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-Lx7nwnF5v16-iOWhynh%2F-LxqoWHalPgX2UtMcXn6%2F-LxqoagEz7MAF4QlDaad%2FYap%20Core.png?alt=media&token=cca612c5-1d41-4c59-911b-d82f859ce246)
  
 ## Key features of Yap 🙌
 Yap offers powerful, yet lightweight features that allow fine-grained control over your API ecosystem.
 
 * **Elegants XML Policies** – Policies are a powerful capability of the system that allow the publisher to change API behavior through configuration in elegants with XML
 * **GraphQL as API Gateway** – GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. Yap use only GraphQL as API Gateway.
-* **YAML Functional testing** – CI-ready tests for REST APIs configured in YAML.
-* **Error handling with Policies** – Sentry provides self-hosted and cloud-based error monitoring that helps all software
-teams discover, triage, and prioritize errors in real-time.
-* **Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
-* **Universal middleware design** – Inspired by Express or KoaJS and adapted for Serverless application and low-code approach.
-* **Designed for Serverless** – Yap is designed for serverless event functions on AWS, GCP or Azure Functions.
-* **TypeScript** – YAP is written in NodeJS and TypeScript, which makes it fast and easy to set up.
-
-## Documentation
- - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
- - [Application and middlewares](https://manual.youngapp.co/community/application-and-middlewares)
- - [Connectors](https://manual.youngapp.co/community/connectors)
- - [Policies](https://manual.youngapp.co/community/policies)
- - [Error handling](https://manual.youngapp.co/community/error-handling)
- - [Yap for Express Users](https://manual.youngapp.co/community/faq/faq-error-policies)
- - [FAQ](https://manual.youngapp.co/community/faq/frequently-asked-questions)
+* **API Connectors** – YAP is the only integration platform that was built from the ground to support a single design interface for developer/IT and for citizen integrators.
 
 ## Installing
 It's an official version for JavaScript, available for Node.js backends, Serverless and AWS Lambda.
 
 ###### With yarn
 ```
-npx create yap my-api
-cd my-api
-yarn start
+yarn install yap
 ```
 
 ###### With npm
 ```
-npx create-yap my-api
-cd my-api
-npm start
+npm install yap
+```
+
+## Hello API
+Yap application is an object containing resolvers functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
+
+###### Minimalist application
+```typescript
+import { Yap } from "@youngapp/yap";
+import typeDefs from "./schema.graphql";
+import resolvers from "./resolvers.ts";
+import policies from "./policies.xml";
+
+// The Yap constructor requires three parameters:
+// your schema definition, policies and resolvers.
+const app = new Yap({ typeDefs, resolvers, policies });
+
+// A simple typescript node project for AWS Lambda.
+exports.handler = app.handler;
 ```
 
 Find more details on [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
 
 Enjoy 🎉
+
+
+## Documentation
+ - [Usage guide](https://manual.youngapp.co/community/usage-and-getting-started)
+ - [Gateway](https://manual.youngapp.co/community/application-and-middlewares)
+ - [Connectors](https://manual.youngapp.co/community/connectors)
+ - [Policies](https://manual.youngapp.co/community/policies)
+ - [Error handling](https://manual.youngapp.co/community/error-handling)
+ - [Yap for Express Users](https://manual.youngapp.co/community/faq/faq-error-policies)
+ - [FAQ](https://manual.youngapp.co/community/faq/frequently-asked-questions)
 
 ## Opening issues
 If you encounter a bug with YAP, we would appreciate if you inform us about it. 
@@ -94,13 +95,3 @@ For general help using Yap, please refer to [the official Yap documentation](htt
 
 This SDK is distributed under Apache License 2.0. 
 See [LICENSE.txt](LICENSE.txt) for more information.
-
-## Yap API management Cloud Edition (Coming soon) 🔥
-Yap API management Cloud Edition is a desktop version can be used with the Yap API Gateway to provide a full lifecycle API management platform. For more details, visit https://youngapp.co and to see the full feature set, explore https://manual.youngapp.co
-
-#### Features available for cloud edition 
-* **Fully managed API** – create your API on cloud editor and hosted by Young App in realtime.
-* **Advanced policies** – use advanced policies for better and more security.
-* **Advanced connectors** – use complex app and connectors directly on the YAP platform.
-* **Versioning** – use versionning for APIs and cloud processes.
-* **Support and integration** – beneficiate support by experts to select the best API and cloud integration.
