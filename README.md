@@ -37,7 +37,7 @@ $ npm install yap
 Yap application is an object containing resolvers functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
 
 ###### Minimalist application
-```
+```typescript
 import { Yap } from "@youngapp/yap";
 import typeDefs from "./schema.graphql";
 import resolvers from "./resolvers.ts";
