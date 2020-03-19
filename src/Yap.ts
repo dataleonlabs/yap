@@ -10,6 +10,14 @@ import Policy from "./policies/policy";
 const colors = require('colors/safe');
 
 /**
+ * Options for http server
+ */
+interface Options {
+    /** env for debug log */
+    env: "development" | "production";
+}
+
+/**
  * Yap api gateway
  */
 export default class Yap {
@@ -151,8 +159,7 @@ export default class Yap {
      * @return {http.Server}
      * @public
      */
-
-    public listen(port: number, options: { env: "development" | "production" } = { env: "development" }): http.Server {
+    public listen(port: number, options?: Options): http.Server {
         this.server = http.createServer(async (req: any, res: any) => {
             let body: any = [];
             req.on('data', (chunk: string) => {
@@ -183,7 +190,7 @@ export default class Yap {
             res.writeHead(queryResponse.statusCode, queryResponse.headers);
             res.write(queryResponse.body);
 
-            if (options.env === "development") {
+            if (options && options.env === "development") {
                 console.info(
                     (queryResponse.statusCode < 400 ? colors.green.bold(req.method) : colors.red.bold(req.method))
                     + ' ' + req.url + ' - ' + queryResponse.statusCode);
