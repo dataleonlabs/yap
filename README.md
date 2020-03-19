@@ -35,18 +35,33 @@ npm install yap
 ## Hello API
 Yap application is an object containing resolvers functions and policies which are composed and executed in a stack-like manner upon request. Yap is similar to many other middleware systems that you may have encountered such as Koa, Connect.
 
-###### Minimalist application
+###### Minimalist application with http.Server
 ```typescript
 import { Yap } from "@youngapp/yap";
 import typeDefs from "./schema.graphql";
 import resolvers from "./resolvers.ts";
-import policies from "./policies.xml";
 
 // The Yap constructor requires three parameters:
-// your schema definition, policies and resolvers.
-const app = new Yap({ typeDefs, resolvers, policies });
+// your schema definition, resolvers.
+const app = new Yap({ typeDefs, resolvers });
 
-// A simple typescript node project for AWS Lambda.
+// Listen on http
+app.listen(3000, () => {
+  console.log('Example app listening on port 3000!')
+})
+```
+
+###### With AWS Lambda
+```typescript
+import { Yap } from "@youngapp/yap";
+import typeDefs from "./schema.graphql";
+import resolvers from "./resolvers.ts";
+
+// The Yap constructor requires three parameters:
+// your schema definition and resolvers.
+const app = new Yap({ typeDefs, resolvers });
+
+// A simple handler for AWS Lambda.
 exports.handler = app.handler;
 ```
 
