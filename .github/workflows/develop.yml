@@ -23,8 +23,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: test and publish
       run: |
-        npm install -g standard-version nyc mocha typescript ts-node yarn
-        npm ci
+        yarn install global standard-version nyc mocha typescript ts-node yarn
+        yarn ci
         yarn lint
         yarn test:integration
         nyc check-coverage --lines 93 --functions 89 --branches 81 --statements 93
