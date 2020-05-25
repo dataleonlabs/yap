@@ -24,12 +24,12 @@ It's an official version for JavaScript, available for Node.js backends, Serverl
 
 ###### With yarn
 ```
-yarn install yap
+yarn install @youngapp/yap
 ```
 
 ###### With npm
 ```
-npm install yap
+npm install @youngapp/yap
 ```
 
 ## Hello API
