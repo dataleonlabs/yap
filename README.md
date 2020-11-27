@@ -24,7 +24,7 @@ It's an official version for JavaScript, available for Node.js backends, Serverl
 
 ###### With yarn
 ```
-yarn install @youngapp/yap
+yarn add @youngapp/yap
 ```
 
 ###### With npm
